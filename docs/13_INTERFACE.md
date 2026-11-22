@@ -12,7 +12,8 @@ Dentro.
 3. Caderno de campo com laudos, leituras, estoque, calendário e fontes.
 4. Relatório de safra com decomposição da perda, balanço de água e raio-x.
 5. Controles do tempo, dormir e pular até o evento.
-6. Controles padrão, acessibilidade e escala da interface.
+6. Telas do modo experimento no semiaberto (planejar, medir, comparar e ramificar o save).
+7. Controles padrão, acessibilidade e escala da interface.
 
 Fora.
 1. Verbos, pré-condições e efeitos das operações (documento 08).
@@ -52,13 +53,19 @@ flowchart TD
   M --> F["Fontes e créditos"]
   N --> J["Em campo (HUD)"]
   C --> J
-  J -- "Tab" --> K["Caderno de campo"]
-  J -- "M" --> P["Mapa da propriedade"]
-  J -- "cama ou rede" --> D["Dormir<br/>escolher a hora de acordar"]
-  J -- "Esc" --> Z["Pausa<br/>salvar, opções, sair"]
-  J -- "fim da safra" --> R["Relatório de safra"]
+  J -->|Tab| K["Caderno de campo"]
+  J -->|M| P["Mapa da propriedade"]
+  J -->|cama ou rede| D["Dormir<br/>escolher a hora de acordar"]
+  J -->|Esc| Z["Pausa<br/>salvar, opções, sair"]
+  J -->|fim da safra| R["Relatório de safra"]
   R --> J
   K --> R
+  N -->|modo semiaberto| X["Planejar experimento<br/>tratamentos, parcelas, repetições, blocos"]
+  X --> J
+  X -->|ramificar o save| Y["Mesmo clima, outro manejo"]
+  Y --> J
+  K -->|aba Experimentos| W["Comparar tratamentos<br/>médias, diferenças, gráficos"]
+  W --> R
 ```
 
 ### 5.3 HUD em campo
@@ -67,7 +74,7 @@ flowchart TD
 
 | Nº | Elemento | Conteúdo | Regra |
 |---|---|---|---|
-| 1 | Relógio e clima | Dia, dia da semana, hora, céu e temperatura medida. Botões de pausa, 1x, 2x, 4x, 8x e pular até o próximo evento. Na campanha também 16x e 32x | A velocidade só muda o ritmo, nunca o resultado (`ARQUITETURA_SIMULACAO` §3.2) |
+| 1 | Relógio e clima | Dia, dia da semana, hora, céu e temperatura medida. Botões de pausa, 1x, 2x, 4x e 8x. Na campanha também pular até o próximo evento | A velocidade só muda o ritmo, nunca o resultado (`ARQUITETURA_SIMULACAO` §3.2) |
 | 2 | Avisos | Laudo que chega, janela de manejo aberta, evento do modo semiaberto | No máximo três linhas. O resto vai para o caderno |
 | 3 | Tarefas da lição | Lição atual e passos com caixa de seleção | Só na campanha |
 | 4 | Mira e prompt | Tecla e verbo do que está sob a mira | Aparece só quando há verbo possível |
@@ -92,6 +99,7 @@ flowchart TD
 | Leituras | Série das leituras de cada instrumento, com o gatilho do pacote como linha de referência |
 | Estoque | Insumos, quantidades, validade e carência |
 | Calendário | Datas das operações feitas e janelas previstas pela cultura |
+| Experimentos | No semiaberto, plano do experimento, medidas por parcela e comparação entre tratamentos e entre ramos do save |
 | Fontes | Publicações citadas no jogo, com ID, título e link |
 
 ### 5.6 Relatório de safra
@@ -106,7 +114,7 @@ flowchart TD
 6. **Rodapé.** Versões do pacote e do motor, semente, série climática e hash do último dia. Com eles a safra pode ser reproduzida.
 
 ### 5.7 Tempo
-1. Pausa, 1x, 2x, 4x e 8x em todos os modos. 16x, 32x e pular até o próximo evento só na campanha (decisão 29).
+1. Pausa, 1x, 2x, 4x e 8x em todos os modos. Pular até o próximo evento só na campanha (decisão 29).
 2. Dormir na cama ou na rede. O jogador escolhe a hora de acordar.
 3. Pausa automática opcional quando chega um laudo, quando começa chuva forte e quando abre uma janela de manejo.
 4. Não existe ajuste de "dias por mês". O calendário é o real (decisão 45).
@@ -154,6 +162,8 @@ Todo texto ao jogador vem de arquivo de dado do pacote ou de tradução (`CONVEN
 | Sem fome nem energia do personagem; esforço vira tempo de jogo | Necessidade fisiológica não ensina agronomia. O tempo é o recurso que pressiona o manejo | Barra de energia e fome como no Medieval Dynasty | agente, decisão 47 |
 | Relatório com perda decomposta por fator | Cada fator multiplicativo é registrado por dia, então a perda tem causa | Nota única de produtividade | agente [INFERÊNCIA] |
 | Calendário real, sem dias por mês | Clima e cultura ficam coerentes | Dias por mês configuráveis | agente, decisão 45 |
+| Velocidades 1x a 8x; pular até o evento só na campanha | O usuário aprovou o pulo e manteve 2x, 4x e 8x | 16x e 32x | usuário, decisão 29 |
+| Aba de experimentos com ramificação do save | O mundo determinístico permite comparar manejos sob o mesmo clima | Comparar só safras de anos diferentes | agente, decisão 49 |
 | Resolução base 1280 × 720 com escala | Cabe no notebook de referência e escala para telas maiores | Desenho para 1920 × 1080 | agente [INFERÊNCIA] |
 
 ## 7. Exemplos

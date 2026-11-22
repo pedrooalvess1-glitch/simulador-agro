@@ -161,7 +161,7 @@ TEST("agenda: orçamento de eventos para no último tick processado") {
   CHECK_EQ(t, Tick{1000});
 }
 
-TEST("relógio: 1 s real em 1x = 24 s de jogo; 8x = 192; limite por quadro") {
+TEST("relógio: 1 s real em 1x = 24 s de jogo; 8x = 192; limite por quadro; só 1, 2, 4 e 8") {
   Clock c;
   CHECK_EQ(c.target_after(1.0, 1000000), Tick{24});
   c.reached(24);
@@ -169,6 +169,7 @@ TEST("relógio: 1 s real em 1x = 24 s de jogo; 8x = 192; limite por quadro") {
   CHECK_EQ(c.target_after(1.0, 1000000), Tick{24 + 192});
   CHECK_EQ(c.target_after(100.0, 600), Tick{24 + 600});
   CHECK_THROWS(c.set_multiplier(3));
+  CHECK_THROWS(c.set_multiplier(16));
 }
 
 // --------------------------------------------------------------------------- detmath

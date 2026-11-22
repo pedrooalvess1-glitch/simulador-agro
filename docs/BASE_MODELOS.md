@@ -54,6 +54,45 @@ Agenda de eventos, relógio, ordem causal, árbitros, ledger, determinismo, núc
 
 ## 3. Modelos por fase
 
+### 3.0 Base de clima e solo
+
+1. Clima e solo são a base do simulador. Eles não conhecem nenhuma cultura. A cultura só declara demandas de água, nitrogênio e luz e devolve raízes, resíduos e cobertura ao solo (`ARQUITETURA_SIMULACAO` §4.3). Por isso a base validada sem cultura continua válida para toda cultura nova.
+2. A base precisa reproduzir solos e climas reais do Brasil. Ela é validada contra dados observados em cenários de referência sem cultura antes de receber culturas novas (Etapa V do `MAPA_DO_PROJETO`). É essa validação que permite tirar resultados do simulador sem ter uma propriedade.
+
+```mermaid
+flowchart LR
+  A["Astronomia"] --> C["Clima do dia<br/>e ciclo diário"]
+  C --> E["ET0"]
+  C --> T["Temperatura<br/>do solo"]
+  E --> W["Água no solo"]
+  F["Física do solo<br/>retenção, densidade,<br/>bioporos"] --> W
+  W --> T
+  T --> B["Biologia do solo<br/>matéria orgânica,<br/>mineralização"]
+  W --> B
+  B --> Q["Química do solo<br/>N, P, K, pH, Al"]
+  W --> Q
+  P["Qualquer cultura<br/>(pacote)"] -->|demandas| W
+  P -->|demandas| Q
+  P -->|raízes e resíduos| B
+  W -->|água alocada| P
+  Q -->|N alocado| P
+```
+
+| Componente | O que calcula | Fase | Validado contra |
+|---|---|---|---|
+| Astronomia | Fotoperíodo, radiação extraterrestre e posição do sol | 1 | Exemplos numéricos do FAO-56 [FONTE:FAO-1998-FAO56] |
+| Clima diário | Série real do INMET na campanha; grade diária para qualquer município [VERIFICAR]; gerador só no modo semiaberto | 1 (série), 3 (gerador) | Estatísticas da estação (chuva mensal, frequência de dias com chuva, veranicos) |
+| Ciclo diário | Temperatura e umidade hora a hora | 1 (leitura e visual), 2 (processos horários) | Série horária de estação automática do INMET |
+| ET0 | Penman–Monteith, com Hargreaves–Samani calibrado de reserva | 1 | Exemplos do FAO-56 e ET0 calculada com dados de estação |
+| Água no solo | Uma camada na fase 1, camadas em cascata e evaporação em dois estágios na fase 2 | 1 e 2 | Umidade medida em solo nu e lisímetros brasileiros (rodada 4) |
+| Temperatura do solo | Temperatura por camada a partir do ar, da cobertura e da umidade | 1 | Medidas de temperatura do solo no Brasil (rodada 4) |
+| Física | Densidade, porosidade, curva de retenção, compactação e bioporos | 1 a 3 | [FONTE:VZJ-2018-HYBRAS]; [FONTE:RBCS-2008-NICOLOSO] |
+| Química | CTC, bases, alumínio, pH–V, calcário, P, K e salinidade | 1 a 3 | Curvas de incubação de calcário; relação pH–V (§4.1) |
+| Biologia | Matéria orgânica em compartimentos, mineralização e imobilização de N, respiração e bioporos | 2 e 3 | Incubações de mineralização de N em solos brasileiros (rodada 4) |
+
+3. **Cenários de referência.** Solo nu em pousio em cinco regiões climáticas (semiárido, Cerrado, Sudeste, Sul e Amazônia), com séries reais. O núcleo roda o cenário por linha de comando, sem o jogo, e compara cada variável com o dado observado. As métricas são viés, raiz do erro quadrático médio e índice de concordância de Willmott. Os limites de aceite ficam no documento 22 [INFERÊNCIA].
+4. **Cultura nova não muda a base.** Se uma cultura exigir um processo novo do solo, como a fixação biológica de N por leguminosa, o processo entra na base e passa pela validação antes da cultura.
+
 ### 3.1 Fase 1 (canteiro plano de alface)
 
 | Módulo | Modelo | Mecanismo | Referência a registrar |
@@ -61,23 +100,24 @@ Agenda de eventos, relógio, ordem causal, árbitros, ledger, determinismo, núc
 | Astronomia | Declinação, fotoperíodo e radiação extraterrestre do FAO-56 | Expressões fechadas para qualquer latitude do Brasil | FAO-56 cap. 3 |
 | Clima | Série real de estação automática do INMET e curva diurna de temperatura | Auditável contra a fonte e sem calibração estatística | INMET; Parton e Logan |
 | ET0 | Penman–Monteith com Hargreaves–Samani de reserva | Balanço de energia mais demanda aerodinâmica | FAO-56 |
+| Temperatura do solo | Temperatura por camada a partir do ar, da cobertura e da umidade (modelo a escolher na rodada 4) | Condução de calor amortecida com a profundidade | APSIM SoilTemp ou equivalente [VERIFICAR] |
 | Água | *Bucket* de uma camada, Kc simples, Ks e escoamento por CN | Tanque com ladrão que conserva massa a cada passo | FAO-56 cap. 8; NRCS |
 | Solo físico | Capacidade de campo, ponto de murcha e densidade por classe e textura | Tabela com fonte e curva de retenção (§4.6) | Embrapa; SiBCS |
 | Química | Laudo com V% e CTC, calagem por saturação por bases, NPK por formulação, nitrogênio mineral com lixiviação | Inventário e um compartimento dinâmico de nitrato | Embrapa Hortaliças; manuais estaduais |
-| Planta | AquaCrop simplificado com graus-dia, cobertura, transpiração, produtividade da água e índice de colheita | Biomassa proporcional à transpiração normalizada pela ET0 | FAO AquaCrop |
+| Planta | Modelo genérico por tipo de cultura (folhosa, raiz, fruto, grão) no estilo do AquaCrop, com graus-dia, cobertura, transpiração, produtividade da água e índice de colheita | Biomassa proporcional à transpiração normalizada pela ET0; o tipo define o órgão colhido | FAO AquaCrop |
 | Daninhas | Coorte com cobertura logística e perda de Cousens, janela de capina pelo período crítico (§4.8) | Competição com dano marginal decrescente | Cousens 1985; [FONTE:SEMINA-2011-GIANCOTTI] |
 | Irrigação | Regador, gotejo com eficiência e fração de área molhada, tensiômetro virtual (gatilho de 15 kPa a 10 cm, §4.3) | Lâmina pela ETc e manejo pela tensão da água | Embrapa Hortaliças |
 | Arquitetura | Agenda única, ledger inteiro, árbitros, núcleo C++ com detmath | `ARQUITETURA_SIMULACAO` | APSIM; [FONTE:BOX2D-2024-DETERMINISM] |
 | Relatório | Atribuição da perda aos fatores Ks, nitrogênio, daninha e V% | Cada fator multiplicativo é registrado por dia | [INFERÊNCIA] |
 
-A interface de planta já nasce preparada para o árbitro de luz da fase 2. A alface é a cultura da fatia porque o índice de colheita da alface é alto e quase constante. Isso dispensa florescimento e partição para frutos.
+A interface de planta já nasce preparada para o árbitro de luz da fase 2. A alface é a cultura da fatia porque o índice de colheita da alface é alto e quase constante. Isso dispensa florescimento e partição para frutos. O modelo de planta é um só para todas as culturas. Uma cultura nova entra só com parâmetros, preenchidos pelo fluxo de ingestão do documento 19, e os estádios seguem uma escala fenológica comum (BBCH [VERIFICAR]).
 
 ### 3.2 Fase 2 (horta completa e campanha em área plana)
 1. Água em várias camadas por cascata.
 2. Planta híbrida com biomassa igual ao mínimo entre a limitada por luz e a limitada por água (§7), com árbitro de luz.
 3. Daninhas com o mesmo código da planta e parâmetros próprios.
 4. Calcário com cinética por classe granulométrica, relação pH–V e NPK por formulação (§4.1 e §6).
-5. Mineralização simples de nitrogênio.
+5. Biologia do solo com matéria orgânica em compartimentos (resíduo fresco, biomassa microbiana e húmus), mineralização e imobilização de N dependentes da temperatura e da umidade do solo. O componente SoilNitrogen do APSIM é a referência a avaliar na rodada 4.
 6. Séries do INMET de vários anos e de estações de todas as regiões. A campanha não usa gerador climático, porque a aleatoriedade fica só nos eventos do modo semiaberto (decisão 40).
 7. Densidade do solo simples por preparo e tráfego, malha de canteiro de 5 cm, deformação do terreno e Terrain3D 1.1.x na propriedade (§8).
 8. Defensivos com dose e carência do Agrofit e meia-vida provisória com correção de temperatura e umidade (§4.2).
@@ -266,3 +306,7 @@ Qualidade das fontes baixa. Vêm de guias e fóruns de comunidade.
 | 13 | Ano, título ou URL oficial das publicações da fila | 31 itens na fila do registro | Rodada 4 e BDPA/Infoteca-e |
 | 14 | Custo real por célula | Estimativa de ordem de grandeza | Benchmark no passo D1b |
 | 15 | Fontes sobre jogos de referência | Comunidade, qualidade baixa | Manuais oficiais (rodada 4) |
+| 16 | Modelo de temperatura do solo e dados brasileiros para validar | Não escolhido | Rodada 4 |
+| 17 | Grade climática diária para qualquer município | Não verificada | Rodada 4 |
+| 18 | Dados observados para os cenários de referência sem cultura (umidade, temperatura do solo, mineralização, pH depois da calagem) | Não levantados | Rodada 4 e documento 22 |
+| 19 | Biologia do solo calibrada no Brasil (compartimentos de matéria orgânica) | Não levantada | Rodada 4 |

@@ -33,9 +33,10 @@ Igual ao do `simulador-normas`. Todo o projeto é conduzido no Claude Code, com 
 O usuário é o primeiro público. Ele é engenheiro, tem horta própria e quer testar técnicas de manejo antes de aplicá-las. Um segundo público possível são estudantes de ciências agrárias e pequenos produtores [INFERÊNCIA].
 
 ### 1.3 Modos de jogo
-1. **Campanha.** Ensina o básico do cultivo de uma espécie e do manejo, passo a passo. Começa numa área de manejo plana. Depois avança para uma área inclinada, onde escoamento e erosão passam a pesar.
-2. **Semiaberto.** A propriedade fica livre para o jogador. Eventos aleatórios (veranico, chuva intensa, surto de praga) acontecem só neste modo.
-3. O simulador pode mostrar fenômenos difíceis de observar no campo. Por isso cada resultado vem com a explicação causal no relatório de safra.
+1. **Campanha.** Formação guiada. Ensina o cultivo de uma espécie e o manejo passo a passo, para que o jogador chegue ao modo semiaberto sabendo medir, decidir e interpretar o resultado. Começa numa área de manejo plana e depois avança para uma área inclinada, onde escoamento e erosão passam a pesar. Usa clima real do INMET e não sorteia nada.
+2. **Semiaberto.** Laboratório de manejo. A propriedade fica livre e o jogador conduz os próprios experimentos. Eventos aleatórios (veranico, chuva intensa, surto de praga) acontecem só neste modo e podem ser desligados num experimento.
+3. **Experimentos.** O jogador define tratamentos em canteiros ou parcelas, com repetições e blocos sobre a variação espacial do solo do cenário, mede e compara. Como o mundo é determinístico, ele também pode ramificar o save no início do experimento e rodar cada manejo sob o mesmo clima. A diferença no resultado vem só do manejo (documento 20).
+4. O simulador pode mostrar fenômenos difíceis de observar no campo. Por isso cada resultado vem com a explicação causal no relatório de safra.
 
 ### 1.4 Política de fontes
 1. Todo elemento do modelo tem fundamentação em livro, publicação da Embrapa ou manual técnico.
@@ -61,6 +62,7 @@ O usuário é o primeiro público. Ele é engenheiro, tem horta própria e quer 
 9. **Rastreabilidade.** Todo número leva fonte e local. Toda simplificação do simulador leva [MODELO].
 10. **Verificável por máquina.** Esquema dos dados e citações conferidos no CI desde o primeiro dia.
 11. **Leve por padrão.** Recurso visual que não ensina nada não entra.
+12. **Base física primeiro.** Clima e solo não conhecem nenhuma cultura e são validados contra dados observados antes de receber culturas novas. Cultura nova entra só como dado, pelo fluxo de ingestão (`BASE_MODELOS` §3.0; documento 19).
 
 ### 2.1 O que vem dos jogos de referência e o que muda
 
@@ -69,7 +71,7 @@ O usuário é o primeiro público. Ele é engenheiro, tem horta própria e quer 
 | Personagem | Protagonista em primeira pessoa (Medieval Dynasty) ou em máquinas (Farming Simulator) | Protagonista em primeira e terceira pessoa, a pé ou em máquinas pequenas |
 | Campo | Grade de quadrados com ordem ritual de operações | Grade de células por canteiro, com a mesma ordem de operações e estado agronômico em cada célula |
 | Fertilidade | Fertilizante binário por quadrado ou bônus aditivos fixos de produtividade | Inventário de nutrientes, V% e fatores multiplicativos causais (Ks, nitrogênio, daninha) |
-| Tempo | Estações discretas, dia acelerado, dormir para avançar | Graus-dia e clima diário, relógio 24 para 1 com 2x, 4x e 8x, dormir para avançar |
+| Tempo | Estações discretas, dia acelerado, dormir para avançar | Graus-dia e clima diário real, relógio 24 para 1 com 2x, 4x e 8x, dormir e, na campanha, pular até o próximo evento |
 | Análise de solo | Mapa de pH e nitrogênio com alvo de solo temperado (Farming Simulator) | Laudo com atraso e recomendação pelos manuais brasileiros |
 | Daninhas | Penalidade fixa por estágio | Competição pela hipérbole de Cousens e capina no momento certo |
 | Trabalho | Delegação a trabalhadores (Medieval Dynasty) | Fase futura com NPCs |
@@ -143,11 +145,11 @@ Formato: `_MODELO_DOCUMENTO.md`. Ordem, esforço e estado: `MAPA_DO_PROJETO` §3
 | 02 | Arquitetura geral | Camadas, contratos, eventos, `act()` |
 | 03 | Plataforma e desempenho | Perfis, vegetação em massa, malha na CPU, orçamento |
 | 04 | Modelo de conhecimento | Esquema dos dados agronômicos e das citações |
-| 05 | Modelo solo-planta-atmosfera | Variáveis de estado e processos de água, química, biologia e planta |
+| 05 | Modelo solo-planta-atmosfera | Variáveis de estado e processos de água, temperatura, química, física e biologia do solo e da planta genérica |
 | 06 | Mundo 3D e terreno | Propriedade, terreno deformável, canteiros, declividade |
 | 07 | Catálogo | Ferramentas, instrumentos de campo, máquinas, insumos |
 | 08 | Interação e operações | Verbos, pré-condições, efeitos |
-| 09 | Relógio e clima | Camadas de taxa, multiplicador, dormir, séries e gerador climático |
+| 09 | Relógio e clima | Agenda de eventos, multiplicador, dormir, pular até o evento, séries reais e gerador climático |
 | 10 | Fitossanidade | Pragas, doenças, plantas daninhas, defensivos |
 | 11 | Campanha | Lições, progressão do plano ao inclinado |
 | 12 | Avaliação | Produtividade, qualidade, custo, saúde do solo, explicação |
@@ -157,9 +159,10 @@ Formato: `_MODELO_DOCUMENTO.md`. Ordem, esforço e estado: `MAPA_DO_PROJETO` §3
 | 16 | Testes e CI | Testes do modelo contra valores das fontes e teste 1x × 8x |
 | 17 | Pipeline de arte | Plantas por estádio, ferramentas, máquinas |
 | 18 | Protagonista e câmera | Primeira e terceira pessoa, controle, interação com o mundo |
-| 19 | Novo pacote | Como adicionar cultura ou região |
-| 20 | Modo semiaberto e eventos | Propriedade livre e eventos aleatórios |
+| 19 | Ingestão de cultura e novo pacote | Como o agente transforma as publicações de uma cultura num pacote validado; região nova |
+| 20 | Modo semiaberto, experimentos e eventos | Propriedade livre, delineamento de experimentos, ramificação do save e eventos aleatórios |
 | 21 | Roadmap | Sequência de entrega |
+| 22 | Validação do clima e do solo | Cenários de referência sem cultura, dados observados, métricas e limites de aceite |
 
 ---
 

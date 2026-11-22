@@ -7,18 +7,24 @@
 
 | # | Requisito | O que ele exige da arquitetura |
 |---|---|---|
-| A1 | Mesmo mundo em 1x, 2x, 4x, 8x, 16x, 32x, dormir e depois de salvar e carregar | O passo dos modelos nunca muda. A velocidade só decide quanto tempo de jogo roda por quadro |
+| A1 | Mesmo mundo em 1x, 2x, 4x, 8x, dormir, pular até o evento e depois de salvar e carregar | O passo dos modelos nunca muda. A velocidade só decide quanto tempo de jogo roda por quadro |
 | A2 | Mesmo mundo no Linux do CI e no Windows do jogador | Nenhum resultado depende de biblioteca matemática da plataforma, de FMA ou da ordem de soma em ponto flutuante |
 | A3 | Balanço exato de água, N, P, K, C e massa de solo | Estoques inteiros e transferências com o mesmo inteiro nos dois lados |
 | A4 | Módulos que crescem por fase sem reescrita | Módulos não se conhecem. Eles falam com donos de recurso por interfaces fixas |
 | A5 | Resposta imediata às ações do jogador | O tensiômetro reage à rega na hora, sem esperar o fim do dia |
 | A6 | Aleatoriedade só em eventos de jogo | Modelos de processo determinísticos. Sorteio só em gerador de eventos com semente gravada |
 | A7 | Custo dentro do notebook de referência | Passo diário barato e fatiável entre quadros |
+| A8 | Clima e solo válidos para qualquer cultura | A base física não conhece cultura nenhuma e é validada sozinha. Cultura nova entra só como dado |
 
 ## 2. Visão geral
 
 ```mermaid
 flowchart LR
+  subgraph Repo["Repositório (fora do jogo)"]
+    PDF["Publicações da cultura"] --> ING["Fluxo de ingestão<br/>(documento 19)"]
+    ING --> PK["Pacotes<br/>cultura, solo, clima, insumos"]
+    VAL["Cenários de referência<br/>sem cultura (Etapa V)"]
+  end
   subgraph Godot["Godot 4.7.2 (GDScript)"]
     UI["Interface e HUD"]
     P["Protagonista, câmera, física em tempo real"]
@@ -29,22 +35,31 @@ flowchart LR
   end
   subgraph Core["agro_core (C++ sem Godot)"]
     S["Agenda de eventos"]
-    M["Modelos diários por célula"]
+    B["Base de clima e solo"]
+    M["Planta genérica e fitossanidade"]
     L["Ledger inteiro"]
     D["detmath"]
     R["RNG de eventos"]
   end
+  PK --> Core
+  VAL -.->|valida| B
   O --> API --> S
-  P -- "ação quantizada" --> API
-  UI -- "leitura" --> API
-  S --> M --> L
-  M --> D
+  P -->|ação quantizada| API
+  UI -->|leitura| API
+  S --> B
+  S --> M
+  B <-->|demanda e alocação| M
+  B --> L
+  M --> L
+  B --> D
   S --> R
 ```
 
 1. **Godot** desenha, recebe a entrada e roda a física do protagonista e das máquinas em tempo real. Ele nunca calcula estado agronômico.
 2. **agro_core** guarda todo o estado do mundo calculado e é a única coisa que o muda. Ele compila e roda nos testes sem o Godot.
 3. **GDExtension** é a ponte. Ela expõe cinco chamadas e nada mais. A interface lê o estado por `read()` e muda o mundo só por `act()`.
+4. **Pacotes** trazem todo o conhecimento agronômico. O fluxo de ingestão (documento 19) os produz no repositório a partir das publicações. O jogo só os carrega.
+5. **Base de clima e solo** é separada da planta. A planta fala com ela só por demandas e alocações (§4.3). Por isso a validação da base nos cenários de referência sem cultura vale para toda cultura nova (`BASE_MODELOS` §3.0).
 
 ## 3. Tempo
 
@@ -56,10 +71,10 @@ flowchart LR
 5. O antigo "tick de mundo" de 1 a 5 minutos deixa de existir. Na fase 1 nenhum estado agronômico muda abaixo do dia, e eventos do jogador já têm resolução de 1 segundo.
 
 ### 3.2 Relógio, velocidade e dormir
-1. Em 1x, 1 segundo real vale 24 segundos de jogo. O multiplicador (1, 2, 4, 8 e, na campanha, 16 e 32) multiplica esse avanço.
+1. Em 1x, 1 segundo real vale 24 segundos de jogo. O multiplicador 1, 2, 4 ou 8 multiplica esse avanço.
 2. A cada quadro o relógio calcula até onde a agenda pode correr. A agenda processa os eventos devidos até esse ponto. O resto fracionário de tempo real é ritmo e não estado. Ele não entra no save.
 3. Há um teto de tempo de jogo por quadro e um teto de eventos por quadro. No teto o jogo fica mais lento. O passo nunca muda. Isso evita a espiral da morte num notebook lento.
-4. **Dormir** pula direto até a hora escolhida para acordar. **Pular até o próximo evento** pula até o próximo evento de interesse na agenda. Os dois usam o mesmo processamento de eventos.
+4. **Dormir** pula direto até a hora escolhida para acordar. **Pular até o próximo evento**, só na campanha, pula até o próximo evento de interesse na agenda. Os dois processam no caminho os mesmos eventos que o jogo em 1x processaria.
 5. Sol, céu e animação são funções puras do tempo contínuo interpolado. Eles não são estado e não precisam de passo.
 6. O passo diário de muitas células pode ser fatiado em vários quadros. Enquanto ele não termina, a agenda segura os eventos posteriores à meia-noite. A interface mostra o dia anterior até o novo ficar pronto.
 
@@ -144,7 +159,7 @@ O passo diário segue a ordem em que um processo produz o recurso que o próximo
 | g++ -O2 -march=haswell sem `-ffp-contract=off` | `1631d7df988e7a71` (diferente) |
 | MinGW g++ 14.2.0 no Windows Server 2022 (job do CI) | `41cbfb563eb7b91d` |
 
-A terceira linha prova o mecanismo. Basta liberar a fusão em FMA para o resultado mudar. O teste `tests/test_determinism.cpp` roda um mundo de brinquedo com agenda, ledger, árbitro, detmath e um evento sorteado. Ele confere o mesmo hash diário em 1x, 8x, 32x com um evento por quadro, quadros irregulares, dormir e save e carga no meio.
+A terceira linha prova o mecanismo. Basta liberar a fusão em FMA para o resultado mudar. O teste `tests/test_determinism.cpp` roda um mundo de brinquedo com agenda, ledger, árbitro, detmath e um evento sorteado. Ele confere o mesmo hash diário em 1x, 8x, 8x com um evento por quadro, quadros irregulares, dormir, pular até o evento e save e carga no meio.
 
 ## 8. Aleatoriedade só em eventos
 
@@ -171,12 +186,12 @@ A terceira linha prova o mecanismo. Basta liberar a fusão em FMA para o resulta
 | Teste | Onde | O que prova |
 |---|---|---|
 | Unidades do núcleo | `engine/native/tests/test_core.cpp` | RNG, alocação exata, ledger, ordem da agenda, relógio, detmath |
-| Determinismo do tempo | `engine/native/tests/test_determinism.cpp` | 1x = 8x = 32x = quadros irregulares = dormir = save e carga |
+| Determinismo do tempo | `engine/native/tests/test_determinism.cpp` | 1x = 8x = quadros irregulares = dormir = pular até o evento = save e carga |
 | Vetores do detmath | `engine/native/tools/detmath_vectors.cpp` e `golden/` | Mesmo hash em vários compiladores, otimizações e no Windows |
 | Erro em ulp | `tools/medir_erro_detmath.py` | Precisão contra 120 bits |
 | CI | `.github/workflows/ci.yml` | Jobs Linux e Windows a cada PR |
 
-Próximos testes. Exemplos numéricos do FAO-56 para astronomia e ET0 (passo B5). Fechamento do ledger com sequências aleatórias de ações em cada módulo. Reprodução da hipérbole de Cousens e da faixa de Ky da alface como testes de validação.
+Próximos testes. Exemplos numéricos do FAO-56 para astronomia e ET0 (passo B5). Cenários de referência da base de clima e solo contra dados observados (Etapa V). Fechamento do ledger com sequências aleatórias de ações em cada módulo. Reprodução da hipérbole de Cousens e da faixa de Ky da alface como testes de validação.
 
 ## 12. Pontos a verificar na fonte primária
 Gomes et al. 2018 e ECP 157 sobre mestres de passo fixo e sinais descontínuos. Keating et al. 2003 e o SoilArbitrator e o MicroClimate do APSIM. Priority-Flood. Funções matemáticas do GDScript. Exemplos do FAO-56 e do TR-55. Todos estão na rodada 4 de pesquisa (passo B0.5).

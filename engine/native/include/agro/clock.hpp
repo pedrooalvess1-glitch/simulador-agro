@@ -23,8 +23,8 @@ class Clock {
   int multiplier() const { return multiplier_; }
 
   void set_multiplier(int m) {
-    if (m != 1 && m != 2 && m != 4 && m != 8 && m != 16 && m != 32)
-      throw std::invalid_argument("clock: multiplier must be 1, 2, 4, 8, 16 or 32");
+    if (m != 1 && m != 2 && m != 4 && m != 8)
+      throw std::invalid_argument("clock: multiplier must be 1, 2, 4 or 8");
     multiplier_ = m;
   }
 
@@ -43,7 +43,8 @@ class Clock {
     return now_ + static_cast<Tick>(whole);
   }
 
-  // Sleep / skip: jump straight to a target (e.g. next 06:00). Pacing carry is discarded.
+  // Sleep, or skip to the next event of interest (campaign): jump straight to a target tick.
+  // Pacing carry is discarded. The events on the way are processed exactly as at 1x.
   Tick target_skip_to(Tick t) {
     carry_ = 0.0;
     return t < now_ ? now_ : t;

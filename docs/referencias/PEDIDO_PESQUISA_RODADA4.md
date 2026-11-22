@@ -1,6 +1,6 @@
 # Pedido da rodada 4 de pesquisa (passo B0.5)
 
-> Texto pronto para a ferramenta de pesquisa. Ele não rodou em 22/11/2026 porque a conta estava sem cota de pesquisa. Na próxima sessão com o modo pesquisa ligado, o agente lança este pedido sem mudar o escopo. O texto fica em inglês porque o pedido é processado em inglês; o relatório volta em português. Depois que a rodada rodar, este arquivo sai do repositório.
+> Texto lançado na ferramenta de pesquisa em 22/11/2026. O texto fica em inglês porque o pedido é processado em inglês; o relatório volta em português. Quando o relatório for incorporado ao `BASE_MODELOS` e ao registro de fontes, este arquivo sai do repositório.
 
 ## Escopo resumido
 1. **Parte A.** Completar ano, título, autoria, URL oficial e página dos 31 itens da fila de verificação de `fontes.json`.
@@ -8,6 +8,8 @@
 3. **Parte C.** Componentes reaproveitáveis do APSIM (licença, SoilWater, SoilNitrogen, SurfaceOrganicMatter, MicroClimate, SoilArbitrator, PMF, daninhas, dados de validação).
 4. **Parte D.** Verificações da `ARQUITETURA_SIMULACAO` §12.
 5. **Parte E.** Referências de interface e de acessibilidade para o documento 13.
+6. **Parte F.** Realismo e validação da base de clima e solo sem cultura (grade climática diária, INMET, temperatura do solo, umidade observada, biologia e química do solo, bases de solos, métricas de aceite).
+7. **Parte G.** Apoio ao fluxo de ingestão de cultura (escala BBCH, estrutura dos Sistemas de Produção da Embrapa, dados abertos do Agrofit, parâmetros por grupo de cultura e piloto da beterraba).
 
 ## Texto do pedido
 
@@ -86,11 +88,28 @@ E2 Farming Simulator 25 official manual (Giants): HUD, time scale, sleep, season
 E3 Agricultural serious games for education (including Brazilian/Embrapa); learning outcomes, explanatory feedback, debriefing.
 E4 Game Accessibility Guidelines and Xbox Accessibility Guidelines: text size, colour-blind design, remapping, subtitles for a PC game designed at 1280×720.
 
+PART F — Climate and soil base: realism and validation without crops (the climate and soil models are the foundation; they must reproduce real Brazilian climates and soils for any future crop)
+F1 Gridded daily weather for any Brazilian municipality: Xavier, King & Scanlon BR-DWGD (Brazilian Daily Weather Gridded Data): latest version, period, variables (Tmax, Tmin, Rs, RH, u2, P, ET0), resolution, access, licence, validation papers; alternatives (NASA POWER, ERA5-Land) and their known biases in Brazil.
+F2 INMET automatic vs conventional stations: hourly variables, portal/API, terms of use; stations with long series in five reference regions (semi-arid PE/BA, Cerrado GO/DF/MG, Southeast SP, South RS/PR, Amazon AM/PA).
+F3 Soil temperature models for daily soil simulation (APSIM SoilTemp/Campbell, DSSAT/EPIC soil temperature, Parton 1984, damping-depth models): equations, inputs, parameters, and Brazilian validation studies; Brazilian soil temperature observation datasets (INMET conventional stations, Embrapa agrometeorological stations, research datasets).
+F4 Observed soil water dynamics under bare soil/fallow in Brazil for validation: lysimeter, TDR or neutron-probe studies with soil water content, drainage and evaporation (Embrapa Cerrados, Embrapa Semiárido, IAC, ESALQ); flux towers in Brazil (LBA, FLUXNET) as ET references; measured parameters of two-stage soil evaporation in Brazil.
+F5 Soil biology: soil organic matter pool models calibrated or applied in Brazil (Century, RothC, DayCent, APSIM SoilNitrogen); N mineralization incubation data for Brazilian soils (potentially mineralizable N, rates, temperature and moisture responses); soil respiration data; decomposition rates of common residues in Brazil (vegetable residues, cover crops, compost, manure).
+F6 Soil chemistry dynamics for validation: pH, V and Al over time after liming in Brazilian field or incubation experiments; P sorption (P-remanescente, Langmuir) by soil class; K leaching; nitrate leaching in vegetable beds in Brazil.
+F7 Brazilian soil property databases by class (Embrapa BDsolos, PronaSolos, SiBCS profiles: texture, density, organic carbon, CEC, pH) for parameterizing scenario soils; access and licence.
+F8 Validation metrics and acceptance thresholds used in soil and crop model evaluation (Willmott d, RMSE, NSE, bias), especially thresholds adopted in Brazilian model evaluations.
+
+PART G — Support for the crop ingestion pipeline (the agent will read sets of PDFs about a crop, e.g. beet, and turn them into a validated content pack: anatomy, growth stages, diseases, pests, fungicides, herbicides, irrigation and management)
+G1 BBCH scale: general scale and crop-specific scales for lettuce, beet, tomato and leafy vegetables; official publication (Meier, JKI/BBA monograph), terms of use, Portuguese usage in Brazil.
+G2 How Embrapa structures crop information ("Sistemas de Produção" standard sections); AGROVOC and Crop Ontology identifiers for crops, pests and diseases.
+G3 Agrofit (MAPA) open data: access (dados.gov.br, API), fields per registered product (crop, target, dose, safety interval, class), licence.
+G4 Default parameters by crop group for missing values: FAO-56 crop groups and tables; AquaCrop crop types (leafy, root/tuber, fruit, grain) and their default or conservative parameters; APSIM crop classes.
+G5 Beet (beterraba) as the pilot: Embrapa Hortaliças publications (cultivation system, Kc, cycle, base temperature or thermal time, spacing, nutrition, main pests and diseases such as Cercospora leaf spot, registered products) and Brazilian studies; international AquaCrop or crop-model parameters for beet, noting the difference between table beet and sugar beet.
+
 OUTPUT
 1. PART A table: proposed ID (format ORG-YEAR-ACRONYM, keep given IDs), complete reference, official URL, year, licence, exact location of each value.
 2. PART B summary table (RESOLVED-BR / RESOLVED-PROVISIONAL-INTL / PARTIAL / NOT FOUND) with recommended default and source, then details.
 3. PART C component-by-component guide with licence implications and phase recommendation.
-4. PART D and E findings with URLs and design implications.
+4. PART D, E, F and G findings with URLs and design implications (for F, propose the five reference scenarios with data sources and acceptance metrics).
 5. Registry-ready bibliography of every new source (ID, reference, https URL, domain, type, year, licence, access date).
 6. Unresolved items and next step for each.
 ```

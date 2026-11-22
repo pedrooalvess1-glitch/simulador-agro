@@ -12,6 +12,7 @@
 6. Motor **Godot 4.7.2** (renderizador Compatibility) mais o núcleo C++ `agro_core` em `engine/native/`, que guarda e muda todo o estado do mundo calculado; conteúdo em `packs/<pacote>/`. Fase atual: **Fase 0** (modelos, fontes e núcleo; nada no Godot).
 7. Estilo visual: low-poly, **cores chapadas, sem texturas, sem sombras em tempo real**.
 8. Alvo de desempenho: GPU integrada (Radeon R5 via ANGLE/D3D11), 7,5 GB de RAM, pouco disco livre.
+9. **Base física primeiro:** clima e solo não conhecem nenhuma cultura e são validados contra dados observados sem cultura (Etapa V). Cultura nova entra só como pacote, pelo fluxo de ingestão (`docs/19_INGESTAO_DE_CULTURA.md`). A campanha forma o jogador; o modo semiaberto é o laboratório de experimentos.
 
 ## 2. Quem faz o quê e onde
 - **O usuário faz só quatro coisas:** U1 manda fotos de objetos (ferramenta, implemento, planta, praga) e aprova a prévia do modelo 3D; U2 usa o simulador e conta o que estranhou; U3 concede acesso (notebook ligado com o app Claude Desktop aberto quando avisado; aprova os pedidos de acesso); U4 responde perguntas essenciais e valida o conteúdo técnico.
