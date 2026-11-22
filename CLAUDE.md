@@ -4,12 +4,12 @@
 > Estado: `docs/STATUS.md`. Passos, ordem, esforço e regra de autonomia: `docs/ROTEIRO.md`. Planejamento: `docs/00_INDICE.md`. Decisões: `docs/DECISOES.md`.
 
 ## 1. O projeto em resumo
-1. Simulador 3D de **microgestão de propriedade rural**, com aparência e mecânicas de *farming simulator* (propriedade em 3D, ciclo de dias e estações, ferramentas, máquinas, insumos, colheita).
+1. Simulador 3D de **microgestão de propriedade rural**, com aparência e mecânicas de *farming simulator* e de Medieval Dynasty. O jogador é o protagonista, em primeira ou terceira pessoa. O produto final é um mundo semiaberto.
 2. Foco diferente do *farming simulator*: **manejo técnico** de horta e de várias culturas, canteiro a canteiro. O jogador testa técnicas sem ter uma propriedade.
 3. **Conhecimento agronômico é dado, não código:** nenhum número agronômico (dose, espaçamento, ciclo, Kc, limiar de praga, faixa de pH) dentro de cena ou script do motor. Tudo vem do pacote de conteúdo.
 4. **Fonte rastreável:** todo parâmetro do pacote cita uma publicação registrada em `docs/referencias/fontes.json` (fonte primária: **Embrapa**), com página ou seção. Política de fontes complementares: `00_INDICE` §1.4.
-5. **Mundo calculado:** o estado de solo, água, planta, pragas e doenças evolui por um modelo diário (documento 05). Nada é pintado à mão.
-6. Motor **Godot 4.7.2** (renderizador Compatibility), em `engine/` (motor genérico) e `packs/<pacote>/` (conteúdo). Fase atual: **planejamento**.
+5. **Mundo calculado:** o estado de solo, água, planta, pragas e doenças evolui por modelos com passo fixo em tempo simulado, em camadas de taxa, com relógio 24 para 1 e multiplicador 2x/4x/8x (`docs/BASE_MODELOS.md`). Nada é pintado à mão.
+6. Motor **Godot 4.7.2** (renderizador Compatibility), em `engine/` (motor genérico) e `packs/<pacote>/` (conteúdo). Fase atual: **Fase 0** (pesquisa de modelos e fontes; nada no Godot).
 7. Estilo visual: low-poly, **cores chapadas, sem texturas, sem sombras em tempo real**.
 8. Alvo de desempenho: GPU integrada (Radeon R5 via ANGLE/D3D11), 7,5 GB de RAM, pouco disco livre.
 
@@ -38,7 +38,7 @@
 
 ## 4. Estrutura
 ```
-docs/             00_INDICE (entrada), ROTEIRO, STATUS, DECISOES, CONVENCOES, GLOSSARIO_DO_PROJETO, _MODELO_DOCUMENTO
+docs/             00_INDICE (entrada), BASE_MODELOS, ROTEIRO, STATUS, DECISOES, CONVENCOES, GLOSSARIO_DO_PROJETO, _MODELO_DOCUMENTO
 docs/referencias/ fontes.json (registro de fontes) · FONTES.md (como registrar) · pdf/ (local, ignorada)
 art/              blender/ (scripts .py) · glb/ · previews/ · fotos/ (local, ignorada)
 engine/           motor genérico Godot (não conhece nenhuma cultura)

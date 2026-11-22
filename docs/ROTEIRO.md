@@ -39,52 +39,56 @@ Fora desses casos, o agente decide, registra a decisão em `docs/DECISOES.md` qu
 
 ## 3. Passos pendentes, na ordem de execução
 
-**A (repositório) → B (acervo de fontes) → C (documentos) → D (esqueleto Godot e fatia vertical) → E (ciclo de correção).** A Etapa F (arte) acontece quando chegar uma foto.
+As etapas A, B e C formam a **Fase 0** do `00_INDICE` §7. As etapas D e E entregam a **Fase 1**. As fases 2 a 5 ganham etapas próprias quando a Fase 1 terminar. A Etapa F (arte) acontece quando chegar uma foto. Nada é produzido no Godot antes do fim da Etapa C.
 
 ### Etapa A — repositório
-- [x] **A1.** 🤖 Repositório `simulador-agro` criado a partir da infraestrutura do `simulador-normas` (Godot fixado, CI, verificadores, pipeline Blender, convenções).
+- [x] **A1.** 🤖 Repositório `simulador-agro` criado a partir da infraestrutura do `simulador-normas`.
 - [ ] **A2.** 🤖 `médio` Pelo navegador logado: regra da `main` (PR obrigatório, *checks* do CI obrigatórios, histórico linear, sem *push* forçado), apagar *branch* no *merge*, rótulos das issues (`bug`, `conteudo-tecnico`, `desempenho`, `docs`, `ideia`, `arte`).
-- [ ] **A3.** 👤 U4 responder as perguntas abertas da `00_INDICE` §9.
+- [x] **A3.** 👤 Perguntas iniciais respondidas (decisões 7, 10, 14 e 15).
 
-### Etapa B — acervo de fontes Embrapa
-- [ ] **B1.** 🤖 `alto` Levantar as publicações da Embrapa para a cultura e a região da fatia vertical (sistema de produção, recomendação de calagem e adubação, irrigação, pragas e doenças, calendário) e registrá-las em `docs/referencias/fontes.json`, com URL e data de acesso.
+### Etapa B — base de modelos e acervo de fontes
+- [x] **B0.1.** 🤖 Primeira pesquisa de modelos: catálogo por domínio, conjunto da fase 1, arquitetura de tempo (`BASE_MODELOS`).
+- [ ] **B0.2.** 🤖 `extra` Segunda pesquisa: lacunas do `BASE_MODELOS` §5, avaliação dos candidatos pelos critérios C1–C7 e arquitetura multitaxa com acoplamento mínimo. Atualizar o `BASE_MODELOS`.
+- [ ] **B1.** 🤖 `alto` Registrar em `docs/referencias/fontes.json` as publicações que sustentam os modelos da fase 1 e os dados da alface (FAO-56, AquaCrop, INMET, Embrapa Hortaliças, manuais estaduais, SiBCS), com URL e data de acesso. Ampliar `dominios_permitidos` conforme a política do `00_INDICE` §1.4.
 - [ ] **B2.** 🤖 `alto` Conferir a licença e as condições de reprodução de cada publicação; registrar no campo `licenca`.
-- [ ] **B3.** 🤖 `médio` Levantar as fontes da horta completa (Fase 2): demais hortaliças, adubação verde, consórcio, rotação, plantas daninhas.
+- [ ] **B3.** 🤖 `médio` Levantar as fontes da Fase 2: tomate cereja, compostagem, palhada, defensivos (Agrofit), aspersão.
 
 ### Etapa C — documentos de planejamento (um PR por documento)
-Para cada documento da `00_INDICE` §5: ler `CLAUDE.md`, a `00_INDICE`, `DECISOES` e os documentos já escritos; escrever no formato do `_MODELO_DOCUMENTO`; todo número com fonte; rodar os verificadores; PR e *merge* com CI verde.
+Para cada documento da `00_INDICE` §5: ler `CLAUDE.md`, a `00_INDICE`, o `BASE_MODELOS`, `DECISOES` e os documentos já escritos; escrever no formato do `_MODELO_DOCUMENTO`; todo número com fonte; rodar os verificadores; PR e *merge* com CI verde. O `BASE_MODELOS` sai do repositório na revisão cruzada, depois de absorvido.
 
 | Ordem | Documento | Esforço | Por que nesta posição |
 |---|---|---|---|
-| 1 | 01 Visão e pedagogia | `alto` | Define o que é aprender manejo jogando |
-| 2 | 04 Modelo de conhecimento | `extra` | Formato em que todo o conteúdo é escrito |
-| 3 | 05 Modelo solo-planta-atmosfera | `extra` | O que torna o mundo calculado |
-| 4 | 09 Tempo, clima e calendário | `alto` | Entrada diária do modelo |
-| 5 | 14 Pacote inicial | `alto` | Dados reais da fatia vertical |
-| 6 | 10 Fitossanidade | `alto` | Pragas, doenças e daninhas acopladas ao modelo |
-| 7 | 08 Interação e operações | `alto` | Como o jogador muda o mundo |
-| 8 | 07 Catálogo | `alto` | O que existe para operar |
-| 9 | 11 Desafios e campanha | `alto` | Objetivos e progressão |
-| 10 | 12 Avaliação | `alto` | Como o resultado é medido e explicado |
-| 11 | 02 Arquitetura geral | `extra` | Consolida os contratos acima |
-| 12 | 13 Interface | `médio` | Segue os contratos do 02 |
-| 13 | 03 Plataforma e desempenho | `médio` | Vegetação em massa e orçamento |
-| 14 | 06 Mundo 3D | `médio` | Propriedade e kit de peças |
-| 15 | 17 Pipeline de arte | `médio` | Plantas por estádio e máquinas |
-| 16 | 15 Dados e replay | `alto` | Formato de save é caro de mudar depois |
-| 17 | 16 Testes e CI | `alto` | Testes do modelo contra valores das fontes |
-| 18 | 20 Roadmap | `médio` | Sequência de entrega |
-| 19 | 18 Novo pacote | `médio` | Só depende do 04 e do 14 |
-| 20 | 19 Modo livre | `alto` | Fase 4 |
-| 21 | Revisão cruzada de `docs/` | `extra` | Contradições, lacunas, dependências circulares |
+| 1 | 01 Visão e pedagogia | `alto` | Define o que é aprender manejo jogando e os dois modos de jogo |
+| 2 | 09 Relógio e clima | `extra` | O relógio é a base de todos os modelos |
+| 3 | 04 Modelo de conhecimento | `extra` | Formato em que todo o conteúdo é escrito |
+| 4 | 05 Modelo solo-planta-atmosfera | `extra` | O que torna o mundo calculado |
+| 5 | 15 Save, replay e determinismo | `alto` | O formato de save é caro de mudar depois |
+| 6 | 14 Pacote inicial | `alto` | Dados reais da fatia vertical |
+| 7 | 10 Fitossanidade | `alto` | Daninhas na fase 1; pragas, doenças e defensivos preparados para a fase 2 |
+| 8 | 18 Protagonista e câmera | `alto` | Como o jogador age no mundo |
+| 9 | 08 Interação e operações | `alto` | Como o jogador muda o mundo |
+| 10 | 07 Catálogo | `alto` | Ferramentas, instrumentos e máquinas |
+| 11 | 06 Mundo 3D e terreno | `alto` | Propriedade, deformação do terreno, declividade |
+| 12 | 11 Campanha | `alto` | Lições do plano ao inclinado |
+| 13 | 12 Avaliação | `alto` | Como o resultado é medido e explicado |
+| 14 | 02 Arquitetura geral | `extra` | Consolida os contratos acima |
+| 15 | 13 Interface | `médio` | Segue os contratos do 02 |
+| 16 | 03 Plataforma e desempenho | `médio` | Vegetação em massa, malha na CPU, orçamento |
+| 17 | 17 Pipeline de arte | `médio` | Plantas por estádio e máquinas |
+| 18 | 16 Testes e CI | `alto` | Testes do modelo contra as fontes e teste 1x × 8x |
+| 19 | 21 Roadmap | `médio` | Sequência de entrega das fases 1 a 5 |
+| 20 | 19 Novo pacote | `médio` | Só depende do 04 e do 14 |
+| 21 | 20 Modo semiaberto e eventos | `alto` | Fase 3 |
+| 22 | Revisão cruzada de `docs/` | `extra` | Contradições, lacunas, dependências circulares; absorve e retira o `BASE_MODELOS` |
 
 ### Etapa D — esqueleto Godot e fatia vertical
 - [ ] **D1.** 🤖 `médio` Projeto Godot (Compatibility, 4.7.2), gdUnit4, CI de testes e de exportação do `.exe` Windows.
+- [ ] **D1a.** 🤖 `extra` Relógio de passo fixo com camadas L1–L3, multiplicador 2x/4x/8x, limite de passos por quadro, dormir e teste 1x × 8x (documento 09).
 - [ ] **D2.** 🤖 `médio` Abrir o primeiro `.exe` da Release no notebook e conferir se abre.
-- [ ] **D3.** 🤖 `médio` Camada base: eventos, save, RNG com semente, log (documento 15).
+- [ ] **D3.** 🤖 `alto` Camada base: eventos, salvar e carregar, RNG por subsistema, registro de ações, log (documento 15).
 - [ ] **D4.** 🤖 `extra` Carregador e validador do pacote (documento 04).
-- [ ] **D5.** 🤖 `extra` Modelo diário solo-planta-atmosfera (documento 05), com testes contra valores das fontes.
-- [ ] **D6.** 🤖 `médio` Propriedade com um canteiro (documento 06).
+- [ ] **D5.** 🤖 `extra` Modelos da fase 1 (`BASE_MODELOS` §3; documento 05), com testes contra valores das fontes.
+- [ ] **D6.** 🤖 `médio` Propriedade com um canteiro plano e protagonista em primeira e terceira pessoa (documentos 06 e 18).
 - [ ] **D7.** 🤖 `alto` `act()` com as operações da fatia vertical (documentos 02 e 08).
 - [ ] **D8.** 🤖 `alto` Safra completa e relatório com raio-x (documentos 11, 12 e 13).
 - [ ] **D9.** 🤖 `médio` Jogar no notebook e medir o FPS (painel F3). 👤 U2 jogar e dizer o que ficou confuso.
