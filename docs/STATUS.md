@@ -6,7 +6,7 @@
 
 **Fase 0, Etapas B e C.** Três rodadas de pesquisa estão no `BASE_MODELOS`. A arquitetura de simulação foi refeita no `ARQUITETURA_SIMULACAO` e já tem núcleo C++ testado em `engine/native/`. O registro de fontes tem 16 publicações registradas e 31 na fila de verificação. O documento 13 (interface) está em rascunho. Nada é produzido no Godot nesta fase.
 
-**Próximo passo.** B0.5 (quarta rodada de pesquisa, já lançada). Depois B1 (esvaziar a fila do registro), Opus 5.5 com esforço `alto`, e B5 (astronomia e ET0 no núcleo), esforço `extra`.
+**Próximo passo.** B0.5 (quarta rodada de pesquisa). O pedido está pronto em `docs/referencias/PEDIDO_PESQUISA_RODADA4.md` e não rodou por falta de cota de pesquisa. Depois B1 (esvaziar a fila do registro), Opus 5.5 com esforço `alto`, e B5 (astronomia e ET0 no núcleo), esforço `extra`.
 
 ## 2. O que existe
 
