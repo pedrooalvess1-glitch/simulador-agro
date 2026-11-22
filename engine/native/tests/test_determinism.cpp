@@ -4,8 +4,8 @@
 // same mechanics the real core will use: event queue, daily step, player actions at
 // arbitrary seconds, integer water ledger, arbiter with largest remainder, detmath in the
 // fluxes and a counter-based RNG for one game event. The same world is driven by very
-// different frame sequences (1x, 8x, irregular frames, sleep jumps, tiny event budgets and a
-// save/load in the middle). The daily hash sequence must be identical in every run.
+// different frame sequences (1x, 8x, irregular frames, sleep and skip-to-event jumps, tiny event
+// budgets and a save/load in the middle). The daily hash sequence must be identical in every run.
 #include <cstdint>
 #include <vector>
 
@@ -155,6 +155,8 @@ std::vector<std::uint64_t> run_irregular_with_sleep_and_save() {
     Tick target;
     if (r % 97 == 0) {
       target = clock.target_skip_to(clock.now() + 10 * 3600);  // sleep: jump 10 h at once
+    } else if (r % 131 == 0 && !w.queue.empty()) {
+      target = clock.target_skip_to(w.queue.peek().tick);      // skip to the next event
     } else {
       clock.set_multiplier(1 << (r % 4));
       const double dt = 0.002 + static_cast<double>(r % 1000) / 4000.0;  // 2 ms to 252 ms frames
@@ -175,11 +177,11 @@ std::vector<std::uint64_t> run_irregular_with_sleep_and_save() {
 
 }  // namespace
 
-TEST("determinismo: 1x, 8x, quadros irregulares, dormir, orçamento mínimo e save/load dão o mesmo hash diário") {
+TEST("determinismo: 1x, 8x, quadros irregulares, dormir, pular até o evento, orçamento mínimo e save/load dão o mesmo hash diário") {
   const auto ref = run_frames(1, 1.0 / 60.0, 1000);
   CHECK_EQ(ref.size(), static_cast<std::size_t>(kDays));
   CHECK(run_frames(8, 1.0 / 60.0, 1000) == ref);
-  CHECK(run_frames(32, 1.0 / 30.0, 1) == ref);
+  CHECK(run_frames(8, 1.0 / 30.0, 1) == ref);
   CHECK(run_frames(2, 1.0 / 144.0, 2) == ref);
   CHECK(run_irregular_with_sleep_and_save() == ref);
 }

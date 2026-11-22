@@ -4,9 +4,9 @@
 
 ## 1. Fase atual
 
-**Fase 0, Etapas B e C.** Três rodadas de pesquisa estão no `BASE_MODELOS`. A arquitetura de simulação foi refeita no `ARQUITETURA_SIMULACAO` e já tem núcleo C++ testado em `engine/native/`. O registro de fontes tem 16 publicações registradas e 31 na fila de verificação. O documento 13 (interface) está em rascunho. Nada é produzido no Godot nesta fase.
+**Fase 0, Etapas B, V e C.** Três rodadas de pesquisa estão no `BASE_MODELOS`. A arquitetura de simulação está no `ARQUITETURA_SIMULACAO` e já tem núcleo C++ testado em `engine/native/`. Clima e solo passaram a ser a base do simulador, validada sem cultura na Etapa V. O fluxo de ingestão de cultura (documento 19) e a interface (documento 13) estão em rascunho. O registro de fontes tem 16 publicações registradas e 31 na fila de verificação. Nada é produzido no Godot nesta fase.
 
-**Próximo passo.** B0.5 (quarta rodada de pesquisa). O pedido está pronto em `docs/referencias/PEDIDO_PESQUISA_RODADA4.md` e não rodou por falta de cota de pesquisa. Depois B1 (esvaziar a fila do registro), Opus 5.5 com esforço `alto`, e B5 (astronomia e ET0 no núcleo), esforço `extra`.
+**Próximo passo.** Incorporar a rodada 4 de pesquisa (B0.5, lançada em 22/11/2026). Depois B1 (esvaziar a fila do registro, esforço `alto`), B5 e V4 (astronomia e ET0 no núcleo, esforço `extra`) e V1 a V3 (cenários de referência e documento 22).
 
 ## 2. O que existe
 
@@ -14,8 +14,8 @@
 |---|---|
 | Repositório `pedrooalvess1-glitch/simulador-agro` | Público, MIT. Todo trabalho entra por *branch* + PR. |
 | CI (`.github/workflows/ci.yml`) | Links internos; registro de fontes e citações; núcleo C++ no Linux (g++ -O0/-O2, clang++, g++ -march=haswell, erro em ulp) e no Windows (MinGW-w64); Godot fixado. |
-| Núcleo C++ (`engine/native/`) | detmath, agenda de eventos, relógio, ledger, alocação por maior resto, RNG de eventos e hash de estado. 15 testes, incluindo 1x = 8x = dormir = save/load. Hash dos vetores do detmath `41cbfb563eb7b91d` igual em todas as configurações Linux e no Windows (MinGW g++ 14.2.0, job do CI). |
-| Documentos | `00_INDICE`, `MAPA_DO_PROJETO`, `ARQUITETURA_SIMULACAO`, `BASE_MODELOS`, `DECISOES`, `CONVENCOES`, `GLOSSARIO_DO_PROJETO`, `_MODELO_DOCUMENTO`, `13_INTERFACE` (rascunho, com wireframes em `docs/interface/`), este arquivo. Os demais documentos 01 a 21 ainda não existem. |
+| Núcleo C++ (`engine/native/`) | detmath, agenda de eventos, relógio, ledger, alocação por maior resto, RNG de eventos e hash de estado. 15 testes, incluindo 1x = 8x = dormir = pular até o evento = save/load. Hash dos vetores do detmath `41cbfb563eb7b91d` igual em todas as configurações Linux e no Windows (MinGW g++ 14.2.0, job do CI). |
+| Documentos | `00_INDICE`, `MAPA_DO_PROJETO`, `ARQUITETURA_SIMULACAO`, `BASE_MODELOS`, `DECISOES`, `CONVENCOES`, `GLOSSARIO_DO_PROJETO`, `_MODELO_DOCUMENTO`, `13_INTERFACE` (rascunho, com wireframes em `docs/interface/`), `19_INGESTAO_DE_CULTURA` (rascunho), este arquivo. Os demais documentos 01 a 21 ainda não existem. |
 | Registro de fontes | 16 fontes registradas e 31 publicações na fila de verificação (`docs/referencias/fontes.json`). |
 | Projeto Godot | Ainda não existe. `packs/` e `art/` só têm a estrutura de pastas. |
 | Regra da `main` | Ainda não configurada (passo A2). |

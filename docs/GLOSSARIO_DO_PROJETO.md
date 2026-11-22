@@ -20,7 +20,12 @@
 | **Operador vertical e lateral** | Os processos de uma célula leem só a própria célula (vertical). O escoamento entre células segue um grafo em ordem topológica fixa (lateral, fase 3). | `ARQUITETURA_SIMULACAO` §5 |
 | **detmath** | Funções exp, log, pow, sin, cos, tan, atan, atan2 e acos do núcleo, feitas só com operações exatas do IEEE 754 para dar o mesmo resultado no Linux e no Windows. | `ARQUITETURA_SIMULACAO` §7 |
 | **Campanha** | Modo que ensina o básico do cultivo e do manejo, primeiro em área plana e depois em área inclinada. | documento 11 |
-| **Modo semiaberto** | Propriedade livre para o jogador, com eventos aleatórios. É o único lugar com sorteio. | documento 20 |
+| **Modo semiaberto** | Propriedade livre para o jogador conduzir experimentos de manejo, com eventos aleatórios. É o único lugar com sorteio. | documento 20 |
+| **Modo experimento** | No semiaberto, plano com tratamentos, repetições e blocos, medidas por parcela e comparação, inclusive entre ramos do mesmo save sob o mesmo clima. | `00_INDICE` §1.3; documento 20 |
+| **Base de clima e solo** | Astronomia, clima, ET0, água, temperatura, física, química e biologia do solo. Não conhece nenhuma cultura e é validada sem cultura. | `BASE_MODELOS` §3.0 |
+| **Cenário de referência** | Solo nu numa região, com série climática real e dados observados, usado para validar a base de clima e solo. | `MAPA_DO_PROJETO` Etapa V; documento 22 |
+| **Ingestão de cultura** | Fluxo em que o agente lê as publicações de uma cultura, preenche a ficha da cultura e gera um pacote validado. | documento 19 |
+| **Ficha da cultura** | Registro estruturado de tudo que as publicações dizem sobre uma cultura, com valor, unidade, fonte, página e rótulo em cada campo. | documento 19 §5.2 |
 | **Operação** | Ação do jogador (analisar solo, calcar, adubar, plantar, irrigar, capinar, cobrir, monitorar, controlar, colher). Toda operação passa por `act(verbo, alvo, insumo)`. | documento 08 |
 | **Laudo** | Resultado de uma medição (análise de solo, foliar, amostragem de pragas). Chega com atraso e com a incerteza da amostragem. | documento 13 |
 | **Raio-x** | Visualização do estado real (umidade do perfil, nutrientes, raiz, inóculo), mostrada no relatório de safra e no modo aprendiz. | `00_INDICE` §2, princípio 6 |

@@ -32,11 +32,15 @@ Numa sessão de esforço X o agente executa os passos pendentes de nível X. Se 
 
 ```mermaid
 flowchart LR
-  F0["Fase 0<br/>Base de modelos,<br/>fontes e núcleo"] --> F1["Fase 1<br/>Fatia vertical<br/>(canteiro de alface)"]
+  F0["Fase 0<br/>Modelos, fontes<br/>e núcleo C++"] --> V["Etapa V<br/>Base de clima e solo<br/>validada sem cultura"]
+  V --> F1["Fase 1<br/>Fatia vertical<br/>(canteiro de alface)"]
   F1 --> F2["Fase 2<br/>Horta completa e<br/>campanha plana"]
-  F2 --> F3["Fase 3<br/>Encosta, solo vivo<br/>e modo semiaberto"]
+  F2 --> F3["Fase 3<br/>Encosta, solo vivo,<br/>semiaberto e experimentos"]
   F3 --> F4["Fase 4<br/>Mundo semiaberto"]
   F4 --> F5["Fase 5<br/>Animais"]
+  ING["Ingestão de culturas<br/>(documento 19, contínua)"] -.-> F2
+  ING -.-> F3
+  V -.->|revalida a cada processo novo| ING
   ART["Etapa F<br/>Fotos para modelos 3D<br/>(contínua)"] -.-> F1
   ART -.-> F2
 ```
@@ -44,9 +48,10 @@ flowchart LR
 | Fase | Objetivo | Entregável que fecha a fase | Critério de saída | Estado |
 |---|---|---|---|---|
 | 0 | Escolher modelos, provar a arquitetura e registrar as fontes antes de qualquer cena | Documentos 01 a 21, registro de fontes da fase 1, núcleo C++ determinístico com testes | Revisão cruzada sem contradição. Todo parâmetro da fase 1 com fonte registrada ou rótulo [PROVISÓRIO]. CI verde em Linux e Windows | 🔄 Etapas B e C |
-| 1 | Atravessar todas as camadas com o menor conteúdo possível | `.exe` com um canteiro plano de alface, ciclo completo e relatório de safra | Balanço de água e N fecha exato. 1x, 8x, dormir e save/load dão o mesmo hash. Mesmo hash no Linux e no Windows. ≥ 30 FPS no notebook | ⬜ |
-| 2 | Horta completa com campanha que ensina o básico em área plana | Várias culturas, água em camadas, calagem com tempo de reação, defensivos, compostagem, microtrator | Campanha plana jogável do início ao fim. Testes de validação contra as fontes passam | ⬜ |
-| 3 | Declividade, solo vivo e propriedade livre | Escoamento e erosão na encosta, plantas de cobertura, salinidade, consórcio, modo semiaberto com eventos | Erosão e escoamento conservativos e determinísticos. Modo semiaberto com eventos sorteados reproduzíveis | ⬜ |
+| V | Provar que clima e solo reproduzem a realidade sem nenhuma cultura | Cenários de referência sem cultura rodando no núcleo, com métricas contra dados observados | Astronomia e ET0 batem com os exemplos do FAO-56. Água e temperatura do solo dentro dos limites de aceite do documento 22 nas cinco regiões | ⬜ |
+| 1 | Atravessar todas as camadas com o menor conteúdo possível | `.exe` com um canteiro plano de alface, ciclo completo e relatório de safra | Balanço de água e N fecha exato. 1x, 8x, dormir, pular até o evento e save/load dão o mesmo hash. Mesmo hash no Linux e no Windows. ≥ 30 FPS no notebook | ⬜ |
+| 2 | Horta completa com campanha que ensina o básico em área plana | Várias culturas, água em camadas, biologia do solo, calagem com tempo de reação, defensivos, compostagem, microtrator, primeira cultura pelo fluxo de ingestão (beterraba) | Campanha plana jogável do início ao fim. Base revalidada com os processos novos. Testes de validação contra as fontes passam | ⬜ |
+| 3 | Declividade, solo vivo e propriedade livre para experimentos | Escoamento e erosão na encosta, plantas de cobertura, salinidade, consórcio, modo semiaberto com experimentos e eventos | Erosão e escoamento conservativos e determinísticos. Experimento com ramificação do save mostra diferença só pelo manejo. Eventos sorteados reproduzíveis | ⬜ |
 | 4 | Mundo semiaberto com economia e vida | Economia, combustível, NPCs, cidades, deriva, micronutrientes, carbono de longo prazo | Mundo navegável no orçamento de desempenho | ⬜ |
 | 5 | Animais ligados ao ciclo de nutrientes | Galinha, tilápia, porcos e gado | Esterco e pastejo fecham o ledger de N e C | ⬜ |
 
@@ -64,6 +69,7 @@ flowchart LR
 | E0.4 | Registro de fontes da fase 1 | `docs/referencias/fontes.json` | Toda publicação usada pela fase 1 registrada com URL, local e licença. Fila vazia para os itens da fase 1 | 🔄 16 registradas, 31 na fila |
 | E0.5 | Documentos de planejamento 01 a 21 | `docs/NN_*.md` | Formato do `_MODELO_DOCUMENTO`, verificadores sem erro | 🔄 13 Interface em rascunho |
 | E0.6 | Revisão cruzada | todos os `docs/` | Sem contradição; `BASE_MODELOS` e `ARQUITETURA_SIMULACAO` absorvidos e retirados | ⬜ |
+| E0.7 | Fluxo de ingestão de cultura | `19_INGESTAO_DE_CULTURA.md` | Fluxo, ficha da cultura, regras de conflito e validação definidos | 🔄 rascunho |
 
 ### 3.2 Passo a passo
 
@@ -77,13 +83,24 @@ flowchart LR
 - [x] **B0.2.** 🤖 Segunda pesquisa (matriz, acoplamento, solo, planta, terreno).
 - [x] **B0.3.** 👤 Validação das decisões 26 a 34 (o usuário acatou todas as recomendações).
 - [x] **B0.4.** 🤖 Terceira pesquisa (dados da alface, descompactação, determinismo, Terrain3D) e nova análise da arquitetura.
-- [ ] **B0.5.** 🤖 `alto` Quarta pesquisa. Lacunas da `BASE_MODELOS` §10, componentes reaproveitáveis do APSIM, verificações pendentes da `ARQUITETURA_SIMULACAO` §12 e dados da fila do registro, com busca no BDPA e na Infoteca-e (`FONTES.md` §4). Pedido pronto em `docs/referencias/PEDIDO_PESQUISA_RODADA4.md`; lançar quando houver cota de pesquisa.
+- [ ] **B0.5.** 🔄 🤖 `alto` Quarta pesquisa, lançada em 22/11/2026 (`docs/referencias/PEDIDO_PESQUISA_RODADA4.md`). Lacunas da `BASE_MODELOS` §10, componentes do APSIM, verificações da `ARQUITETURA_SIMULACAO` §12, fila do registro, dados para validar clima e solo sem cultura e apoio ao fluxo de ingestão. Falta incorporar o relatório.
 - [ ] **B1.** 🤖 `alto` Esvaziar a fila de verificação do registro para as publicações da fase 1, com página ou tabela de cada valor da `BASE_MODELOS` §4.
 - [ ] **B2.** 🤖 `alto` Conferir licença e condição de reprodução de cada publicação (campo `licenca`).
 - [ ] **B3.** 🤖 `médio` Levantar as fontes da fase 2 (tomate cereja, compostagem, palhada, Agrofit, aspersão, APSIM SoilWater e SoilNitrogen).
 - [x] **B4.** 🤖 Núcleo C++ determinístico com testes e jobs de CI no Linux e no Windows (`engine/native/`).
 - [ ] **B5.** 🤖 `extra` Primeiros modelos no núcleo. Astronomia e ET0 de Penman–Monteith do FAO-56 em C++ com detmath, testados contra os exemplos numéricos do FAO-56. Depende de B0.5 confirmar os exemplos.
 - [ ] **B6.** 🤖 `alto` Balanço hídrico diário de uma camada com Curve Number e o compartimento "aplicada hoje" (`ARQUITETURA_SIMULACAO` §4.1), com teste de fechamento do ledger sob sequências aleatórias de ações.
+
+**Etapa V. Base de clima e solo validada sem cultura**
+
+O núcleo C++ não depende do Godot, então a base pode ser construída e validada antes da fase 1 (`CLAUDE.md` §3, regra 3).
+- [ ] **V1.** 🤖 `alto` Escolher os cinco cenários de referência (semiárido, Cerrado, Sudeste, Sul e Amazônia) com série climática real e dados observados de solo. Depende de B0.5.
+- [ ] **V2.** 🤖 `alto` Executável de linha de comando do núcleo que roda um cenário sem cultura e grava as variáveis diárias em CSV.
+- [ ] **V3.** 🤖 `extra` Documento 22 com métricas (viés, raiz do erro quadrático médio, índice de Willmott) e limites de aceite por variável.
+- [ ] **V4.** 🤖 `alto` Validar astronomia e ET0 (depois de B5).
+- [ ] **V5.** 🤖 `alto` Validar o balanço hídrico em solo nu (depois de B6).
+- [ ] **V6.** 🤖 `extra` Modelo de temperatura do solo por camada no núcleo e validação contra medidas brasileiras.
+- [ ] **V7.** 🤖 `alto` Job de CI que roda os cenários de referência e barra o PR se uma métrica sair do limite.
 
 **Etapa C. Documentos de planejamento (um PR por documento)**
 
@@ -95,6 +112,7 @@ Para cada documento, ler `CLAUDE.md`, `00_INDICE`, `BASE_MODELOS`, `ARQUITETURA_
 | 2 | 09 Relógio e clima | `extra` | ⬜ | Base dos modelos; absorve `ARQUITETURA_SIMULACAO` §3 |
 | 3 | 04 Modelo de conhecimento | `extra` | ⬜ | Formato do conteúdo e das citações |
 | 4 | 05 Modelo solo-planta-atmosfera | `extra` | ⬜ | O que torna o mundo calculado |
+| 4a | 22 Validação do clima e do solo | `extra` | ⬜ | Critérios que a base precisa cumprir antes de culturas novas |
 | 5 | 15 Save, replay e determinismo | `alto` | ⬜ | Absorve `ARQUITETURA_SIMULACAO` §7 e §10 |
 | 6 | 14 Pacote inicial | `alto` | ⬜ | Dados reais da fatia vertical |
 | 7 | 10 Fitossanidade | `alto` | ⬜ | Daninhas na fase 1; pragas e defensivos na fase 2 |
@@ -110,8 +128,8 @@ Para cada documento, ler `CLAUDE.md`, `00_INDICE`, `BASE_MODELOS`, `ARQUITETURA_
 | 17 | 17 Pipeline de arte | `médio` | ⬜ | Plantas por estádio e máquinas |
 | 18 | 16 Testes e CI | `alto` | ⬜ | Testes do modelo contra as fontes |
 | 19 | 21 Roadmap | `médio` | ⬜ | Datas e versões das fases 1 a 5 |
-| 20 | 19 Novo pacote | `médio` | ⬜ | Cultura ou região nova sem código |
-| 21 | 20 Modo semiaberto e eventos | `alto` | ⬜ | Fase 3 |
+| 20 | 19 Ingestão de cultura e novo pacote | `extra` | 🔄 rascunho | Cultura nova a partir das publicações, sem código |
+| 21 | 20 Modo semiaberto, experimentos e eventos | `alto` | ⬜ | Fase 3; laboratório de manejo |
 | 22 | Revisão cruzada de `docs/` | `extra` | ⬜ | Absorve e retira `BASE_MODELOS` e `ARQUITETURA_SIMULACAO` |
 
 ## 4. Fase 1. Fatia vertical
@@ -134,7 +152,7 @@ Para cada documento, ler `CLAUDE.md`, `00_INDICE`, `BASE_MODELOS`, `ARQUITETURA_
 
 **Etapa D. Esqueleto Godot e fatia vertical**
 - [ ] **D1.** 🤖 `médio` Projeto Godot 4.7.2 (Compatibility), gdUnit4, godot-cpp fixado, GDExtension do `agro_core` compilada com MinGW-w64 no CI, exportação do `.exe` Windows.
-- [ ] **D1a.** 🤖 `extra` Ponte `step_to`, `act`, `read`, `save`, `load`. Relógio com 1x a 8x (16x e 32x na campanha), limite por quadro, dormir e pular até o evento. Teste 1x × 8x dentro do Godot.
+- [ ] **D1a.** 🤖 `extra` Ponte `step_to`, `act`, `read`, `save`, `load`. Relógio com 1x a 8x, limite por quadro, dormir e, na campanha, pular até o evento. Teste 1x × 8x dentro do Godot.
 - [ ] **D2.** 🤖 `médio` Abrir o primeiro `.exe` da Release no notebook (P3).
 - [ ] **D1b.** 🤖 `médio` Benchmark do passo diário em C++ com 100, 500 e 1000 células no notebook.
 - [ ] **D3.** 🤖 `alto` Save e carga com manifesto JSON e bloco binário, registro de ações, replay e migração de versão.
@@ -159,13 +177,14 @@ Para cada documento, ler `CLAUDE.md`, `00_INDICE`, `BASE_MODELOS`, `ARQUITETURA_
 | E2.2 | Planta híbrida (mínimo entre luz e água) e árbitro de luz | Alface volta ao comportamento da fase 1 sem competição |
 | E2.3 | Daninhas com o código da planta | Reproduz a hipérbole de Cousens como teste |
 | E2.4 | Calcário com cinética, pH–V e NPK por formulação | Tempo de reação ensinado na campanha |
-| E2.5 | Mineralização de N | Componente SoilNitrogen do APSIM avaliado como referência |
+| E2.5 | Biologia do solo (matéria orgânica em compartimentos, mineralização e imobilização de N) | Componente SoilNitrogen do APSIM avaliado como referência; validado contra incubações brasileiras na Etapa V |
 | E2.6 | Séries INMET de vários anos e regiões | Brasil inteiro sem gerador climático |
 | E2.7 | Densidade do solo por preparo e tráfego, deformação do terreno, Terrain3D 1.1.x | Malha de 5 cm por canteiro dentro do orçamento |
 | E2.8 | Defensivos do Agrofit com carência e meia-vida corrigida | DT50 com fonte ou [PROVISÓRIO] |
 | E2.9 | Compostagem, palhada com Kc dual, aspersão com molhamento foliar (passo horário) | Passo horário entra na agenda sem mudar os outros módulos |
 | E2.10 | Microtrator e tomate cereja | Cultura nova só com dados |
 | E2.11 | Campanha plana | Lições do documento 11 jogáveis |
+| E2.12 | Piloto do fluxo de ingestão com a beterraba | Pacote gerado a partir das publicações, validado pelo documento 19, sem código novo |
 
 Passo a passo (Etapa G).
 - [ ] **G1.** 🤖 `extra` Água em camadas e passo horário na agenda.
@@ -176,6 +195,7 @@ Passo a passo (Etapa G).
 - [ ] **G6.** 🤖 `alto` Defensivos, compostagem, palhada e aspersão.
 - [ ] **G7.** 🤖 `médio` Microtrator e tomate cereja. 👤 U1 fotos das ferramentas e do microtrator.
 - [ ] **G8.** 🤖 `alto` Campanha plana. 👤 U2 jogar a campanha.
+- [ ] **G9.** 🤖 `extra` Piloto de ingestão com a beterraba. 👤 U4 validar o conteúdo e U1 mandar fotos por estádio.
 
 ## 6. Fase 3. Encosta, solo vivo e modo semiaberto
 
@@ -189,6 +209,7 @@ Passo a passo (Etapa G).
 | E3.4 | Fósforo e húmus em dois compartimentos | Adubação fosfatada perde disponibilidade em Latossolo argiloso |
 | E3.5 | Consórcio e banco de sementes de daninhas | Partição de luz por estrato |
 | E3.6 | Modo semiaberto, gerador climático e eventos | Eventos reproduzíveis pela semente |
+| E3.8 | Modo experimento | Tratamentos, repetições e blocos sobre a variação espacial do solo; ramificação do save com o mesmo clima; comparação no caderno |
 | E3.7 | ZARC na época de plantio | Janela por município |
 
 Passo a passo (Etapa H).
@@ -197,6 +218,7 @@ Passo a passo (Etapa H).
 - [ ] **H3.** 🤖 `alto` Química da fase 3.
 - [ ] **H4.** 🤖 `alto` Consórcio e banco de sementes.
 - [ ] **H5.** 🤖 `alto` Modo semiaberto, gerador climático e eventos.
+- [ ] **H7.** 🤖 `alto` Modo experimento com ramificação do save.
 - [ ] **H6.** 🤖 `médio` ZARC. 👤 U2 jogar na encosta.
 
 ## 7. Fase 4. Mundo semiaberto
@@ -241,3 +263,5 @@ Passo a passo (Etapa J). Detalhado quando a fase 4 terminar.
 | 5 | Regra da `main` não configurada | Hoje um *merge* sem CI verde é possível | A2 |
 | 6 | Documentos 01 a 21 ainda não escritos | O projeto Godot só começa depois da Etapa C | Etapa C |
 | 7 | Custo por célula só estimado | A escolha do tamanho da grade depende dele | D1b |
+| 8 | Base de clima e solo ainda sem validação contra dados observados | Sem ela o simulador não serve para tirar conclusões sem propriedade | Etapa V |
+| 9 | Temperatura do solo e biologia do solo ainda sem modelo escolhido | Mineralização, germinação de daninhas e degradação de defensivos dependem delas | B0.5, V6 e G3 |
