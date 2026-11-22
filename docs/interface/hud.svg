@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="DejaVu Sans, Arial, sans-serif">
+  <title>Wireframe do HUD em campo (1280x720)</title>
+  <!-- cena low-poly de fundo -->
+  <rect x="0" y="0" width="1280" height="330" fill="#a9cbe6"/>
+  <polygon points="0,330 1280,330 1280,720 0,720" fill="#7fae5a"/>
+  <polygon points="0,330 260,300 470,322 700,296 960,318 1280,300 1280,330 0,330" fill="#6b9a4b"/>
+  <polygon points="420,720 860,720 760,420 520,420" fill="#8b5a2b"/>
+  <polygon points="520,420 760,420 770,410 512,410" fill="#a06a36"/>
+  <g fill="#5f9e3c">
+    <circle cx="560" cy="440" r="9"/><circle cx="610" cy="440" r="9"/><circle cx="660" cy="440" r="9"/><circle cx="710" cy="440" r="9"/>
+    <circle cx="548" cy="490" r="13"/><circle cx="612" cy="490" r="13"/><circle cx="676" cy="490" r="13"/><circle cx="740" cy="490" r="13"/>
+    <circle cx="530" cy="570" r="18"/><circle cx="615" cy="570" r="18"/><circle cx="700" cy="570" r="18"/><circle cx="785" cy="570" r="18"/>
+  </g>
+  <rect x="826" y="430" width="6" height="90" fill="#e8e8e8"/><circle cx="829" cy="428" r="9" fill="#d9d9d9" stroke="#555" stroke-width="2"/>
+
+  <!-- 1 relógio e clima -->
+  <g>
+    <rect x="16" y="16" width="360" height="92" rx="8" fill="#14181c" fill-opacity="0.8"/>
+    <text x="32" y="44" fill="#f2f2f2" font-size="20" font-weight="bold">Dia 23 · terça · 14:35</text>
+    <text x="32" y="68" fill="#dfe6ec" font-size="15">Parcialmente nublado · 31 °C (medido)</text>
+    <g font-size="14">
+      <rect x="32" y="78" width="34" height="22" rx="4" fill="#2c343c"/><text x="40" y="94" fill="#f2f2f2">II</text>
+      <rect x="72" y="78" width="38" height="22" rx="4" fill="#2c343c"/><text x="80" y="94" fill="#f2f2f2">1x</text>
+      <rect x="116" y="78" width="38" height="22" rx="4" fill="#2c343c"/><text x="124" y="94" fill="#f2f2f2">2x</text>
+      <rect x="160" y="78" width="38" height="22" rx="4" fill="#f6b26b"/><text x="168" y="94" fill="#14181c" font-weight="bold">4x</text>
+      <rect x="204" y="78" width="38" height="22" rx="4" fill="#2c343c"/><text x="212" y="94" fill="#f2f2f2">8x</text>
+      <rect x="248" y="78" width="112" height="22" rx="4" fill="#2c343c"/><text x="256" y="94" fill="#f2f2f2">Próx. evento ▶</text>
+    </g>
+  </g>
+
+  <!-- 2 alertas -->
+  <g>
+    <rect x="884" y="16" width="380" height="96" rx="8" fill="#14181c" fill-opacity="0.8"/>
+    <text x="900" y="42" fill="#f6b26b" font-size="15" font-weight="bold">Avisos</text>
+    <text x="900" y="66" fill="#f2f2f2" font-size="14">• Laudo de solo do canteiro 2 chega amanhã</text>
+    <text x="900" y="90" fill="#f2f2f2" font-size="14">• Canteiro 2 está na janela de capina</text>
+  </g>
+
+  <!-- 3 tarefas da lição (campanha) -->
+  <g>
+    <rect x="16" y="124" width="300" height="104" rx="8" fill="#14181c" fill-opacity="0.8"/>
+    <text x="32" y="150" fill="#b6d7a8" font-size="15" font-weight="bold">Lição 3 · Manejo da irrigação</text>
+    <text x="32" y="176" fill="#f2f2f2" font-size="14">☑ Instalar o tensiômetro a 10 cm</text>
+    <text x="32" y="200" fill="#f2f2f2" font-size="14">☐ Ler o tensiômetro</text>
+    <text x="32" y="222" fill="#f2f2f2" font-size="14">☐ Irrigar quando passar do gatilho</text>
+  </g>
+
+  <!-- 4 mira e prompt de interação -->
+  <g>
+    <circle cx="640" cy="360" r="4" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <rect x="690" y="378" width="230" height="34" rx="6" fill="#14181c" fill-opacity="0.85"/>
+    <text x="702" y="400" fill="#f2f2f2" font-size="15"><tspan fill="#f6b26b" font-weight="bold">[E]</tspan> Ler tensiômetro (10 cm)</text>
+  </g>
+
+  <!-- 5 barra de ferramentas -->
+  <g font-size="11" text-anchor="middle">
+    <rect x="300" y="628" width="680" height="76" rx="8" fill="#14181c" fill-opacity="0.8"/>
+    <g fill="#2c343c">
+      <rect x="312" y="638" width="74" height="56" rx="6"/><rect x="396" y="638" width="74" height="56" rx="6"/>
+      <rect x="480" y="638" width="74" height="56" rx="6" fill="#f6b26b"/><rect x="564" y="638" width="74" height="56" rx="6"/>
+      <rect x="648" y="638" width="74" height="56" rx="6"/><rect x="732" y="638" width="74" height="56" rx="6"/>
+      <rect x="816" y="638" width="74" height="56" rx="6"/><rect x="900" y="638" width="74" height="56" rx="6"/>
+    </g>
+    <g fill="#f2f2f2">
+      <text x="349" y="662">1 Enxada</text><text x="349" y="682" fill="#c0c8cf">—</text>
+      <text x="433" y="662">2 Regador</text><text x="433" y="682" fill="#c0c8cf">cheio</text>
+      <text x="517" y="662" fill="#14181c" font-weight="bold">3 Tensiôm.</text><text x="517" y="682" fill="#14181c">ativo</text>
+      <text x="601" y="662">4 Trado</text><text x="601" y="682" fill="#c0c8cf">amostra</text>
+      <text x="685" y="662">5 Calcário</text><text x="685" y="682" fill="#c0c8cf">saco</text>
+      <text x="769" y="662">6 Adubo</text><text x="769" y="682" fill="#c0c8cf">saco</text>
+      <text x="853" y="662">7 Mudas</text><text x="853" y="682" fill="#c0c8cf">bandeja</text>
+      <text x="937" y="662">8 Faca</text><text x="937" y="682" fill="#c0c8cf">colheita</text>
+    </g>
+  </g>
+
+  <!-- 6 contexto do alvo -->
+  <g>
+    <rect x="994" y="560" width="270" height="144" rx="8" fill="#14181c" fill-opacity="0.8"/>
+    <text x="1010" y="586" fill="#f2f2f2" font-size="15" font-weight="bold">Canteiro 2 · Alface crespa</text>
+    <text x="1010" y="610" fill="#dfe6ec" font-size="13">23 dias após o transplante</text>
+    <text x="1010" y="634" fill="#a4c2f4" font-size="13">Tensão a 10 cm: 18 kPa (07:10)</text>
+    <text x="1010" y="656" fill="#a4c2f4" font-size="13">Última rega: hoje 07:15</text>
+    <text x="1010" y="678" fill="#a4c2f4" font-size="13">Laudo: aguardando</text>
+    <text x="1010" y="698" fill="#8899aa" font-size="11">só valores medidos pelo jogador</text>
+  </g>
+
+  <!-- marcações do wireframe -->
+  <g font-size="13" font-weight="bold" fill="#ffffff">
+    <circle cx="380" cy="20" r="11" fill="#c2185b"/><text x="376" y="25">1</text>
+    <circle cx="880" cy="20" r="11" fill="#c2185b"/><text x="876" y="25">2</text>
+    <circle cx="320" cy="128" r="11" fill="#c2185b"/><text x="316" y="133">3</text>
+    <circle cx="686" cy="374" r="11" fill="#c2185b"/><text x="682" y="379">4</text>
+    <circle cx="296" cy="632" r="11" fill="#c2185b"/><text x="292" y="637">5</text>
+    <circle cx="990" cy="564" r="11" fill="#c2185b"/><text x="986" y="569">6</text>
+  </g>
+</svg>

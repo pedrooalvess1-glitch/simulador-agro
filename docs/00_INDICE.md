@@ -6,7 +6,7 @@
 >
 > Rótulos: `[FONTE:ID]` · [PRÁTICA] · [INFERÊNCIA] · [MODELO] · [VERIFICAR] · [VERIFICAR NA FONTE] (definições no `CLAUDE.md` §3, regra 7).
 >
-> **Fase atual:** Fase 0 (pesquisa de modelos e acervo de fontes). Nada é produzido no Godot nesta fase. Escolha de modelos, arquitetura de simulação e dados levantados em `BASE_MODELOS.md` (duas rodadas de pesquisa).
+> **Fase atual:** Fase 0 (modelos, fontes e núcleo C++). Nada é produzido no Godot nesta fase. Fases, entregáveis e passo a passo em `MAPA_DO_PROJETO.md`. Modelos e dados em `BASE_MODELOS.md`. Arquitetura de simulação em `ARQUITETURA_SIMULACAO.md`.
 
 ---
 
@@ -22,12 +22,12 @@
 | R6 | **Protagonista jogável** | O jogador anda pela propriedade e opera ferramentas e máquinas com o próprio personagem, em primeira pessoa ou em terceira pessoa. |
 | R7 | **Mundo semiaberto** | O produto final é uma propriedade rural navegável. Economia, combustível, NPCs, cidades e animais entram em fases futuras (§7). |
 | R8 | **Brasil inteiro** | Modelos parametrizados por região, classe de solo e clima. Nenhum modelo pode supor um único estado. |
-| R9 | **Tempo simulado fiel** | Relógio de 24 para 1 com 2x, 4x e 8x, dormir, salvar e carregar, resultado idêntico em qualquer velocidade (`BASE_MODELOS` §2). |
+| R9 | **Tempo simulado fiel** | Relógio de 24 para 1 com 2x, 4x e 8x, dormir, salvar e carregar, resultado idêntico em qualquer velocidade e no Linux e no Windows (`ARQUITETURA_SIMULACAO`). |
 | R10 | **Extensível** | Separação rígida motor × pacote (§4). Cultura nova é dado novo, sem código novo. |
 | R11 | **Interferência mínima do usuário** | O agente opera ferramentas, repositório e notebook. O usuário só faz U1–U4 (`CLAUDE.md` §2). |
 
 ### 1.1 Modelo de operação
-Igual ao do `simulador-normas`. Todo o projeto é conduzido no Claude Code, com permissão total, trabalho contínuo e pontos de parada P1–P4 (`ROTEIRO` §1).
+Igual ao do `simulador-normas`. Todo o projeto é conduzido no Claude Code, com permissão total, trabalho contínuo e pontos de parada P1–P4 (`MAPA_DO_PROJETO` §1.1).
 
 ### 1.2 Público e uso
 O usuário é o primeiro público. Ele é engenheiro, tem horta própria e quer testar técnicas de manejo antes de aplicá-las. Um segundo público possível são estudantes de ciências agrárias e pequenos produtores [INFERÊNCIA].
@@ -44,6 +44,7 @@ O usuário é o primeiro público. Ele é engenheiro, tem horta própria e quer 
 4. Todo parâmetro do pacote cita o ID do registro `docs/referencias/fontes.json` e o local (página, tabela, seção). O `tools/conferir_fontes.py` barra no CI citação a ID inexistente e dado sem fonte.
 5. Quando duas publicações divergirem, o pacote guarda as duas com região e ano. O motor usa a da região do cenário [INFERÊNCIA].
 6. PDFs de terceiros ficam fora do Git (`docs/referencias/pdf/`). O registro guarda a referência, a URL e a data de acesso.
+7. A busca na Embrapa começa pelo BDPA e pela Infoteca-e (`docs/referencias/FONTES.md` §4).
 
 ---
 
@@ -53,9 +54,9 @@ O usuário é o primeiro público. Ele é engenheiro, tem horta própria e quer 
 2. **O mundo é calculado.** Solo, água, planta, pragas e doenças evoluem por modelos com passo fixo em tempo simulado.
 3. **Um único ponto de mudança do mundo.** Toda operação passa por `act(verbo, alvo, insumo)`. Interface, testes e replay usam o mesmo caminho.
 4. **Camadas.** A camada de baixo nunca chama a de cima. A comunicação de volta é por eventos (*signals*).
-5. **Acoplamento mínimo no tempo.** Cada subsistema roda na própria taxa. Módulos não se conhecem e falam apenas com módulos de recurso que arbitram oferta e demanda. Entre células vale o *double buffer* (`BASE_MODELOS` §2.3).
-6. **Tudo reproduzível.** Uma safra é definida por `(versão do pacote, versão do motor, semente do mundo, série climática, registro de ações)`.
-7. **Conservação exata.** Água, nutrientes e carbono são estoques inteiros movidos por transações num ledger. O balanço fecha sem tolerância (`BASE_MODELOS` §2.5).
+5. **Acoplamento mínimo.** Tudo que muda o mundo passa por uma agenda única de eventos. Módulos não se conhecem e falam apenas com donos de recurso que arbitram oferta e demanda (`ARQUITETURA_SIMULACAO` §3 a §5).
+6. **Tudo reproduzível.** Uma safra é definida por `(versão do pacote, versão do motor, semente do mundo, série climática, registro de ações)`. Os modelos de processo são determinísticos. Sorteio só existe em eventos de jogo. O resultado é o mesmo no Linux e no Windows (`ARQUITETURA_SIMULACAO` §7 e §8).
+7. **Conservação exata.** Água, nutrientes e carbono são estoques inteiros movidos por transações num ledger. O balanço fecha sem tolerância (`ARQUITETURA_SIMULACAO` §6).
 8. **Verdade invisível.** O estado real do solo e da planta só aparece por medição. Análise de solo com prazo de laudo, tensiômetro, amostragem de pragas e observação de sintomas. O raio-x aparece no relatório de safra e no modo aprendiz.
 9. **Rastreabilidade.** Todo número leva fonte e local. Toda simplificação do simulador leva [MODELO].
 10. **Verificável por máquina.** Esquema dos dados e citações conferidos no CI desde o primeiro dia.
@@ -80,6 +81,7 @@ O usuário é o primeiro público. Ele é engenheiro, tem horta própria e quer 
 
 ### 3.1 Stack
 Herdada e já testada: Godot 4.7.2 (GDScript, Compatibility), Blender 4.5.10 LTS → glTF, gdUnit4 v6.2.3, GitHub Actions. Versões e somas em `tools/ambiente/versoes.env`; comandos no `CLAUDE.md` §5.
+Núcleo do mundo calculado em C++17 (`engine/native/`), compilado com MinGW-w64 para Windows, a mesma família de compilador das builds oficiais do Godot [FONTE:GODOT-2026-COMPWIN]. Na fase 1 ele entra no Godot como GDExtension (godot-cpp).
 
 ### 3.2 GPU integrada
 **Mecanismo.** GPU integrada divide a RAM do sistema e tem pouca banda de memória. O que derruba o desempenho é, em ordem, textura grande, sombra em tempo real, pós-processamento e número de *draw calls*. Medição herdada na Radeon R5: ~496 FPS sem sombra e ~75 FPS com sombra numa cena trivial; ~250–280 FPS no `.exe` da cena de fumaça.
@@ -87,8 +89,8 @@ Herdada e já testada: Godot 4.7.2 (GDScript, Compatibility), Blender 4.5.10 LTS
 Restrições específicas deste projeto:
 1. **Vegetação em massa.** Plantas repetidas com `MultiMeshInstance3D`. Lavoura grande vira representação por talhão. Nível de detalhe por distância.
 2. **Sem *compute shaders*.** O renderizador Compatibility não oferece *compute shaders* e não há plano de suporte [VERIFICAR]. Simulação em malha (água no terreno, deformação) roda na CPU em malha grossa ou em GDExtension C++.
-3. **Terreno.** Terrain3D na série 1.x para a propriedade e malha própria de 5 cm para cada canteiro (`BASE_MODELOS` §8). A série 2.x não deve suportar o Compatibility [VERIFICAR].
-4. **Física fora do multiplicador.** Protagonista e máquinas rodam em tempo real (`BASE_MODELOS` §2.2).
+3. **Terreno.** Terrain3D 1.1.x para a propriedade e malha própria de 5 cm para cada canteiro (`BASE_MODELOS` §8). A versão 1.1.0 suporta Godot 4.5 a 4.8 e o Compatibility [FONTE:GH-2026-TERRAIN3D110]. A série 2.x não vai suportar o Compatibility [FONTE:TOKISAN-2025-T3DGPU].
+4. **Física fora do multiplicador.** Protagonista e máquinas rodam em tempo real. Só a ação quantizada entra no mundo calculado (`ARQUITETURA_SIMULACAO` §3.3).
 
 ### 3.3 Orçamento de desempenho
 
@@ -98,23 +100,22 @@ Restrições específicas deste projeto:
 | Triângulos visíveis | ≤ 150 mil |
 | *Draw calls* | ≤ 200 |
 | Memória de texturas (só fontes e interface) | ≤ 64 MB |
-| Passos de simulação agronômica por quadro na velocidade 8x | dentro de 4 ms de CPU [INFERÊNCIA]; custo por célula a medir na fase 1 (`BASE_MODELOS` §2.8) |
+| Simulação agronômica por quadro | dentro de 4 ms de CPU [INFERÊNCIA]; custo por célula a medir no passo D1b (`ARQUITETURA_SIMULACAO` §9) |
 | Tamanho do instalador | ≤ 200 MB |
 
 ---
 
 ## 4. Arquitetura em duas partes
 
-As subpastas de `engine/` e `packs/` são criadas com o projeto Godot (Fase 1).
+`engine/native/` já existe. As outras subpastas de `engine/` e as de `packs/` são criadas com o projeto Godot (Fase 1).
 
 ```
 engine/                  motor genérico: não conhece nenhuma cultura
-  base/     relógio de passo fixo, eventos, save, RNG por subsistema, log
-  world/    propriedade, terreno deformável, câmera, protagonista, máquinas
-  model/    camadas L1–L3, ledger inteiro, árbitros de luz, água e nitrogênio, módulos em ordem causal
-  domain/   act(), catálogo, operações, laudos
-  game/     campanha, modo semiaberto, eventos aleatórios, avaliação
-  ui/       HUD, caderno de campo, laudos, relatório de safra
+  native/   núcleo C++ agro_core: agenda de eventos, relógio, ledger, árbitros, detmath, RNG de eventos, modelos em ordem causal, act(), save
+  bridge/   GDExtension (godot-cpp) com step_to, act, read, save e load
+  world/    propriedade, terreno deformável, câmera, protagonista, máquinas (GDScript)
+  game/     campanha, modo semiaberto, avaliação (GDScript)
+  ui/       HUD, caderno de campo, laudos, relatório de safra (GDScript)
 packs/
   <pacote>/
     crops/    culturas: graus-dia, Kc, parâmetros de dossel e de produtividade da água, espaçamento, janelas
@@ -134,7 +135,7 @@ packs/
 
 ## 5. Mapa dos documentos de planejamento
 
-Formato: `_MODELO_DOCUMENTO.md`. Ordem e esforço: `ROTEIRO` §3.
+Formato: `_MODELO_DOCUMENTO.md`. Ordem, esforço e estado: `MAPA_DO_PROJETO` §3.2.
 
 | Nº | Documento | Pergunta que responde |
 |---|---|---|
@@ -163,22 +164,13 @@ Formato: `_MODELO_DOCUMENTO.md`. Ordem e esforço: `ROTEIRO` §3.
 ---
 
 ## 6. Fatia vertical (primeira entrega jogável)
-Um canteiro plano de alface, ciclo completo. O protagonista faz análise de solo, calagem e adubação, plantio, irrigação e manejo, monitoramento e colheita. O relatório de safra explica as causas de cada perda. A fatia atravessa todas as camadas, do dado citado ao `.exe`, para expor cedo os erros de arquitetura. Ela só fecha se o balanço de água e de nitrogênio fechar exato e se 1x e 8x derem o mesmo hash de estado. O motivo da alface está no `BASE_MODELOS` §3.
+Um canteiro plano de alface, ciclo completo. O protagonista faz análise de solo, calagem e adubação, plantio, irrigação e manejo, monitoramento e colheita. O relatório de safra explica as causas de cada perda. A fatia atravessa todas as camadas, do dado citado ao `.exe`, para expor cedo os erros de arquitetura. Ela só fecha se o balanço de água e de nitrogênio fechar exato e se 1x, 8x, dormir e save/load derem o mesmo hash de estado, no Linux e no Windows. O motivo da alface está no `BASE_MODELOS` §3.
 
 ---
 
 ## 7. Fases do projeto
 
-| Fase | Entrega | Conteúdo |
-|---|---|---|
-| 0 | Base de modelos e acervo de fontes | Pesquisa de modelos, arquitetura de tempo, registro de fontes Embrapa, documentos de planejamento. Nada no Godot. |
-| 1 | Fatia vertical | Protagonista em primeira e terceira pessoa, relógio 24 para 1 com 2x/4x/8x, dormir, salvar e carregar, ledger inteiro e *double buffer*, um canteiro plano de alface com os modelos da fase 1 (`BASE_MODELOS` §3.1) e relatório de safra. Benchmark de custo por célula no notebook. |
-| 2 | Horta completa e campanha em área plana | Água em camadas, planta híbrida com árbitro de luz, daninhas com o mesmo código, calcário cinético e pH–V, ClimaBR, densidade do solo por preparo, deformação do terreno, núcleo diário em C++ com matemática própria, defensivos do Agrofit, compostagem, microtrator, tomate cereja (`BASE_MODELOS` §3.2). |
-| 3 | Área inclinada e solo vivo | D8 em cascata e MUSLE, resistência à penetração com IHO e bioporos, plantas de cobertura, Gapon e salinidade, fósforo e húmus em dois compartimentos, consórcio, banco de sementes, modo semiaberto com eventos aleatórios (`BASE_MODELOS` §3.3). |
-| 4 | Mundo semiaberto | Economia, combustível, NPCs, cidades, gases e deriva, epidemiologia espacial, micronutrientes por tabelas offline, RothC, água visual (`BASE_MODELOS` §3.4). |
-| 5 | Animais | Galinha, tilápia, porcos e gado, ligados ao ciclo de esterco e composto. Reaproveitam o ledger, o árbitro de recurso e a compactação por pisoteio. |
-
----
+Objetivo, entregáveis, critério de saída e passo a passo de cada fase estão no `MAPA_DO_PROJETO` §2 a §8.
 
 ## 8. Riscos
 
@@ -187,7 +179,8 @@ Um canteiro plano de alface, ciclo completo. O protagonista faz análise de solo
 | Modelo agronômico complexo demais | Cada processo acoplado multiplica parâmetros sem fonte | Conjunto mínimo por fase (`BASE_MODELOS` §3) |
 | Parâmetro provisório vira definitivo | Sem calibração brasileira de alface, defensivos e descompactação, o número fica por inércia | Rótulo [PROVISÓRIO] no pacote e lista de lacunas em `BASE_MODELOS` §10 |
 | Dado sem fonte entra no pacote | Preencher lacuna de memória parece inofensivo | Verificador de fontes no CI (§1.4) |
-| Divergência entre velocidades do relógio | Passo variável muda o resultado e pode desestabilizar o integrador | Passo fixo com acumulador e teste 1x × 8x no CI |
+| Divergência entre velocidades do relógio | Passo variável muda o resultado e pode desestabilizar o integrador | Agenda única de eventos com passo fixo e teste 1x = 8x = dormir = save/load no CI |
+| Resultado diferente no Windows | FMA e bibliotecas matemáticas mudam os últimos bits e o erro cresce com o tempo | Núcleo C++ com detmath e `-ffp-contract=off`; job Windows no CI compara o hash |
 | Simulação em malha pesada | Sem *compute shaders* no Compatibility | Malha grossa na CPU, GDExtension, adiamento para a fase 3 |
 | Vegetação derruba o FPS | Milhares de nós de planta | MultiMesh, talhão agregado, LOD (§3.2) |
 | Licença das publicações | Tabela reproduzida em repositório público | Guardar só valores com citação e URL; PDF fora do Git |
@@ -196,9 +189,4 @@ Um canteiro plano de alface, ciclo completo. O protagonista faz análise de solo
 
 ## 9. Perguntas abertas
 
-| # | Pergunta | Recomendação |
-|---|---|---|
-| 1 | Duração de um ciclo de alface em tempo real. Na razão 24 para 1, um ciclo de cerca de 45 dias [VERIFICAR NA FONTE] leva cerca de 45 horas em 1x e cerca de 6 horas em 8x, sem contar o dormir. Isso serve para a campanha? | Manter 24 para 1. O dormir pula as noites e a campanha usa etapas curtas do ciclo |
-| 2 | Determinismo entre plataformas | Nível A (mesma build e plataforma) na fase 1 e nível B (matemática própria em C++) a partir da fase 2, como propõe `BASE_MODELOS` §2.7 |
-| 3 | Oferecer 16x, 32x e "pular até o próximo evento" além de 2x, 4x e 8x? | Sim, só na campanha. A CPU não limita. O limite é o tempo do jogador |
-| 4 | Fixar o Terrain3D na série 1.x? | Sim. Confirmar na documentação oficial antes de fixar |
+Nenhuma no momento. O usuário acatou as recomendações das rodadas de pesquisa. As decisões vigentes estão no `DECISOES.md`.

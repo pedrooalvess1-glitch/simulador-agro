@@ -1,4 +1,5 @@
-# CI. Porteiro do merge: links válidos, Godot fixado e testável, registro de fontes e citações consistentes.
+# CI. Porteiro do merge: links válidos, registro de fontes e citações consistentes, núcleo C++ determinístico
+# (mesmo hash no Linux e no Windows) e Godot fixado e testável.
 name: CI
 
 on:
@@ -39,6 +40,43 @@ jobs:
         run: python3 tools/test_conferir_fontes.py
       - name: Registro válido e toda citação aponta para uma fonte registrada
         run: python3 tools/conferir_fontes.py
+
+  nucleo-linux:
+    name: Núcleo C++ (Linux, determinismo)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: mpmath para medir o erro em ulp
+        run: python3 -m pip install mpmath==1.3.0
+      - name: g++ -O2/-O0, clang++ -O2, g++ -O3 -march=haswell; testes, hash dos vetores e erro em ulp
+        run: tools/testar_nucleo.sh
+
+  nucleo-windows:
+    name: Núcleo C++ (Windows, MinGW)
+    runs-on: windows-2022
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - name: Compila com MinGW-w64 (mesma família de compilador das builds oficiais do Godot) e confere o hash
+        working-directory: engine/native
+        run: |
+          GXX=/c/mingw64/bin/g++.exe; [ -x "$GXX" ] || GXX=g++
+          "$GXX" --version | head -1
+          FLAGS="-std=c++17 -O2 -ffp-contract=off -fno-fast-math -Wall -Wextra -Iinclude"
+          "$GXX" $FLAGS src/detmath.cpp tests/run_tests.cpp tests/test_core.cpp tests/test_determinism.cpp -o run_tests.exe -static
+          "$GXX" $FLAGS src/detmath.cpp tools/detmath_vectors.cpp -o detmath_vectors.exe -static
+          ./run_tests.exe
+          obtido="$(./detmath_vectors.exe | tail -1 | tr -d '\r' | awk '{print $2}')"
+          esperado="$(tr -d '[:space:]' < golden/detmath_vectors.fnv)"
+          echo "Windows: $obtido  esperado: $esperado"
+          [ "$obtido" = "$esperado" ]
 
   godot:
     name: Godot (versão, SHA-512 e gdUnit4)

@@ -1,5 +1,399 @@
 {
-  "versao_esquema": 1,
-  "dominios_permitidos": ["embrapa.br"],
-  "fontes": []
+  "versao_esquema": 2,
+  "dominios_permitidos": [
+    "embrapa.br",
+    "fao.org",
+    "doi.org",
+    "europa.eu",
+    "nih.gov",
+    "sgb.gov.br",
+    "harvard.edu",
+    "semanticscholar.org",
+    "box2d.org",
+    "godotengine.org",
+    "github.com",
+    "tokisan.com",
+    "inria.fr",
+    "wiki.gg"
+  ],
+  "fontes": [
+    {
+      "id": "FAO-1998-FAO56",
+      "titulo": "Crop evapotranspiration: guidelines for computing crop water requirements (FAO Irrigation and Drainage Paper 56)",
+      "autoria": "Allen, R. G.; Pereira, L. S.; Raes, D.; Smith, M. (FAO)",
+      "tipo": "Manual técnico",
+      "ano": 1998,
+      "url": "https://www.fao.org/4/x0490e/x0490e00.htm",
+      "acesso": "2026-11-22",
+      "licenca": "a conferir",
+      "notas": "Equações de astronomia, ET0 de Penman-Monteith, Kc e balanço hídrico; tabelas 11, 12, 17 e 22 usadas para alface."
+    },
+    {
+      "id": "MDPI-2018-KET",
+      "titulo": "Simulation of Crop Growth and Water-Saving Irrigation Scenarios for Lettuce: A Monsoon-Climate Case Study in Kampong Chhnang, Cambodia",
+      "autoria": "Ket, P.; Garré, S.; Oeurng, C.; Hok, L.; Degré, A. Water 10(5):666",
+      "tipo": "Artigo",
+      "ano": 2018,
+      "url": "https://doi.org/10.3390/w10050666",
+      "acesso": "2026-11-22",
+      "licenca": "CC BY (versão a conferir)",
+      "regiao": "Camboja (monção)",
+      "culturas": [
+        "lettuce"
+      ],
+      "pendencias": [
+        "ler as tabelas de parâmetros para resolver a ambiguidade do CGC"
+      ]
+    },
+    {
+      "id": "ISHS-2003-TEI",
+      "titulo": "Critical nitrogen concentration in lettuce",
+      "autoria": "Tei, F.; Benincasa, P.; Guiducci, M. Acta Horticulturae 627:187-194",
+      "tipo": "Artigo",
+      "ano": 2003,
+      "url": "https://doi.org/10.17660/ActaHortic.2003.627.24",
+      "acesso": "2026-11-22",
+      "licenca": "acesso fechado; só valores citados",
+      "regiao": "Itália central (43° N)",
+      "culturas": [
+        "lettuce"
+      ]
+    },
+    {
+      "id": "ANNBOT-1996-TEI",
+      "titulo": "Growth of lettuce, onion, and red beet. 1. Growth analysis, light interception, and radiation use efficiency",
+      "autoria": "Tei, F.; Scaife, A.; Aikman, D. P. Annals of Botany 78:633-643",
+      "tipo": "Artigo",
+      "ano": 1996,
+      "url": "https://doi.org/10.1006/anbo.1996.0171",
+      "acesso": "2026-11-22",
+      "licenca": "acesso fechado; só valores citados",
+      "culturas": [
+        "lettuce"
+      ],
+      "pendencias": [
+        "confirmar na tabela original se k = 0,60 ou 0,655 é o da alface"
+      ]
+    },
+    {
+      "id": "JRC-2021-FOCUSGW",
+      "titulo": "FOCUS Generic Guidance for Tier 1 FOCUS Ground Water Assessments, version 2.3",
+      "autoria": "FOCUS Ground Water Work Group; European Commission JRC (ESDAC)",
+      "tipo": "Guia regulatório",
+      "ano": 2021,
+      "url": "https://esdac.jrc.ec.europa.eu/public_path/projects_data/focus/gw/docs/Generic_guidance_FOCUS_GW_V2-3final.pdf",
+      "acesso": "2026-11-22",
+      "licenca": "a conferir",
+      "notas": "Correção de temperatura (Q10 = 2,58; Ea = 65,4 kJ/mol) e de umidade (Walker, B = 0,7) da degradação de agrotóxicos."
+    },
+    {
+      "id": "EFSA-2017-PECSOIL",
+      "titulo": "EFSA Guidance Document for predicting environmental concentrations of active substances of plant protection products and transformation products of these active substances in soil",
+      "autoria": "European Food Safety Authority (EFSA). EFSA Journal",
+      "tipo": "Guia regulatório",
+      "ano": 2017,
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7010114/",
+      "acesso": "2026-11-22",
+      "licenca": "a conferir"
+    },
+    {
+      "id": "RBCS-2008-NICOLOSO",
+      "titulo": "Eficiência da escarificação mecânica e biológica na melhoria dos atributos físicos de um Latossolo muito argiloso e no incremento do rendimento de soja",
+      "autoria": "Nicoloso, R. S. et al. Revista Brasileira de Ciência do Solo 32(4):1723-1734",
+      "tipo": "Artigo",
+      "ano": 2008,
+      "url": "https://doi.org/10.1590/S0100-06832008000400037",
+      "acesso": "2026-11-22",
+      "licenca": "acesso aberto (SciELO); licença a conferir",
+      "regiao": "Santa Rosa, RS; Latossolo Vermelho distroférrico",
+      "pendencias": [
+        "confirmar o título completo e a lista de autores"
+      ]
+    },
+    {
+      "id": "RBCS-1998-TORMENA",
+      "titulo": "Caracterização do intervalo hídrico ótimo de um Latossolo Roxo sob plantio direto",
+      "autoria": "Tormena, C. A.; Silva, A. P.; Libardi, P. L. Revista Brasileira de Ciência do Solo 22:573-581",
+      "tipo": "Artigo",
+      "ano": 1998,
+      "url": "https://ui.adsabs.harvard.edu/abs/1998RvBCS..22..573T/abstract",
+      "acesso": "2026-11-22",
+      "licenca": "a conferir",
+      "pendencias": [
+        "extrair os coeficientes a, b e c do ajuste de Busscher no PDF da RBCS"
+      ]
+    },
+    {
+      "id": "VZJ-2018-HYBRAS",
+      "titulo": "Hydrophysical Database for Brazilian Soils (HYBRAS) and Pedotransfer Functions for Water Retention",
+      "autoria": "Ottoni, M. V.; Ottoni Filho, T. B.; Schaap, M. G.; Lopes-Assad, M. L. R. C.; Rotunno Filho, O. C. Vadose Zone Journal 17:170095",
+      "tipo": "Artigo e base de dados",
+      "ano": 2018,
+      "url": "https://rigeo.sgb.gov.br/bitstream/doc/20525/1/hydrophysical_database.pdf",
+      "acesso": "2026-11-22",
+      "licenca": "acesso aberto (RIGEO/SGB); licença a conferir",
+      "regiao": "Brasil (445 perfis, 1075 amostras)"
+    },
+    {
+      "id": "SEMINA-2011-GIANCOTTI",
+      "titulo": "Período total de prevenção à interferência das plantas daninhas na cultura da alface cultivar Solaris",
+      "autoria": "Giancotti, P. R. F.; Machado, M. H.; Yamauti, M. S. Semina: Ciências Agrárias",
+      "tipo": "Artigo",
+      "ano": 2011,
+      "url": "https://www.semanticscholar.org/paper/9490918a533464eaa8c04745c5b455295afa7b42",
+      "acesso": "2026-11-22",
+      "licenca": "acesso aberto; licença a conferir",
+      "culturas": [
+        "lettuce"
+      ],
+      "pendencias": [
+        "confirmar volume e páginas"
+      ]
+    },
+    {
+      "id": "BOX2D-2024-DETERMINISM",
+      "titulo": "Determinism",
+      "autoria": "Catto, E. (Box2D)",
+      "tipo": "Artigo técnico (blog)",
+      "ano": 2024,
+      "url": "https://box2d.org/posts/2024/08/determinism/",
+      "acesso": "2026-11-22",
+      "licenca": "a conferir"
+    },
+    {
+      "id": "GODOT-2026-COMPWIN",
+      "titulo": "Compiling for Windows (Godot Engine documentation, latest)",
+      "autoria": "Godot Engine contributors",
+      "tipo": "Documentação de software",
+      "ano": 2026,
+      "url": "https://docs.godotengine.org/en/latest/engine_details/development/compiling/compiling_for_windows.html",
+      "acesso": "2026-11-22",
+      "licenca": "CC BY 3.0 (documentação do Godot)",
+      "notas": "Afirma que todos os binários oficiais do Godot são compilados com MinGW."
+    },
+    {
+      "id": "GH-2026-TERRAIN3D110",
+      "titulo": "Terrain3D v1.1.0-stable (release)",
+      "autoria": "TokisanGames",
+      "tipo": "Página de software",
+      "ano": 2026,
+      "url": "https://github.com/TokisanGames/Terrain3D/releases/tag/v1.1.0-stable",
+      "acesso": "2026-11-22",
+      "licenca": "MIT",
+      "notas": "Suporta Godot 4.5 a 4.8+ e o renderizador Compatibility."
+    },
+    {
+      "id": "TOKISAN-2025-T3DGPU",
+      "titulo": "Moving Terrain3D Towards a GPU Driven Workflow",
+      "autoria": "Tokisan Games",
+      "tipo": "Artigo técnico (blog)",
+      "ano": 2025,
+      "url": "https://tokisan.com/terrain3d-gpu-driven-workflow/",
+      "acesso": "2026-11-22",
+      "licenca": "a conferir",
+      "notas": "Série 1.x edita na CPU e suporta Compatibility; série 2.x não suportará Compatibility."
+    },
+    {
+      "id": "INRIA-2026-COREMATH",
+      "titulo": "The CORE-MATH project",
+      "autoria": "Sibidanov, A.; Zimmermann, P. et al. (INRIA)",
+      "tipo": "Página de software",
+      "ano": 2026,
+      "url": "https://core-math.gitlabpages.inria.fr/",
+      "acesso": "2026-11-22",
+      "licenca": "MIT"
+    },
+    {
+      "id": "WIKIGG-2024-FS25MANUAL",
+      "titulo": "Farming Simulator 25/Manual",
+      "autoria": "Farming Simulator Wiki (wiki.gg), comunidade",
+      "tipo": "Wiki de comunidade",
+      "ano": 2024,
+      "url": "https://farmingsimulator.wiki.gg/wiki/Farming_Simulator_25/Manual",
+      "acesso": "2026-11-22",
+      "licenca": "CC BY-SA (wiki)",
+      "notas": "Fonte de comunidade, qualidade baixa; só referência de interface."
+    }
+  ],
+  "fila_de_verificacao": [
+    {
+      "id_proposto": "EMB-CNPH-2011-CAP5",
+      "referencia": "Marouelli, W. A.; Oliveira, A. S. et al. Manejo da água de irrigação. Cap. 5 de Irrigação e fertirrigação em fruteiras e hortaliças. Embrapa.",
+      "url": "https://www.alice.cnptia.embrapa.br/alice/bitstream/doc/915574/1/IRRIGACAOeFERTIRRIGACAOcap5.pdf",
+      "falta": "ano, autoria completa, páginas das tabelas de Kc e de tensão"
+    },
+    {
+      "id_proposto": "EMB-CNPH-2008-CT57",
+      "referencia": "Marouelli, W. A. Tensiômetros para o controle de irrigação em hortaliças. Embrapa Hortaliças, Circular Técnica 57.",
+      "url": "http://www2.ufac.br/labmec/menu/disciplinas/irrigacao-e-drenagem/material-didatico/tensiometro-para-controle-da-irrigacao-em-hortalicas.pdf",
+      "falta": "ano; URL oficial da Embrapa (Infoteca-e ou Alice)"
+    },
+    {
+      "id_proposto": "EMB-CNPH-2008-CT69",
+      "referencia": "Marouelli, W. A. Manejo de irrigação em hortaliças com sistema Irrigas. Embrapa Hortaliças, Circular Técnica 69.",
+      "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/782937/4/ct69.pdf",
+      "falta": "ano e título exato"
+    },
+    {
+      "id_proposto": "EMB-CNPH-SD-TENSIOMAN",
+      "referencia": "Embrapa Hortaliças. Controle da irrigação de hortaliças usando tensiômetro com manômetro de vácuo (cartilha).",
+      "url": "https://www.infoteca.cnptia.embrapa.br/bitstream/doc/939283/1/5ControledaIrrigacaodeHortalicas.pdf",
+      "falta": "ano e autoria"
+    },
+    {
+      "id_proposto": "EMB-CNPAF-SD-CALAGEM",
+      "referencia": "Fageria, N. K. Calagem e Adubação (capítulo). Embrapa Arroz e Feijão.",
+      "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/1015113/1/p59.pdf",
+      "falta": "ano, título da obra e página da frase sobre 3 e 6 meses de reação"
+    },
+    {
+      "id_proposto": "EMB-SD-IKEDA-MIPD",
+      "referencia": "Ikeda, F. S. Manejo integrado de plantas daninhas em olericultura (apresentação). Embrapa.",
+      "url": "https://www.embrapa.br/documents/1354377/1743426/Manejo+integrado+de+plantas+daninhas+em+olericultura.pdf/67d7aa94-a025-46f6-87ed-2b76e1ff6a05?version=1.0",
+      "falta": "ano e unidade; buscar publicação formal equivalente"
+    },
+    {
+      "id_proposto": "EMB-SD-JALES-EUPS",
+      "referencia": "Rotação e sucessão de culturas como práticas de conservação do solo no município de Jales, SP. Embrapa.",
+      "url": "https://ainfo.cnptia.embrapa.br/digital/bitstream/item/138887/1/Rotacao-e-sucessao-de-culturas.pdf",
+      "falta": "ano, autoria e página da equação LS"
+    },
+    {
+      "id_proposto": "BRAGANTIA-1979-RAIJ",
+      "referencia": "Raij, B. van; Cantarella, H.; Zullo, M. A. T. Bragantia 38(7):57-69 (relação pH em água = 4,50 + 0,025·V).",
+      "url": "https://doi.org/10.1590/S0006-87051979000100007",
+      "falta": "título exato e página da equação"
+    },
+    {
+      "id_proposto": "BRAGANTIA-1976-BRUNINI",
+      "referencia": "Brunini, O. et al. Temperatura-base para alface cultivar White Boston. Bragantia 35(1):213-219.",
+      "falta": "título exato, URL e página"
+    },
+    {
+      "id_proposto": "RBMET-2019-FERNANDES",
+      "referencia": "Fernandes et al. Soma térmica de cultivares de alface em Bom Jesus, PI. Revista Brasileira de Meteorologia 34(4):505-514.",
+      "falta": "título exato, autoria, URL"
+    },
+    {
+      "id_proposto": "RBRH-2005-SARTORI",
+      "referencia": "Sartori, A.; Lombardi Neto, F.; Genovez, A. M. Classificação hidrológica de solos brasileiros para a estimativa da chuva excedente com o método do SCS, partes 1 e 2. RBRH.",
+      "falta": "volume, páginas, URL e tabela de CN adaptados"
+    },
+    {
+      "id_proposto": "EMB-CT136-EFIC",
+      "referencia": "Embrapa. Circular Técnica 136 (eficiência de aplicação por método de irrigação).",
+      "falta": "unidade, ano, título, URL e tabela"
+    },
+    {
+      "id_proposto": "RBEAA-CLIMABR",
+      "referencia": "Zanetti, S. S.; Oliveira, V. P. S.; Pruski, F. F. CLIMABR parte I. Revista Brasileira de Engenharia Agrícola e Ambiental.",
+      "falta": "ano, volume, páginas e URL"
+    },
+    {
+      "id_proposto": "RBCS-2015-PRNT",
+      "referencia": "Revista Brasileira de Ciência do Solo 39:1723-1736 (tabelas de RE e PRNT de corretivos).",
+      "falta": "título, autoria e URL"
+    },
+    {
+      "id_proposto": "FAO-2012-FAO66",
+      "referencia": "Steduto, P.; Hsiao, T. C.; Fereres, E.; Raes, D. Crop yield response to water (FAO Irrigation and Drainage Paper 66).",
+      "falta": "URL e tabela de Ky do repolho"
+    },
+    {
+      "id_proposto": "SJAR-KUSLU-KY",
+      "referencia": "Kuslu et al. Effect of deficit irrigation on curly lettuce grown under semiarid conditions. Spanish Journal of Agricultural Research.",
+      "url": "https://sjar.revistas.csic.es/index.php/sjar/article/view/367",
+      "falta": "ano, volume e páginas"
+    },
+    {
+      "id_proposto": "ISHS-1335-KY",
+      "referencia": "Agronomical, physiological and WUE changes of lettuce in response to deficit irrigation. Acta Horticulturae 1335.",
+      "url": "https://ishs.org/ishs-article/1335_84/",
+      "falta": "ano e autoria"
+    },
+    {
+      "id_proposto": "SPRINGER-2022-GESUNDE",
+      "referencia": "Effects of irrigation water levels on lettuce yield (Konya). Gesunde Pflanzen.",
+      "url": "https://link.springer.com/article/10.1007/s10343-022-00744-w",
+      "falta": "título exato e autoria"
+    },
+    {
+      "id_proposto": "UPIT-KY-ALFACE",
+      "referencia": "Effects of different irrigation levels on yield of lettuce (estufa, gotejamento). Universidade de Pitești, Scientific Papers.",
+      "url": "https://www.natsci.upit.ro/media/1567/paper-22.pdf",
+      "falta": "ano, autoria e título exato"
+    },
+    {
+      "id_proposto": "INTECH-NUE-AQUACROP",
+      "referencia": "Modeling of Nitrogen Use Efficiency in Lettuce Culture (Lactuca sativa): Isotopic Nitrogen (15N) and AquaCrop. IntechOpen.",
+      "url": "https://www.intechopen.com/chapters/73381",
+      "falta": "ano e autoria"
+    },
+    {
+      "id_proposto": "MDPI-2026-AGRON-SHANGHAI",
+      "referencia": "Deficit irrigation and organic fertilizer substitution on lettuce (Songjiang, Xangai). Agronomy 16(14):1328.",
+      "url": "https://www.mdpi.com/2073-4395/16/14/1328",
+      "falta": "título exato e autoria"
+    },
+    {
+      "id_proposto": "WILEY-2025-SUAREZREY",
+      "referencia": "Suárez-Rey et al. Curva crítica de N da alface no sul da Espanha. Annals of Applied Biology.",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/aab.70019",
+      "falta": "título exato"
+    },
+    {
+      "id_proposto": "RBCS-2004-ABREU",
+      "referencia": "Abreu, S. L.; Reichert, J. M.; Reinert, D. J. Revista Brasileira de Ciência do Solo 28:519-531.",
+      "url": "https://www.scielo.br/j/rbcs/a/jcqgfkT4fWsbwn6pvh5HnRD/?format=pdf&lang=pt",
+      "falta": "título exato"
+    },
+    {
+      "id_proposto": "RBCS-2008-REINERT",
+      "referencia": "Reinert, D. J. et al. Revista Brasileira de Ciência do Solo 32:1805-1816 (limites de densidade para raízes de plantas de cobertura).",
+      "url": "https://www.rbcsjournal.org/wp-content/uploads/articles_xml/0100-0683-rbcs-S0100-06832008000500002/0100-0683-rbcs-S0100-06832008000500002.x42865.pdf",
+      "falta": "título exato"
+    },
+    {
+      "id_proposto": "SSSAJ-2004-WILLIAMS",
+      "referencia": "Williams, S. M.; Weil, R. R. Soil Science Society of America Journal 68(4):1403-1409.",
+      "url": "https://doi.org/10.2136/sssaj2004.1403",
+      "falta": "título exato"
+    },
+    {
+      "id_proposto": "PLSOIL-2010-CHEN",
+      "referencia": "Chen, G.; Weil, R. R. Plant and Soil 331:31-43.",
+      "url": "https://doi.org/10.1007/s11104-009-0223-7",
+      "falta": "título exato e limiar de RP"
+    },
+    {
+      "id_proposto": "AJSR-1995-CRESSWELL",
+      "referencia": "Cresswell, H. P.; Kirkegaard, J. A. Australian Journal of Soil Research 33(2):221-239.",
+      "url": "https://doi.org/10.1071/SR9950221",
+      "falta": "título exato"
+    },
+    {
+      "id_proposto": "FLORESTA-2009-LS",
+      "referencia": "Revista Floresta 39(2):381-391 (transcrição da equação LS de Bertoni e Lombardi Neto).",
+      "url": "https://revistas.ufpr.br/floresta/article/download/14564/9786",
+      "falta": "título e autoria; preferir a fonte primária (Bertoni e Lombardi Neto, Conservação do Solo)"
+    },
+    {
+      "id_proposto": "APSIM-SOILWAT",
+      "referencia": "APSIM Initiative. SoilWat module documentation (cn_red, cn_rain, CNCov, CNRed).",
+      "url": "https://www.apsim.info/documentation/model-documentation/soil-modules-documentation/soilwat/",
+      "falta": "ano ou versão da documentação"
+    },
+    {
+      "id_proposto": "MEX-2021-CICHOTA",
+      "referencia": "Cichota et al. Protocolo de parametrização de solos para o APSIM. MethodsX 8:101566.",
+      "url": "https://doi.org/10.1016/j.mex.2021.101566",
+      "falta": "título exato"
+    },
+    {
+      "id_proposto": "RG-IHO-LVD-RUZIZIENSIS",
+      "referencia": "Intervalo hídrico ótimo de um Latossolo Vermelho distrófico após o primeiro período de pastejo contínuo de Brachiaria ruziziensis em sistema integração lavoura-pecuária (ajuste RP = a·θ^b·Ds^c).",
+      "url": "https://www.researchgate.net/publication/262707556",
+      "falta": "autoria, periódico, ano e URL de acesso aberto do editor"
+    }
+  ]
 }

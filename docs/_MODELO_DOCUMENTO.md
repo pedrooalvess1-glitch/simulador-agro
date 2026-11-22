@@ -3,7 +3,7 @@
 > Modelo dos documentos de planejamento (`00_INDICE` §5). Copie para `docs/NN_NOME_EM_MAIUSCULAS.md` (`CONVENCOES` §1), troque o título, preencha as seções na ordem e apague estas linhas de instrução.
 > Regras para todas as seções: todo número agronômico com fonte registrada e local (`CONVENCOES` §4); toda simplificação rotulada [MODELO] e toda decisão de projeto [INFERÊNCIA]; só o estado atual, com o mínimo de texto (`CLAUDE.md` §3, regra 8). Termos: `GLOSSARIO_DO_PROJETO.md`.
 
-**Estado:** rascunho | pronto · **Esforço:** `médio` | `alto` | `extra` (`ROTEIRO` §2)
+**Estado:** rascunho | pronto · **Esforço:** `médio` | `alto` | `extra` (`MAPA_DO_PROJETO` §1.2)
 
 ## 1. Objetivo
 > Uma ou duas frases: que pergunta do projeto este documento responde e quem o usa.
