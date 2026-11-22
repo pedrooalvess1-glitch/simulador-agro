@@ -75,7 +75,7 @@ flowchart LR
 
 **Etapa A. Repositório**
 - [x] **A1.** 🤖 Repositório criado a partir da infraestrutura do `simulador-normas`.
-- [ ] **A2.** 🤖 `médio` Pelo navegador logado no notebook (P3). Regra da `main` (PR obrigatório, *checks* obrigatórios, histórico linear, sem *push* forçado), apagar *branch* no *merge* e rótulos das issues. Os *checks* obrigatórios são os cinco jobs do CI (`.github/workflows/ci.yml`).
+- [x] **A2.** 🤖 *Ruleset* "Proteção da main" ativo na *branch* padrão. Exige PR, os cinco jobs do CI como *checks*, histórico linear e só *squash*; bloqueia *push* forçado e exclusão da `main`; ninguém na lista de exceção. *Branch* apagada no *merge*. Rótulos `bug`, `conteudo-tecnico` e `desempenho` criados.
 - [x] **A3.** 👤 Perguntas iniciais respondidas.
 
 **Etapa B. Base de modelos, fontes e núcleo**
@@ -260,8 +260,7 @@ Passo a passo (Etapa J). Detalhado quando a fase 4 terminar.
 | 2 | 13 publicações na fila de verificação e pendências da `BASE_MODELOS` §10 | Item da fila não pode entrar no pacote | B1 |
 | 3 | Descompactação calibrada só para o nabo e sem persistência | Maior risco de credibilidade da fase 3 | H2 |
 | 4 | Eficiência do regador sem fonte; aspersão ainda não transcrita | É a primeira ferramenta da fatia | B1 |
-| 5 | Regra da `main` não configurada | Hoje um *merge* sem CI verde é possível | A2 |
-| 6 | Documentos 01 a 21 ainda não escritos | O projeto Godot só começa depois da Etapa C | Etapa C |
-| 7 | Custo por célula só estimado | A escolha do tamanho da grade depende dele | D1b |
-| 8 | Dados observados para os cenários de referência fora do semiárido | Sem eles o simulador não serve para tirar conclusões sem propriedade | V1 |
-| 9 | Temperatura do solo sem dado brasileiro de validação | Mineralização, germinação de daninhas e degradação de defensivos dependem dela | V6 |
+| 5 | Documentos 01 a 21 ainda não escritos | O projeto Godot só começa depois da Etapa C | Etapa C |
+| 6 | Custo por célula só estimado | A escolha do tamanho da grade depende dele | D1b |
+| 7 | Dados observados para os cenários de referência fora do semiárido | Sem eles o simulador não serve para tirar conclusões sem propriedade | V1 |
+| 8 | Temperatura do solo sem dado brasileiro de validação | Mineralização, germinação de daninhas e degradação de defensivos dependem dela | V6 |
