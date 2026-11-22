@@ -48,8 +48,9 @@ As etapas A, B e C formam a **Fase 0** do `00_INDICE` §7. As etapas D e E entre
 
 ### Etapa B — base de modelos e acervo de fontes
 - [x] **B0.1.** 🤖 Primeira pesquisa de modelos: catálogo por domínio, conjunto da fase 1, arquitetura de tempo (`BASE_MODELOS`).
-- [ ] **B0.2.** 🤖 `extra` Segunda pesquisa: lacunas do `BASE_MODELOS` §5, avaliação dos candidatos pelos critérios C1–C7 e arquitetura multitaxa com acoplamento mínimo. Atualizar o `BASE_MODELOS`.
-- [ ] **B1.** 🤖 `alto` Registrar em `docs/referencias/fontes.json` as publicações que sustentam os modelos da fase 1 e os dados da alface (FAO-56, AquaCrop, INMET, Embrapa Hortaliças, manuais estaduais, SiBCS), com URL e data de acesso. Ampliar `dominios_permitidos` conforme a política do `00_INDICE` §1.4.
+- [x] **B0.2.** 🤖 Segunda pesquisa: matriz C1–C7, arquitetura de acoplamento mínimo, lacunas de dados, solo físico e químico, planta, terreno e fases (`BASE_MODELOS` §1 a §10).
+- [ ] **B0.3.** 👤 U4 validar as decisões 27 a 34 do `DECISOES` (todas marcadas "a validar") e as perguntas abertas da `00_INDICE` §9.
+- [ ] **B1.** 🤖 `alto` Registrar em `docs/referencias/fontes.json` as publicações que sustentam os modelos e os dados da fase 1 (FAO-56, FAO AquaCrop, INMET, Embrapa Hortaliças, Marouelli et al., Brunini 1976, Fernandes 2019, Raij 1979, Sartori 2005, Embrapa Circular 136, ClimaBR, Tormena 1998), abrindo e lendo cada uma, com URL e data de acesso. Ampliar `dominios_permitidos` (INMET, MAPA, SciELO, FAO) conforme a política do `00_INDICE` §1.4. Conferir os valores do `BASE_MODELOS` §4 contra o texto de cada fonte.
 - [ ] **B2.** 🤖 `alto` Conferir a licença e as condições de reprodução de cada publicação; registrar no campo `licenca`.
 - [ ] **B3.** 🤖 `médio` Levantar as fontes da Fase 2: tomate cereja, compostagem, palhada, defensivos (Agrofit), aspersão.
 
@@ -85,7 +86,8 @@ Para cada documento da `00_INDICE` §5: ler `CLAUDE.md`, a `00_INDICE`, o `BASE_
 - [ ] **D1.** 🤖 `médio` Projeto Godot (Compatibility, 4.7.2), gdUnit4, CI de testes e de exportação do `.exe` Windows.
 - [ ] **D1a.** 🤖 `extra` Relógio de passo fixo com camadas L1–L3, multiplicador 2x/4x/8x, limite de passos por quadro, dormir e teste 1x × 8x (documento 09).
 - [ ] **D2.** 🤖 `médio` Abrir o primeiro `.exe` da Release no notebook e conferir se abre.
-- [ ] **D3.** 🤖 `alto` Camada base: eventos, salvar e carregar, RNG por subsistema, registro de ações, log (documento 15).
+- [ ] **D1b.** 🤖 `médio` Benchmark do passo diário em GDScript com 100, 500 e 1000 células no notebook de teste (`BASE_MODELOS` §2.8).
+- [ ] **D3.** 🤖 `alto` Camada base: eventos, salvar e carregar, RNG por subsistema, registro de ações, ledger inteiro com *double buffer*, log (documentos 05 e 15).
 - [ ] **D4.** 🤖 `extra` Carregador e validador do pacote (documento 04).
 - [ ] **D5.** 🤖 `extra` Modelos da fase 1 (`BASE_MODELOS` §3; documento 05), com testes contra valores das fontes.
 - [ ] **D6.** 🤖 `médio` Propriedade com um canteiro plano e protagonista em primeira e terceira pessoa (documentos 06 e 18).

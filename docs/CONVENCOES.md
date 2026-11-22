@@ -45,7 +45,8 @@ Todo valor numérico do pacote é um objeto com valor, unidade, fonte e local:
 ```
 1. `fonte` é um ID existente em `docs/referencias/fontes.json`; `local` não pode ser vazio. O `tools/conferir_fontes.py` barra os dois casos no CI.
 2. Valor derivado pelo simulador (interpolação, conversão de unidade, média de faixa) leva `"modelo": "<explicação curta>"` além da fonte de origem.
-3. Valor de cenário sem fonte (nome de propriedade, posição de canteiro) não tem `fonte`; ele não é conhecimento agronômico.
+3. Parâmetro estrangeiro ou sem calibração brasileira leva `"provisorio": true` e continua com `fonte` e `local`.
+4. Valor de cenário sem fonte (nome de propriedade, posição de canteiro) não tem `fonte`; ele não é conhecimento agronômico.
 
 ## 5. Mensagens de commit e títulos de PR
 

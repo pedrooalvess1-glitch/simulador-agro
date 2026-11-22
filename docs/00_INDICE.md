@@ -6,7 +6,7 @@
 >
 > Rótulos: `[FONTE:ID]` · [PRÁTICA] · [INFERÊNCIA] · [MODELO] · [VERIFICAR] · [VERIFICAR NA FONTE] (definições no `CLAUDE.md` §3, regra 7).
 >
-> **Fase atual:** Fase 0 (pesquisa de modelos e acervo de fontes). Nada é produzido no Godot nesta fase. Escolha de modelos e arquitetura de tempo em `BASE_MODELOS.md`.
+> **Fase atual:** Fase 0 (pesquisa de modelos e acervo de fontes). Nada é produzido no Godot nesta fase. Escolha de modelos, arquitetura de simulação e dados levantados em `BASE_MODELOS.md` (duas rodadas de pesquisa).
 
 ---
 
@@ -53,12 +53,13 @@ O usuário é o primeiro público. Ele é engenheiro, tem horta própria e quer 
 2. **O mundo é calculado.** Solo, água, planta, pragas e doenças evoluem por modelos com passo fixo em tempo simulado.
 3. **Um único ponto de mudança do mundo.** Toda operação passa por `act(verbo, alvo, insumo)`. Interface, testes e replay usam o mesmo caminho.
 4. **Camadas.** A camada de baixo nunca chama a de cima. A comunicação de volta é por eventos (*signals*).
-5. **Acoplamento mínimo no tempo.** Cada subsistema roda na própria taxa e lê o estado dos outros só na fronteira da camada mais lenta (`BASE_MODELOS` §2.3).
+5. **Acoplamento mínimo no tempo.** Cada subsistema roda na própria taxa. Módulos não se conhecem e falam apenas com módulos de recurso que arbitram oferta e demanda. Entre células vale o *double buffer* (`BASE_MODELOS` §2.3).
 6. **Tudo reproduzível.** Uma safra é definida por `(versão do pacote, versão do motor, semente do mundo, série climática, registro de ações)`.
-7. **Verdade invisível.** O estado real do solo e da planta só aparece por medição. Análise de solo com prazo de laudo, tensiômetro, amostragem de pragas e observação de sintomas. O raio-x aparece no relatório de safra e no modo aprendiz.
-8. **Rastreabilidade.** Todo número leva fonte e local. Toda simplificação do simulador leva [MODELO].
-9. **Verificável por máquina.** Esquema dos dados e citações conferidos no CI desde o primeiro dia.
-10. **Leve por padrão.** Recurso visual que não ensina nada não entra.
+7. **Conservação exata.** Água, nutrientes e carbono são estoques inteiros movidos por transações num ledger. O balanço fecha sem tolerância (`BASE_MODELOS` §2.5).
+8. **Verdade invisível.** O estado real do solo e da planta só aparece por medição. Análise de solo com prazo de laudo, tensiômetro, amostragem de pragas e observação de sintomas. O raio-x aparece no relatório de safra e no modo aprendiz.
+9. **Rastreabilidade.** Todo número leva fonte e local. Toda simplificação do simulador leva [MODELO].
+10. **Verificável por máquina.** Esquema dos dados e citações conferidos no CI desde o primeiro dia.
+11. **Leve por padrão.** Recurso visual que não ensina nada não entra.
 
 ### 2.1 O que vem dos jogos de referência e o que muda
 
@@ -86,7 +87,8 @@ Herdada e já testada: Godot 4.7.2 (GDScript, Compatibility), Blender 4.5.10 LTS
 Restrições específicas deste projeto:
 1. **Vegetação em massa.** Plantas repetidas com `MultiMeshInstance3D`. Lavoura grande vira representação por talhão. Nível de detalhe por distância.
 2. **Sem *compute shaders*.** O renderizador Compatibility não oferece *compute shaders* e não há plano de suporte [VERIFICAR]. Simulação em malha (água no terreno, deformação) roda na CPU em malha grossa ou em GDExtension C++.
-3. **Física fora do multiplicador.** Protagonista e máquinas rodam em tempo real (`BASE_MODELOS` §2.2).
+3. **Terreno.** Terrain3D na série 1.x para a propriedade e malha própria de 5 cm para cada canteiro (`BASE_MODELOS` §8). A série 2.x não deve suportar o Compatibility [VERIFICAR].
+4. **Física fora do multiplicador.** Protagonista e máquinas rodam em tempo real (`BASE_MODELOS` §2.2).
 
 ### 3.3 Orçamento de desempenho
 
@@ -96,7 +98,7 @@ Restrições específicas deste projeto:
 | Triângulos visíveis | ≤ 150 mil |
 | *Draw calls* | ≤ 200 |
 | Memória de texturas (só fontes e interface) | ≤ 64 MB |
-| Passos de simulação agronômica por quadro na velocidade 8x | dentro de 4 ms de CPU [INFERÊNCIA] |
+| Passos de simulação agronômica por quadro na velocidade 8x | dentro de 4 ms de CPU [INFERÊNCIA]; custo por célula a medir na fase 1 (`BASE_MODELOS` §2.8) |
 | Tamanho do instalador | ≤ 200 MB |
 
 ---
@@ -109,7 +111,7 @@ As subpastas de `engine/` e `packs/` são criadas com o projeto Godot (Fase 1).
 engine/                  motor genérico: não conhece nenhuma cultura
   base/     relógio de passo fixo, eventos, save, RNG por subsistema, log
   world/    propriedade, terreno deformável, câmera, protagonista, máquinas
-  model/    camadas L1–L3: clima → água → química → planta → daninhas → pragas
+  model/    camadas L1–L3, ledger inteiro, árbitros de luz, água e nitrogênio, módulos em ordem causal
   domain/   act(), catálogo, operações, laudos
   game/     campanha, modo semiaberto, eventos aleatórios, avaliação
   ui/       HUD, caderno de campo, laudos, relatório de safra
@@ -161,7 +163,7 @@ Formato: `_MODELO_DOCUMENTO.md`. Ordem e esforço: `ROTEIRO` §3.
 ---
 
 ## 6. Fatia vertical (primeira entrega jogável)
-Um canteiro plano de alface, ciclo completo. O protagonista faz análise de solo, calagem e adubação, plantio, irrigação e manejo, monitoramento e colheita. O relatório de safra explica as causas de cada perda. A fatia atravessa todas as camadas, do dado citado ao `.exe`, para expor cedo os erros de arquitetura. O motivo da alface está no `BASE_MODELOS` §3.
+Um canteiro plano de alface, ciclo completo. O protagonista faz análise de solo, calagem e adubação, plantio, irrigação e manejo, monitoramento e colheita. O relatório de safra explica as causas de cada perda. A fatia atravessa todas as camadas, do dado citado ao `.exe`, para expor cedo os erros de arquitetura. Ela só fecha se o balanço de água e de nitrogênio fechar exato e se 1x e 8x derem o mesmo hash de estado. O motivo da alface está no `BASE_MODELOS` §3.
 
 ---
 
@@ -170,11 +172,11 @@ Um canteiro plano de alface, ciclo completo. O protagonista faz análise de solo
 | Fase | Entrega | Conteúdo |
 |---|---|---|
 | 0 | Base de modelos e acervo de fontes | Pesquisa de modelos, arquitetura de tempo, registro de fontes Embrapa, documentos de planejamento. Nada no Godot. |
-| 1 | Fatia vertical | Protagonista em primeira e terceira pessoa, relógio 24 para 1 com 2x/4x/8x, dormir, salvar e carregar, um canteiro plano de alface com os modelos da fase 1 (`BASE_MODELOS` §3) e relatório de safra. |
-| 2 | Horta completa e campanha em área plana | Gerador climático, palhada, ciclo do nitrogênio, fósforo e potássio, compostagem, aspersão e molhamento foliar, defensivos do Agrofit, microtrator com preparo do solo e deformação do terreno, tomate cereja, campanha básica. |
-| 3 | Área inclinada e solo vivo | Escoamento e erosão no terreno, banco de sementes, consórcio, matéria orgânica multianual, descompactação biológica, compactação por tráfego, adubação verde, ZARC na escolha de época, modo semiaberto com eventos aleatórios. |
-| 4 | Mundo semiaberto | Economia, combustível, NPCs, cidades, gases e deriva, epidemiologia espacial, hidráulica de gotejo, micronutrientes. |
-| 5 | Animais | Galinha, tilápia, porcos e gado, ligados ao ciclo de esterco e composto. |
+| 1 | Fatia vertical | Protagonista em primeira e terceira pessoa, relógio 24 para 1 com 2x/4x/8x, dormir, salvar e carregar, ledger inteiro e *double buffer*, um canteiro plano de alface com os modelos da fase 1 (`BASE_MODELOS` §3.1) e relatório de safra. Benchmark de custo por célula no notebook. |
+| 2 | Horta completa e campanha em área plana | Água em camadas, planta híbrida com árbitro de luz, daninhas com o mesmo código, calcário cinético e pH–V, ClimaBR, densidade do solo por preparo, deformação do terreno, núcleo diário em C++ com matemática própria, defensivos do Agrofit, compostagem, microtrator, tomate cereja (`BASE_MODELOS` §3.2). |
+| 3 | Área inclinada e solo vivo | D8 em cascata e MUSLE, resistência à penetração com IHO e bioporos, plantas de cobertura, Gapon e salinidade, fósforo e húmus em dois compartimentos, consórcio, banco de sementes, modo semiaberto com eventos aleatórios (`BASE_MODELOS` §3.3). |
+| 4 | Mundo semiaberto | Economia, combustível, NPCs, cidades, gases e deriva, epidemiologia espacial, micronutrientes por tabelas offline, RothC, água visual (`BASE_MODELOS` §3.4). |
+| 5 | Animais | Galinha, tilápia, porcos e gado, ligados ao ciclo de esterco e composto. Reaproveitam o ledger, o árbitro de recurso e a compactação por pisoteio. |
 
 ---
 
@@ -182,7 +184,8 @@ Um canteiro plano de alface, ciclo completo. O protagonista faz análise de solo
 
 | Risco | Mecanismo | Mitigação |
 |---|---|---|
-| Modelo agronômico complexo demais | Cada processo acoplado multiplica parâmetros sem fonte | Conjunto mínimo por fase (`BASE_MODELOS` §3 e §4) |
+| Modelo agronômico complexo demais | Cada processo acoplado multiplica parâmetros sem fonte | Conjunto mínimo por fase (`BASE_MODELOS` §3) |
+| Parâmetro provisório vira definitivo | Sem calibração brasileira de alface, defensivos e descompactação, o número fica por inércia | Rótulo [PROVISÓRIO] no pacote e lista de lacunas em `BASE_MODELOS` §10 |
 | Dado sem fonte entra no pacote | Preencher lacuna de memória parece inofensivo | Verificador de fontes no CI (§1.4) |
 | Divergência entre velocidades do relógio | Passo variável muda o resultado e pode desestabilizar o integrador | Passo fixo com acumulador e teste 1x × 8x no CI |
 | Simulação em malha pesada | Sem *compute shaders* no Compatibility | Malha grossa na CPU, GDExtension, adiamento para a fase 3 |
@@ -196,4 +199,6 @@ Um canteiro plano de alface, ciclo completo. O protagonista faz análise de solo
 | # | Pergunta | Recomendação |
 |---|---|---|
 | 1 | Duração de um ciclo de alface em tempo real. Na razão 24 para 1, um ciclo de cerca de 45 dias [VERIFICAR NA FONTE] leva cerca de 45 horas em 1x e cerca de 6 horas em 8x, sem contar o dormir. Isso serve para a campanha? | Manter 24 para 1. O dormir pula as noites e a campanha usa etapas curtas do ciclo |
-| 2 | Determinismo entre plataformas | Aceitar "mesma build, mesma plataforma" na fase 1 e revisar depois da segunda pesquisa |
+| 2 | Determinismo entre plataformas | Nível A (mesma build e plataforma) na fase 1 e nível B (matemática própria em C++) a partir da fase 2, como propõe `BASE_MODELOS` §2.7 |
+| 3 | Oferecer 16x, 32x e "pular até o próximo evento" além de 2x, 4x e 8x? | Sim, só na campanha. A CPU não limita. O limite é o tempo do jogador |
+| 4 | Fixar o Terrain3D na série 1.x? | Sim. Confirmar na documentação oficial antes de fixar |

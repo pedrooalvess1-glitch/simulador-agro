@@ -13,7 +13,10 @@
 | **Protagonista** | Personagem do jogador, controlado em primeira ou terceira pessoa. Opera ferramentas e máquinas. | documento 18 |
 | **Tempo simulado** | Relógio do mundo, 24 vezes mais rápido que o real em 1x. O multiplicador 2x, 4x ou 8x muda quantos passos rodam por segundo real. | `BASE_MODELOS` §2.1 |
 | **Camada de taxa** | Grupo de processos com o mesmo passo fixo. L0 quadro, L1 tick de mundo, L2 horário, L3 diário, L4 evento. | `BASE_MODELOS` §2.2 |
-| **Dormir** | Avanço até a manhã seguinte rodando o mesmo laço de passos sem renderizar. | `BASE_MODELOS` §2.4 |
+| **Dormir** | Avanço até a manhã seguinte rodando o mesmo laço de passos sem renderizar. | `BASE_MODELOS` §2.9 |
+| **Árbitro de recurso** | Módulo dono de um recurso (luz, água, nitrogênio). Recebe a demanda de cada consumidor, decide quanto entrega e debita o estoque. | `BASE_MODELOS` §2.3 |
+| **Ledger** | Registro diário de entradas, saídas e variação de estoque de cada célula, em inteiros. Garante balanço exato de água, nutrientes e carbono. | `BASE_MODELOS` §2.5 |
+| ***Double buffer*** | Cada célula lê o estado do dia d e escreve o estado do dia d+1. A ordem das células não muda o resultado. | `BASE_MODELOS` §2.3 |
 | **Campanha** | Modo que ensina o básico do cultivo e do manejo, primeiro em área plana e depois em área inclinada. | documento 11 |
 | **Modo semiaberto** | Propriedade livre para o jogador, com eventos aleatórios. | documento 20 |
 | **Operação** | Ação do jogador (analisar solo, calcar, adubar, plantar, irrigar, capinar, cobrir, monitorar, controlar, colher). Toda operação passa por `act(verbo, alvo, insumo)`. | documento 08 |
