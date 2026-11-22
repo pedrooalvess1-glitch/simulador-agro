@@ -24,9 +24,11 @@ Fora.
 | ID da fonte | O que fornece aqui | Rótulo |
 |---|---|---|
 | FAO-1998-FAO56 | Grupos de culturas e tabelas de Kc, raiz e depleção usados quando a cultura não tem dado brasileiro | [FONTE:FAO-1998-FAO56] |
-| Publicações da cultura | Todo valor da ficha | registradas no passo 1 do fluxo |
+| JKI-2018-BBCH | Escala fenológica comum: geral (p. 14), beterraba (p. 46), alface (p. 111), tomate (p. 129); licença CC BY 4.0 | [FONTE:JKI-2018-BBCH] |
+| MAPA-2026-AGROFIT | Produtos registrados por cultura, em dados abertos CC BY atualizados todo dia | [FONTE:MAPA-2026-AGROFIT] |
+| Publicações da cultura | Todo valor da ficha | registradas no passo 2 do fluxo |
 
-Escala fenológica comum (BBCH), catálogo do AquaCrop por tipo de cultura e acesso aos dados do Agrofit estão na rodada 4 de pesquisa [VERIFICAR].
+Os parâmetros padrão por tipo de cultura do manual do AquaCrop 7.3 estão na fila de verificação [VERIFICAR].
 
 ## 4. Dependências
 Precisa de 04 (formato do pacote), 05 (parâmetros do modelo genérico), 10 (fitossanidade), 17 (arte por estádio) e 22 (cenários de referência da base de clima e solo). Alimenta 14 (pacote inicial) e todas as culturas novas.
@@ -63,14 +65,14 @@ flowchart TD
 | Bloco | Conteúdo | Usado por |
 |---|---|---|
 | Identidade | Nome científico, família, cultivares, tipo de cultura e órgão colhido | Modelo de planta; catálogo |
-| Anatomia e estádios | Estádios na escala BBCH com descrição, duração em graus-dia e aparência | Fenologia; modelos 3D por estádio |
+| Anatomia e estádios | Estádios na escala BBCH [FONTE:JKI-2018-BBCH] com descrição, duração em graus-dia e aparência | Fenologia; modelos 3D por estádio |
 | Temperatura | Temperatura-base, ótima e máxima; estresses por calor e por frio | Fenologia; perda por temperatura |
 | Água | Kc por estádio, profundidade de raiz, fração de depleção, Ky, tensão-limite, métodos de irrigação indicados | Balanço hídrico; irrigação |
 | Crescimento | Cobertura máxima, ritmo de crescimento do dossel, produtividade da água, índice de colheita, RUE, coeficiente de extinção | Modelo de planta |
 | Nutrição | Extração de nutrientes, recomendação de adubação por manual estadual, curva crítica de N, saturação por bases desejada | Química; laudo; recomendação |
 | Pragas e doenças | Agente, sintomas, condições favoráveis, nível de controle, dano | Fitossanidade |
 | Plantas daninhas | Espécies frequentes e período crítico de controle | Competição; janela de capina |
-| Defensivos | Produtos registrados para a cultura no Agrofit, com ingrediente ativo, dose, intervalo de segurança e classe; meia-vida no solo | Aplicação; ledger; degradação |
+| Defensivos | Produtos registrados para a cultura no Agrofit, com ingrediente ativo, dose, intervalo de segurança e classe; meia-vida no solo. O arquivo do Agrofit muda todo dia, então a ficha guarda a data e o hash do retrato usado | Aplicação; ledger; degradação |
 | Manejo | Espaçamento, densidade, época de plantio por região, ciclo, colheita | Operações; campanha |
 | Referências | IDs das publicações usadas | Registro de fontes |
 

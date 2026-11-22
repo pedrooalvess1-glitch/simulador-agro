@@ -28,7 +28,7 @@ Fora.
 | WIKIGG-2024-FS25MANUAL | Elementos de HUD e escala de tempo do Farming Simulator 25, como referência de convenção de jogo | [FONTE:WIKIGG-2024-FS25MANUAL] |
 | Nenhuma outra | Números agronômicos mostrados na interface vêm do pacote (documento 14) | [INFERÊNCIA] |
 
-Diretrizes de acessibilidade de jogos e manuais oficiais dos jogos de referência estão na rodada 4 de pesquisa [VERIFICAR].
+As Game Accessibility Guidelines (fila de verificação, falta o ano da versão) orientam a §5.9. Manuais oficiais dos jogos de referência ainda não foram lidos [VERIFICAR].
 
 ## 4. Dependências
 Precisa de 01 (pedagogia), 02 (contratos `read()` e `act()`), 08 (verbos) e 18 (câmera). Alimenta 11 (campanha), 12 (avaliação) e 16 (testes de interface).
@@ -139,11 +139,13 @@ flowchart TD
 Todas as teclas são remapeáveis. Controle de *gamepad* fica para depois da fase 1.
 
 ### 5.9 Acessibilidade
-1. Escala de texto e de interface separadas.
-2. Paleta que não depende de vermelho contra verde. Estados críticos sempre com ícone e texto.
-3. Remapeamento completo das teclas.
-4. Legendas para avisos sonoros.
-5. Diretrizes de referência a confirmar na rodada 4 [VERIFICAR].
+Itens das Game Accessibility Guidelines adotados (lista completa na fila de verificação do registro).
+1. Fonte padrão fácil de ler e contraste alto entre texto e fundo (nível básico).
+2. Nenhuma informação essencial só pela cor (nível básico). Estados críticos sempre com ícone e texto.
+3. Remapeamento completo dos controles (nível básico).
+4. Legendas para avisos sonoros, apresentadas de forma clara (nível básico).
+5. Opção de ajustar a velocidade do jogo (nível básico). O relógio de 1x a 8x e a pausa cumprem esse item.
+6. Interface redimensionável (nível intermediário) e tamanho de fonte ajustável (nível avançado). Escala de texto e de interface separadas.
 
 ### 5.10 Contrato de dados
 | Chamada | Uso na interface |

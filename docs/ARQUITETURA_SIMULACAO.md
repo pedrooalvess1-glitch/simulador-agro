@@ -107,18 +107,20 @@ O passo diário segue a ordem em que um processo produz o recurso que o próximo
 | 11 | Fechamento | ledger | conferência exata e hash do dia |
 
 1. É um *splitting* sequencial de primeira ordem. O erro de separar os processos tem a mesma ordem do erro de discretização diária que o FAO-56 e o AquaCrop já aceitam. Quem produz roda antes de quem consome. Só as realimentações lentas têm atraso de um dia, como a cobertura de ontem que afeta a evaporação de hoje.
-2. Chuva e irrigação são pulsos. O pulso inteiro fica dentro do módulo de água. Nenhum pulso é dividido entre módulos [VERIFICAR na fonte primária: Gomes et al. 2018 e Linköping ECP 157].
+2. Chuva e irrigação são pulsos. O pulso inteiro fica dentro do módulo de água. Nenhum pulso é dividido entre módulos.
+3. A literatura de co-simulação confirma a escolha. O acoplamento sequencial tem estabilidade um pouco melhor quando a ordem das unidades é adequada, e laços algébricos não devem ser ignorados [FONTE:ACM-2018-GOMES]. Aqui a divisão de um recurso entre consumidores é resolvida dentro do mesmo passo e em forma fechada (§4.3). Ela não depende de defasagem de um dia.
 
 ### 4.3 Árbitros de recurso
-1. Cada consumidor declara uma demanda. O dono do recurso decide quanto entrega. O consumidor cresce com o que recebeu. Só o dono debita o estoque. É o padrão do APSIM, em que os módulos de cultura falam com os módulos de recurso só pelo motor [VERIFICAR na fonte primária: Keating et al. 2003, §3.9].
+1. Cada consumidor declara uma demanda. O dono do recurso decide quanto entrega. O consumidor cresce com o que recebeu. Só o dono debita o estoque. É o padrão do APSIM. Lá os módulos de cultura falam com os módulos de recurso só pelo motor, a alocação de luz, água e N entre culturas fica num módulo árbitro (§3.9, p. 276) e a comunicação direta entre módulos não é permitida (§5.1, p. 277) [FONTE:EJA-2003-KEATING]. O código do APSIM não entra no projeto, porque a licença exclui uso comercial e reserva as melhorias à APSIM Initiative [FONTE:APSIM-2023-GUL]. O núcleo reimplementa só as equações publicadas.
 2. Quando a oferta não cobre a soma das demandas, a divisão é feita em inteiros pelo método do maior resto. Cada espécie recebe o piso da cota proporcional. As poucas unidades que sobram vão para os maiores restos, com empate decidido pelo menor índice. A soma das partes é igual à oferta, sem erro de arredondamento (`engine/native/include/agro/allocate.hpp`).
 3. Os pesos de cada demanda (sobreposição de raízes, estrato de altura) entram antes da divisão, na própria demanda. O árbitro não conhece espécie nenhuma.
 
 ## 5. Entre células
 
 1. **Operador vertical.** Os processos 1 a 9 de uma célula leem só a própria célula e os forçantes do dia. As células são independentes nesse trecho. A ordem delas e o número de *threads* não mudam o resultado.
-2. **Operador lateral (fase 3).** O escoamento que sai de uma célula entra na vizinha de jusante no mesmo dia. Esse operador é sequencial sobre um grafo acíclico. A ordem é topológica e fixa, por cota decrescente com empate pelo índice da célula. Planos e depressões recebem direção pelo algoritmo Priority-Flood [VERIFICAR: Barnes, Lehman e Mulla 2014]. Cada passagem é uma transferência inteira no ledger. Bacias independentes podem rodar em paralelo.
+2. **Operador lateral (fase 3).** O escoamento que sai de uma célula entra na vizinha de jusante no mesmo dia. Esse operador é sequencial sobre um grafo acíclico. A ordem é topológica e fixa, por cota decrescente com empate pelo índice da célula. Depressões e planos recebem direção pelos algoritmos Priority-Flood [FONTE:CAGEO-2014-BARNES-PF] e de drenagem em superfícies planas [FONTE:CAGEO-2014-BARNES-FLAT]. A fila de prioridade usa a chave composta (cota, ordem de inserção), para não depender da estabilidade do *heap*. Cada passagem é uma transferência inteira no ledger. Bacias independentes podem rodar em paralelo.
 3. Reduções que somam valores de muitas células (balanço da propriedade, relatório) são feitas em inteiros ou em ordem fixa de índice. Soma em ponto flutuante não é associativa.
+4. A ordem entre entidades simultâneas vem de uma função de seleção explícita (tick, fase, seq e índice da célula). É ela que garante um traço único da simulação [FONTE:ACM-2018-GOMES].
 
 ## 6. Conservação exata
 
@@ -141,7 +143,7 @@ O passo diário segue a ordem em que um processo produz o recurso que o próximo
 ### 7.1 Mecanismo
 1. O IEEE 754 exige arredondamento correto em soma, subtração, multiplicação, divisão e raiz quadrada. Uma sequência fixa dessas operações dá os mesmos bits em qualquer máquina x86-64.
 2. Duas coisas quebram isso. A primeira é o compilador fundir a·b + c numa instrução FMA, que arredonda uma vez só. A segunda são as funções exp, log, sin, cos, atan e pow, que a norma não fixa bit a bit e que variam entre a glibc, a CRT do MinGW e a do MSVC.
-3. Os binários oficiais do Godot são compilados com MinGW [FONTE:GODOT-2026-COMPWIN]. As funções matemáticas do GDScript dependem da biblioteca da plataforma [VERIFICAR no código do Godot]. Por isso nenhum estado é calculado em GDScript.
+3. Os binários oficiais do Godot são compilados com MinGW [FONTE:GODOT-2026-COMPWIN]. No código do Godot, Math::sin, cos, exp, log, pow e atan2 chamam as funções da biblioteca C da plataforma [FONTE:GODOT-2025-MATHFUNCS]. Por isso nenhum estado é calculado em GDScript.
 4. A abordagem do Box2D é a referência. Ele chegou ao determinismo entre plataformas evitando *fast-math* e FMA e escrevendo as próprias funções trigonométricas [FONTE:BOX2D-2024-DETERMINISM].
 
 ### 7.2 Regras do núcleo
@@ -194,4 +196,4 @@ A terceira linha prova o mecanismo. Basta liberar a fusão em FMA para o resulta
 Próximos testes. Exemplos numéricos do FAO-56 para astronomia e ET0 (passo B5). Cenários de referência da base de clima e solo contra dados observados (Etapa V). Fechamento do ledger com sequências aleatórias de ações em cada módulo. Reprodução da hipérbole de Cousens e da faixa de Ky da alface como testes de validação.
 
 ## 12. Pontos a verificar na fonte primária
-Gomes et al. 2018 e ECP 157 sobre mestres de passo fixo e sinais descontínuos. Keating et al. 2003 e o SoilArbitrator e o MicroClimate do APSIM. Priority-Flood. Funções matemáticas do GDScript. Exemplos do FAO-56 e do TR-55. Todos estão na rodada 4 de pesquisa (passo B0.5).
+Artigo do ECP 157 (Linköping) sobre mestres de passo fixo e sinais descontínuos. Afirmação do arXiv 1705.09704 sobre funções transcendentais. O mesmo `math_funcs.h` no ramo 4.7 do Godot. Benchmark de GDScript contra C++ (passo D1b).
