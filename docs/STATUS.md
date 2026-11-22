@@ -4,9 +4,9 @@
 
 ## 1. Fase atual
 
-**Fase 0, Etapa B.** A primeira pesquisa de modelos está registrada no `BASE_MODELOS`. A segunda pesquisa (passo B0.2) cobre as lacunas abertas, a avaliação dos modelos pelos critérios C1–C7 e a arquitetura multitaxa. Nada é produzido no Godot nesta fase.
+**Fase 0, Etapa B.** As duas rodadas de pesquisa de modelos estão registradas no `BASE_MODELOS`. Ele traz a matriz C1–C7, a arquitetura de acoplamento mínimo, os dados da alface e as lacunas abertas. Nada é produzido no Godot nesta fase.
 
-**Próximo passo:** B0.2, Opus 5.5 com esforço `extra`. Depois B1 (registro de fontes), esforço `alto`.
+**Próximo passo.** B0.3 (validação do usuário das decisões 27 a 34). Depois B1 (registro de fontes), Opus 5.5 com esforço `alto`.
 
 ## 2. O que existe
 
