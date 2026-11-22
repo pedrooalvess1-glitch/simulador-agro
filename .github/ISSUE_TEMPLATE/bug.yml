@@ -1,0 +1,30 @@
+name: Defeito
+description: Algo no simulador não funciona como deveria (trava, erro, comportamento errado).
+title: "fix: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Descreva o que aconteceu. O agente busca o log no notebook e completa o resto.
+  - type: textarea
+    id: o_que_aconteceu
+    attributes:
+      label: O que aconteceu
+      description: O que você fez e o que viu.
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que era esperado
+  - type: input
+    id: versao
+    attributes:
+      label: Versão e semente
+      description: "Versão da Release (ex.: v0.1.0) e, se for safra, a semente mostrada no relatório de safra."
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: Preenchido pelo agente (trecho do log do Godot ou do console).
+      render: text

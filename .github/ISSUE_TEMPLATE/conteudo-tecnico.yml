@@ -1,0 +1,26 @@
+name: Conteúdo técnico
+description: Dado, recomendação, explicação ou comportamento do modelo que não bate com a publicação citada.
+title: "content(pack): "
+labels: [conteudo-tecnico]
+body:
+  - type: markdown
+    attributes:
+      value: Todo dado do simulador cita uma fonte do registro (docs/referencias/fontes.json). Indique o ID e o local.
+  - type: input
+    id: fonte
+    attributes:
+      label: ID da fonte e local
+      description: "Ex.: EMB-CNPH-2020-ALFACE, Tabela 2, p. 7."
+  - type: textarea
+    id: onde
+    attributes:
+      label: Onde aparece
+      description: Laudo, recomendação, crescimento da planta, relatório de safra, caderno de campo...
+    validations:
+      required: true
+  - type: textarea
+    id: problema
+    attributes:
+      label: O que está errado e o que a publicação diz
+    validations:
+      required: true

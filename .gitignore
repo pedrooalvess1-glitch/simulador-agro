@@ -1,0 +1,28 @@
+# Godot 4+
+.godot/
+.import/
+.nomedia
+export.cfg
+export_credentials.cfg
+*.tmp
+*.translation
+.mono/
+data_*/
+mono_crash.*.json
+~*.dll
+
+# Saídas de exportação
+*.exe
+build/
+
+# Python
+__pycache__/
+
+# Fotos de referência do usuário: nunca vão para o repositório público
+art/fotos/
+# PDFs de terceiros: o registro guarda só a referência e a URL
+docs/referencias/pdf/
+
+# Segredos
+.env
+*.token
