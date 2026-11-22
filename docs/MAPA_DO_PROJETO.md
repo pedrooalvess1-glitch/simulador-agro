@@ -77,7 +77,7 @@ flowchart LR
 - [x] **B0.2.** 🤖 Segunda pesquisa (matriz, acoplamento, solo, planta, terreno).
 - [x] **B0.3.** 👤 Validação das decisões 26 a 34 (o usuário acatou todas as recomendações).
 - [x] **B0.4.** 🤖 Terceira pesquisa (dados da alface, descompactação, determinismo, Terrain3D) e nova análise da arquitetura.
-- [ ] **B0.5.** 🤖 `alto` Quarta pesquisa. Lacunas da `BASE_MODELOS` §10, componentes reaproveitáveis do APSIM, verificações pendentes da `ARQUITETURA_SIMULACAO` §12 e dados da fila do registro, com busca no BDPA e na Infoteca-e (`FONTES.md` §4).
+- [ ] **B0.5.** 🤖 `alto` Quarta pesquisa. Lacunas da `BASE_MODELOS` §10, componentes reaproveitáveis do APSIM, verificações pendentes da `ARQUITETURA_SIMULACAO` §12 e dados da fila do registro, com busca no BDPA e na Infoteca-e (`FONTES.md` §4). Pedido pronto em `docs/referencias/PEDIDO_PESQUISA_RODADA4.md`; lançar quando houver cota de pesquisa.
 - [ ] **B1.** 🤖 `alto` Esvaziar a fila de verificação do registro para as publicações da fase 1, com página ou tabela de cada valor da `BASE_MODELOS` §4.
 - [ ] **B2.** 🤖 `alto` Conferir licença e condição de reprodução de cada publicação (campo `licenca`).
 - [ ] **B3.** 🤖 `médio` Levantar as fontes da fase 2 (tomate cereja, compostagem, palhada, Agrofit, aspersão, APSIM SoilWater e SoilNitrogen).
