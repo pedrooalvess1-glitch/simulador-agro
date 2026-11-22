@@ -81,16 +81,16 @@ flowchart LR
 | Componente | O que calcula | Fase | Validado contra |
 |---|---|---|---|
 | Astronomia | Fotoperíodo, radiação extraterrestre e posição do sol | 1 | Exemplos numéricos do FAO-56 [FONTE:FAO-1998-FAO56] |
-| Clima diário | Série real do INMET na campanha; grade diária para qualquer município [VERIFICAR]; gerador só no modo semiaberto | 1 (série), 3 (gerador) | Estatísticas da estação (chuva mensal, frequência de dias com chuva, veranicos) |
+| Clima diário | Grade diária BR-DWGD para qualquer município [FONTE:IJOC-2022-XAVIER]; gerador só no modo semiaberto | 1 (série), 3 (gerador) | Estações do INMET; estatísticas de chuva mensal, dias com chuva e veranicos |
 | Ciclo diário | Temperatura e umidade hora a hora | 1 (leitura e visual), 2 (processos horários) | Série horária de estação automática do INMET |
 | ET0 | Penman–Monteith, com Hargreaves–Samani calibrado de reserva | 1 | Exemplos do FAO-56 e ET0 calculada com dados de estação |
-| Água no solo | Uma camada na fase 1, camadas em cascata e evaporação em dois estágios na fase 2 | 1 e 2 | Umidade medida em solo nu e lisímetros brasileiros (rodada 4) |
-| Temperatura do solo | Temperatura por camada a partir do ar, da cobertura e da umidade | 1 | Medidas de temperatura do solo no Brasil (rodada 4) |
+| Água no solo | Uma camada na fase 1, camadas em cascata e evaporação em dois estágios na fase 2 [FONTE:APSIM-2020-SOILWAT] | 1 e 2 | Umidade diária em solo nu no semiárido [FONTE:AGRARIA-2015-SILVA]; outras regiões a levantar |
+| Temperatura do solo | Temperatura por camada a partir do ar, da chuva e da radiação, no estilo do APSIM-soiltemp [FONTE:AJEA-2007-CHAUHAN] | 1 | Medidas de temperatura do solo no Brasil (a levantar) |
 | Física | Densidade, porosidade, curva de retenção, compactação e bioporos | 1 a 3 | [FONTE:VZJ-2018-HYBRAS]; [FONTE:RBCS-2008-NICOLOSO] |
 | Química | CTC, bases, alumínio, pH–V, calcário, P, K e salinidade | 1 a 3 | Curvas de incubação de calcário; relação pH–V (§4.1) |
-| Biologia | Matéria orgânica em compartimentos, mineralização e imobilização de N, respiração e bioporos | 2 e 3 | Incubações de mineralização de N em solos brasileiros (rodada 4) |
+| Biologia | Matéria orgânica em compartimentos, mineralização e imobilização de N, respiração e bioporos | 2 e 3 | Incubações de mineralização de N em solos brasileiros (a levantar) |
 
-3. **Cenários de referência.** Solo nu em pousio em cinco regiões climáticas (semiárido, Cerrado, Sudeste, Sul e Amazônia), com séries reais. O núcleo roda o cenário por linha de comando, sem o jogo, e compara cada variável com o dado observado. As métricas são viés, raiz do erro quadrático médio e índice de concordância de Willmott. Os limites de aceite ficam no documento 22 [INFERÊNCIA].
+3. **Cenários de referência.** Solo nu em pousio em cinco regiões climáticas (semiárido, Cerrado, Sudeste, Sul e Amazônia), com séries reais. O núcleo roda o cenário por linha de comando, sem o jogo, e compara cada variável com o dado observado. As métricas são as do documento da Embrapa Cerrados (viés médio, raiz do erro quadrático médio, eficiência, índice d de Willmott e índice c = r·d) [FONTE:EMB-CPAC-2021-DOC381]. Os limites de aceite ficam no documento 22 [INFERÊNCIA]. O APSIM foi testado do mesmo jeito, simulando água e nitrato em pousio [FONTE:AGSY-1998-PROBERT].
 4. **Cultura nova não muda a base.** Se uma cultura exigir um processo novo do solo, como a fixação biológica de N por leguminosa, o processo entra na base e passa pela validação antes da cultura.
 
 ### 3.1 Fase 1 (canteiro plano de alface)
@@ -100,12 +100,12 @@ flowchart LR
 | Astronomia | Declinação, fotoperíodo e radiação extraterrestre do FAO-56 | Expressões fechadas para qualquer latitude do Brasil | FAO-56 cap. 3 |
 | Clima | Série real de estação automática do INMET e curva diurna de temperatura | Auditável contra a fonte e sem calibração estatística | INMET; Parton e Logan |
 | ET0 | Penman–Monteith com Hargreaves–Samani de reserva | Balanço de energia mais demanda aerodinâmica | FAO-56 |
-| Temperatura do solo | Temperatura por camada a partir do ar, da cobertura e da umidade (modelo a escolher na rodada 4) | Condução de calor amortecida com a profundidade | APSIM SoilTemp ou equivalente [VERIFICAR] |
+| Temperatura do solo | Temperatura por camada a partir do ar, da chuva e da radiação, no estilo do APSIM-soiltemp | Condução de calor amortecida com a profundidade | [FONTE:AJEA-2007-CHAUHAN] |
 | Água | *Bucket* de uma camada, Kc simples, Ks e escoamento por CN | Tanque com ladrão que conserva massa a cada passo | FAO-56 cap. 8; NRCS |
 | Solo físico | Capacidade de campo, ponto de murcha e densidade por classe e textura | Tabela com fonte e curva de retenção (§4.6) | Embrapa; SiBCS |
 | Química | Laudo com V% e CTC, calagem por saturação por bases, NPK por formulação, nitrogênio mineral com lixiviação | Inventário e um compartimento dinâmico de nitrato | Embrapa Hortaliças; manuais estaduais |
 | Planta | Modelo genérico por tipo de cultura (folhosa, raiz, fruto, grão) no estilo do AquaCrop, com graus-dia, cobertura, transpiração, produtividade da água e índice de colheita | Biomassa proporcional à transpiração normalizada pela ET0; o tipo define o órgão colhido | FAO AquaCrop |
-| Daninhas | Coorte com cobertura logística e perda de Cousens, janela de capina pelo período crítico (§4.8) | Competição com dano marginal decrescente | Cousens 1985; [FONTE:SEMINA-2011-GIANCOTTI] |
+| Daninhas | Coorte com cobertura logística e perda de Cousens, janela de capina pelo período crítico (§4.8) | Competição com dano marginal decrescente | Cousens 1985; [FONTE:SEMINA-2010-GIANCOTTI] |
 | Irrigação | Regador, gotejo com eficiência e fração de área molhada, tensiômetro virtual (gatilho de 15 kPa a 10 cm, §4.3) | Lâmina pela ETc e manejo pela tensão da água | Embrapa Hortaliças |
 | Arquitetura | Agenda única, ledger inteiro, árbitros, núcleo C++ com detmath | `ARQUITETURA_SIMULACAO` | APSIM; [FONTE:BOX2D-2024-DETERMINISM] |
 | Relatório | Atribuição da perda aos fatores Ks, nitrogênio, daninha e V% | Cada fator multiplicativo é registrado por dia | [INFERÊNCIA] |
@@ -117,7 +117,7 @@ A interface de planta já nasce preparada para o árbitro de luz da fase 2. A al
 2. Planta híbrida com biomassa igual ao mínimo entre a limitada por luz e a limitada por água (§7), com árbitro de luz.
 3. Daninhas com o mesmo código da planta e parâmetros próprios.
 4. Calcário com cinética por classe granulométrica, relação pH–V e NPK por formulação (§4.1 e §6).
-5. Biologia do solo com matéria orgânica em compartimentos (resíduo fresco, biomassa microbiana e húmus), mineralização e imobilização de N dependentes da temperatura e da umidade do solo. O componente SoilNitrogen do APSIM é a referência a avaliar na rodada 4.
+5. Biologia do solo com matéria orgânica em compartimentos (resíduo fresco, biomassa microbiana e húmus), mineralização e imobilização de N dependentes da temperatura e da umidade do solo. A referência é o SoilN do APSIM, reimplementado a partir dos artigos [FONTE:AGSY-1998-PROBERT], sem copiar código (decisão 55).
 6. Séries do INMET de vários anos e de estações de todas as regiões. A campanha não usa gerador climático, porque a aleatoriedade fica só nos eventos do modo semiaberto (decisão 40).
 7. Densidade do solo simples por preparo e tráfego, malha de canteiro de 5 cm, deformação do terreno e Terrain3D 1.1.x na propriedade (§8).
 8. Defensivos com dose e carência do Agrofit e meia-vida provisória com correção de temperatura e umidade (§4.2).
@@ -140,9 +140,9 @@ Valores das rodadas 2 e 3 de pesquisa. Os que têm `[FONTE:ID]` estão no regist
 
 ### 4.1 Calcário
 1. **Reatividade legal (MAPA).** RE é o percentual que reage em 3 meses. RE = 0,2·F(10–20) + 0,6·F(20–50) + 1,0·F(<50), com partículas retidas na peneira 10 valendo zero. PRNT = PN·RE/100 (Boletim Técnico 6; RBCS 39, 2015).
-2. **Cinética observada (Embrapa).** Depois de 6 meses a reação é quase completa e depois de 3 meses mais de 60% do calcário fino já reagiu (Fageria, Embrapa Arroz e Feijão, Infoteca-e). A reação é mais rápida com o solo úmido.
+2. **Cinética observada (Embrapa).** Depois de 6 meses de contato a reação é quase completa (p. 63) e depois de 3 meses mais de 60% do calcário mais fino já reagiu (p. 64). Sem água no solo a incorporação tem pouco efeito (p. 64). O PRNT mínimo recomendado é 80% (p. 65) [FONTE:EMB-CNPAF-2014-CALAGEM].
 3. **Formulação adotada.** Cada classe granulométrica j segue dM_j/dt = −k_j·f(θ)·M_j. A dissolução do CaCO₃ exige H⁺ em solução. Por isso f(θ) vale zero abaixo do ponto de murcha e cresce linearmente até 1 na capacidade de campo. Para a classe fina, 1 − e^(−90k) ≈ 0,62 dá k ≈ 0,0107 por dia e 87% em 180 dias. Essa calibração é provisória.
-4. **pH e V%.** pH em água = 4,50 + 0,025·V (Raij, Cantarella e Zullo 1979, *Bragantia* 38, acesso aberto). Vale para solos de São Paulo com CTC moderada. O próprio artigo diz que a necessidade de calagem por essa relação sai baixa. O pacote guarda o par (a, b) por classe de solo.
+4. **pH e V%.** pH em água = 4,50 + 0,025·V, relação atribuída a Raij, Cantarella e Zullo (1979) e chamada de modelo teórico por Guarçoni [FONTE:COFFEESCI-2017-GUARCONI]. O resumo do artigo de 1979 diz que o critério pH–saturação por bases dá necessidades de calagem muito baixas [FONTE:BRAGANTIA-1979-RAIJ]. A página da equação ainda não foi conferida no PDF. Vale para solos de São Paulo. O pacote guarda o par (a, b) por classe de solo.
 5. Não há equação publicada para pH em CaCl₂. A relação 4,1 + 0,025·V é derivação própria e provisória.
 
 ### 4.2 Meia-vida de defensivos
@@ -156,46 +156,49 @@ Valores das rodadas 2 e 3 de pesquisa. Os que têm `[FONTE:ID]` estão no regist
 
 | Parâmetro | Valor | Fonte e situação |
 |---|---|---|
-| Kc inicial, médio, final | 0,70, 1,05 e 0,95 | Marouelli et al., Embrapa, cap. 5 de *Irrigação e fertirrigação em fruteiras e hortaliças* (fila) |
-| Fração de área molhada | 0,95 | mesmo capítulo (fila) |
+| Kc inicial, médio, final | 0,70, 1,05 e 0,95 | [FONTE:EMB-CNPH-2011-CAP5] Tabela 9, p. 194 |
+| Fração de área molhada | 0,95 para hortaliças de menor espaçamento | [FONTE:EMB-CNPH-2011-CAP5] p. 183 |
 | Fração de depleção p | 0,30, ajustada pela ETc | [FONTE:FAO-1998-FAO56] tabela 22 |
 | Profundidade de raiz | 0,25 m em canteiro | apostila UFAC e Embrapa; [INFERÊNCIA] |
-| Gatilho de irrigação | 15 kPa no tensiômetro raso (10 cm), faixa de 10 a 20 kPa, 25 kPa no tensiômetro profundo | Marouelli, Embrapa Hortaliças, Circulares Técnicas 57 e 69 (fila) |
-| Temperatura-base | 6 °C da semeadura ao transplante e 10 °C depois | Brunini et al. 1976, *Bragantia* 35 (fila) |
-| Temperatura superior | 30 °C | calibração AquaCrop do capítulo IntechOpen (fila); [PROVISÓRIO] |
-| Soma térmica | 898 °C·dia em 45 dias e 1050 °C·dia em 52 dias | Fernandes et al. 2019, *Rev. Bras. Meteorologia* 34 (fila) |
-| Resposta à temperatura | desenvolvimento máximo perto de 22 °C e menor acima | Brunini et al. 1976 (fila). Exige função com teto |
-| Espaçamento | 0,25 × 0,25 m | Embrapa Hortaliças, livro de cultivares (fila) |
-| Ciclo | 35 dias no calor e 45 dias nos demais (BRS Mediterrânea) | Embrapa Hortaliças (fila) |
-| Produtividade da água WP* | 15 g/m² (19 g/m² como limite superior) | [FONTE:MDPI-2018-KET] e dois estudos da fila; [PROVISÓRIO] |
-| Cobertura máxima CCx | 81% | capítulo IntechOpen (fila); [PROVISÓRIO] |
+| Gatilho de irrigação | Faixa de 10 a 20 kPa em aspersão e gotejo; 15 kPa no tensiômetro raso a 10 cm; 25 kPa em sulco | [FONTE:EMB-CNPH-2008-CT57] Tabela 1 e p. 12; [FONTE:EMB-CNPH-2009-CT69] Tabela 1, p. 7 |
+| Temperatura-base | 6 °C da germinação ao transplante e 10 °C do transplante à colheita | [FONTE:BRAGANTIA-1976-BRUNINI] resumo |
+| Temperatura superior | 30 °C | [FONTE:INTECH-2020-AMIROUCHE] Tabela 1; [PROVISÓRIO] |
+| Soma térmica | 898 °C·dia em 45 dias (Simpson, Grand Rapids) e 1050 °C·dia em 52 dias (Bruna, Palmas), Bom Jesus, PI | [FONTE:RBMET-2019-FERNANDES] Tabela 2 |
+| Resposta à temperatura | desenvolvimento máximo perto de 22 °C e menor acima | [FONTE:BRAGANTIA-1976-BRUNINI] resumo. Exige função com teto |
+| Espaçamento | 0,25 × 0,25 m | Embrapa Hortaliças, livro de cultivares (a registrar) |
+| Ciclo | 35 dias no calor e 45 dias nos demais (BRS Mediterrânea) | Embrapa Hortaliças, livro de cultivares (a registrar) |
+| Produtividade da água WP* | 15 g/m² (19 g/m² como limite superior) | [FONTE:MDPI-2018-KET]; [FONTE:MDPI-2026-ZHAI]; [FONTE:INTECH-2020-AMIROUCHE]; [PROVISÓRIO] |
+| Cobertura máxima CCx | 81% | [FONTE:INTECH-2020-AMIROUCHE] Tabela 1; [PROVISÓRIO] |
 | Cobertura inicial CC0 | densidade de plantas vezes área da muda | regra do AquaCrop [MODELO] |
-| Crescimento e declínio do dossel CGC, CDC | 14,3 e 8,0% por dia | capítulo IntechOpen (fila); [PROVISÓRIO] |
-| Estresse na expansão e nos estômatos | p_exp 0,25 a 0,55, p_sto 0,50, forma 3 | capítulo IntechOpen (fila); [PROVISÓRIO] |
-| Índice de colheita de referência HIo | 95% | capítulo IntechOpen (fila); [PROVISÓRIO] |
-| Curva crítica de N | %Nc = 4,56·DW^−0,357 (DW em t/ha de massa seca; válida de 0,9 a 3,4 t/ha) | [FONTE:ISHS-2003-TEI]; [PROVISÓRIO] |
+| Crescimento e declínio do dossel CGC, CDC | 14,3 e 8,0% por dia | [FONTE:INTECH-2020-AMIROUCHE] Tabela 1; [PROVISÓRIO] |
+| Estresse na expansão e nos estômatos | p_exp 0,25 a 0,55, p_sto 0,50, forma 3 | [FONTE:INTECH-2020-AMIROUCHE] Tabela 1; [PROVISÓRIO] |
+| Índice de colheita de referência HIo | 95% | [FONTE:INTECH-2020-AMIROUCHE] Tabela 1; [PROVISÓRIO] |
+| Curva crítica de N | %Nc = 4,56·DW^−0,357 (DW em t/ha de massa seca; válida de 0,9 a 3,4 t/ha). Alternativa espanhola %Nc = 3,39·DMP^−0,22 | [FONTE:ISHS-2003-TEI]; [FONTE:AAB-2025-SUAREZREY]; [PROVISÓRIO] |
 | Eficiência de uso da radiação RUE | 1,44 g/MJ de radiação total interceptada, até 40 dias após a emergência | [FONTE:ANNBOT-1996-TEI]; [PROVISÓRIO] |
 | Coeficiente de extinção k | 0,60 | [FONTE:ANNBOT-1996-TEI] com pendência (0,60 ou 0,655); [PROVISÓRIO] |
-| Ky | não é parâmetro. Faixa de 0,9 a 1,4 vira teste de validação (mediana publicada perto de 1,1) | seis estudos estrangeiros na fila; nenhum brasileiro |
+| Ky | não é parâmetro. Teste de validação com valor central 1,17 (lisímetro) e faixa de 0,9 a 1,4; valores publicados de 0,69 a 2,26 | [FONTE:ISHS-2022-ROUPHAEL]; [FONTE:SJAR-2008-KUSLU]; nenhum estudo brasileiro |
 
 1. Não há calibração brasileira do AquaCrop para alface. A alface não consta do catálogo do AquaCrop [FONTE:MDPI-2018-KET].
 2. O KcTr,x de 0,85 do capítulo IntechOpen é menor que o Kc médio de 1,05 de Marouelli. O pacote deriva o KcTr,x do Kcb do FAO-56 e guarda 0,85 só como teste [INFERÊNCIA].
-3. Na fase 1 o Ky não entra no cálculo, porque a resposta ao déficit emerge do Ks e do WP*. O teste de validação exige que a inclinação entre perda relativa de produção e déficit relativo de ET fique entre 0,9 e 1,4 [INFERÊNCIA].
-4. Um valor de 410 °C·dia atribuído a Brunini em relatório português não foi verificado e não deve ser usado.
+3. Na fase 1 o Ky não entra no cálculo, porque a resposta ao déficit emerge do Ks e do WP*. O teste de validação exige que a inclinação entre perda relativa de produção e déficit relativo de ET fique entre 0,9 e 1,4, perto do valor de lisímetro de 1,17 [INFERÊNCIA].
+4. **Conflito de tensão.** O capítulo de manejo da Embrapa lista alface com 20 a 50 kPa em aspersão, citando Sammis (1980) [FONTE:EMB-CNPH-2011-CAP5]. As Circulares 57 e 69, mais recentes e específicas para hortaliças, indicam 10 a 20 kPa e 15 kPa. O pacote usa as circulares.
+5. **Conflito de temperatura-base.** Fernandes et al. usaram 8 °C até o transplante citando Brunini [FONTE:RBMET-2019-FERNANDES], mas o resumo de Brunini dá 6 °C [FONTE:BRAGANTIA-1976-BRUNINI]. O pacote usa o valor da fonte primária.
+6. **Manejo prático.** Cartilha da Embrapa Amapá manda irrigar a alface quando a média dos tensiômetros passar de 20 kPa e parar quando o de 10 cm marcar 5 a 10 kPa [FONTE:EMB-CPAFAP-2011-TENSIOM]. Ela serve de regra didática da campanha.
+7. Um valor de 410 °C·dia atribuído a Brunini em relatório português não foi verificado e não deve ser usado.
 
 ### 4.4 Curve Number
-Sartori, Lombardi Neto e Genovez (2005, *RBRH*) classificam os solos brasileiros do SiBCS nos grupos hidrológicos A a D. A ANA adota a classificação (Nota Técnica 46/2018). Não há CN brasileiro para canteiro. Usar "culturas em linha" do TR-55 ajustado pelo grupo de Sartori, como **provisório**. O preparo reduz o CN e a chuva acumulada desfaz a redução, como no módulo SoilWat do APSIM.
+Sartori, Lombardi Neto e Genovez classificam os solos brasileiros nos grupos hidrológicos A a D (Tabela 4) e aplicam o método numa microbacia com CN de 80,9 [FONTE:RBRH-2005-SARTORI1] [FONTE:RBRH-2005-SARTORI2]. Não há CN brasileiro para canteiro. Usar "culturas em linha" do TR-55 ajustado pelo grupo de Sartori, como [PROVISÓRIO].
+
+O SoilWat do APSIM parte de um CN de solo nu, reduz o CN pela cobertura e pelo preparo (cn_red) e desfaz a redução do preparo com a chuva acumulada (cn_rain) [FONTE:APSIM-2020-SOILWAT]. A mesma documentação descreve a evaporação de Ritchie em dois estágios (U e CONA; exemplo U = 6 mm e CONA = 3,5) e a drenagem em cascata SWCON·(SW − DUL), adotadas como referência da fase 2. O código do APSIM não entra no projeto. Só as equações publicadas são reimplementadas (decisão 55).
 
 ### 4.5 Eficiência de irrigação
-Padrão do pacote, a conferir na Circular Técnica 136 da Embrapa e nos demais capítulos.
 
-| Método | Faixa publicada (Embrapa) | Padrão do pacote |
-|---|---|---|
-| Gotejamento | 75 a 90% | 0,90 |
-| Microaspersão | 70 a 85% | 0,80 |
-| Aspersão convencional | 60 a 80% conforme o tipo | 0,75 |
-| Sulco | 30 a 70% | 0,60 |
-| Regador | sem fonte Embrapa específica | 0,85 provisório |
+| Método | Faixa publicada | Fonte | Padrão do pacote |
+|---|---|---|---|
+| Gotejamento | 80 a 95% | [FONTE:EMB-CNPH-2011-CT98] p. 7 | 0,90 |
+| Superfície (sulco) | 40 a 70% | [FONTE:EMB-CNPH-2011-CT98] p. 7 | 0,60 |
+| Aspersão e microaspersão | Tabela 1 da Circular 98, ainda não transcrita | [FONTE:EMB-CNPH-2011-CT98] p. 8 | pendente |
+| Regador | sem fonte | nenhuma | 0,85 [INFERÊNCIA] |
 
 A perda (1 menos a eficiência) é particionada em deriva e evaporação, percolação e escoamento. Assim ela fecha o ledger e alimenta a drenagem e a lixiviação de nitrogênio.
 
@@ -205,25 +208,29 @@ A literatura brasileira de IHO usa a capacidade de campo a −10 kPa. Solos aren
 A base HYBRAS reúne 445 perfis e 1075 amostras de solos brasileiros com parâmetros de van Genuchten e funções de pedotransferência brasileiras [FONTE:VZJ-2018-HYBRAS]. Ela é a fonte padrão da curva de retenção por classe e textura. Trabalho derivado mostra que a sucção da capacidade de campo medida no campo depende da textura e da gênese do solo. O valor fixo de −10 kPa é uma simplificação operacional [MODELO]. O uso de −6 kPa em solo arenoso ainda não tem fonte primária.
 
 ### 4.7 Clima
-O ClimaBR (Zanetti, Oliveira e Pruski; validado em 12 localidades de todas as regiões pluviométricas) usa Markov de primeira ordem. Para o semiárido a recomendação é Markov de primeira ordem com quantidades em exponencial mista (Wilks 1998), que captura melhor a cauda de eventos grandes que gera escoamento e erosão. O teste de aceitação é o comprimento dos veranicos. Ordem maior só entra se esse teste falhar. Parâmetros por estação do INMET e por mês. O gerador só roda no modo semiaberto (decisão 40).
+**Forçante padrão.** A grade diária BR-DWGD v3.2.4 cobre todo o Brasil em 0,1° de 1961 a 2025, com chuva, temperaturas, radiação, umidade, vento e ETo, e tem séries por município [FONTE:IJOC-2022-XAVIER]. Ela é a série padrão de qualquer município na campanha e na Etapa V. O núcleo recalcula a ET0 do FAO-56 a partir das variáveis da grade e compara com a ETo da grade como teste. A grade é interpolada das estações do INMET e dos pluviômetros da ANA, então a comparação com essas estações mede só a perda por interpolação [MODELO].
+
+**Gerador do modo semiaberto.** O ClimaBR usa cadeia de Markov e só dados pluviométricos [FONTE:RBEAA-2005-OLIVEIRA]. Para o semiárido a recomendação é Markov de primeira ordem com quantidades em exponencial mista (Wilks 1998), que captura melhor a cauda de eventos grandes que gera escoamento e erosão. O teste de aceitação é o comprimento dos veranicos. Ordem maior só entra se esse teste falhar. Parâmetros por estação do INMET e por mês. O gerador só roda no modo semiaberto (decisão 40).
 
 ### 4.8 Plantas daninhas na alface
-1. Com 5% de perda tolerada, o período total de prevenção da interferência na alface Solaris foi de 21 dias após o transplante. A convivência no ciclo todo reduziu a produtividade em 25% [FONTE:SEMINA-2011-GIANCOTTI].
-2. Espécies dominantes no mesmo trabalho. *Bidens pilosa*, *Amaranthus hybridus*, *Oxalis corniculata*, *Euphorbia heterophylla*, *Commelina benghalensis* e *Lepidium virginicum* [FONTE:SEMINA-2011-GIANCOTTI].
-3. Material da Embrapa para ciclo de 40 a 50 dias indica período anterior à interferência de 19 a 21 dias e período total de prevenção de 34 a 35 dias (Ikeda, fila).
-4. A janela de capina do jogo vai de 19 a 35 dias após o transplante. O relatório de safra explica a perda quando a capina cai fora dela [INFERÊNCIA].
+1. Com 5% de perda tolerada, o período total de prevenção da interferência na alface Solaris foi de 21 dias após o transplante. A convivência no ciclo todo reduziu a produtividade em 25% [FONTE:SEMINA-2010-GIANCOTTI].
+2. Espécies dominantes no mesmo trabalho. *Bidens pilosa*, *Amaranthus hybridus*, *Oxalis corniculata*, *Euphorbia heterophylla*, *Commelina benghalensis* e *Lepidium virginicum* [FONTE:SEMINA-2010-GIANCOTTI].
+3. Em três cultivares, o período anterior à interferência foi de 1 a 3 dias, o período total de prevenção de 35 a 37 dias e o período crítico de 2 a 37 dias (Elisa), 3 a 37 dias (Lucy Brown) e 3 a 35 dias (Solaris) após o transplante. A convivência total reduziu a produtividade em 48, 40 e 33% [FONTE:HB-2023-DARIVA].
+4. A janela de controle do jogo começa logo depois do transplante e vai até 35 a 37 dias, conforme a cultivar. O relatório de safra explica a perda quando o controle cai fora dela [INFERÊNCIA].
 5. Os parâmetros I e A de Cousens para alface e os parâmetros de crescimento das daninhas não foram encontrados.
 
 ### 4.9 Erosão
-1. Fator topográfico de Bertoni e Lombardi Neto. LS = 0,00984·L^0,63·S^1,18, com L em metros e S em porcentagem. A forma aparece igual em várias transcrições abertas (fila). O livro *Conservação do Solo* não foi aberto.
-2. O fator P vale 1 para preparo morro abaixo. Os demais valores de P e os fatores C e K por classe de solo ainda não foram transcritos.
+1. **Fator topográfico.** LS = 0,00984·L^0,63·S^1,18, com L em metros e S em porcentagem, de Bertoni e Lombardi Neto (1999), para relevo suave ondulado a ondulado (Equação 5, p. 157) [FONTE:CCT-2015-NAKAO].
+2. **Fator P.** Vale 1 sem prática conservacionista (p. 158). Plantio em contorno vale 0,50, 0,50, 0,60 e 0,70 e plantio em contorno com cordão vegetado vale 0,35, 0,35, 0,45 e 0,55 para declives de 2, 5, 10 e 15% (Tabela 2, p. 160) [FONTE:CCT-2015-NAKAO].
+3. **Fator C.** Vai de 0 (solo protegido) a 1 (solo exposto) (p. 158) [FONTE:CCT-2015-NAKAO]. Valores de C para hortaliças e K por classe de solo ainda não foram transcritos.
+4. **MUSLE.** Y = 11,8·(Q·qp)^0,56·K·C·P·LS, com Y em t, Q em m³ e qp em m³/s (Williams 1975, reapresentada em [FONTE:JRM-1984-SMITH]).
 
 ## 5. Solo físico e descompactação biológica
 
-Estados por camada. Densidade Ds, fração de bioporos contínuos fbio e rugosidade RR. Todos estão no `PackedFloat64Array`.
+Estados por camada. Densidade Ds, fração de bioporos contínuos fbio e rugosidade RR. Todos ficam em vetores de `double` do núcleo C++.
 
-1. **Resistência à penetração.** RP = a·θ^b·Ds^c (forma de Busscher). RP sobe quando o solo seca e quando compacta. Por isso um veranico endurece o solo compactado. Tormena et al. ajustaram essa forma num Latossolo sob plantio direto e usaram 2,0 MPa como limite [FONTE:RBCS-1998-TORMENA]. Os coeficientes desse ajuste ainda não foram extraídos. Um ajuste verificado em Latossolo Vermelho distrófico sob integração lavoura-pecuária dá RP = 0,0123·θ^−1,2762·Ds^5,6262 na camada de 0 a 0,10 m e RP = 0,0049·θ^−1,8467·Ds^5,6262 na de 0,10 a 0,20 m, com RP em MPa (fila).
-2. **IHO.** Limite superior igual ao menor entre θCC e o θ com 10% de ar. Limite inferior igual ao maior entre θPMP e o θ em que RP chega ao valor crítico. O padrão é 2,0 MPa (Embrapa Trigo e RBCS). Em plantio direto com bioporos citam-se até 3,5 MPa.
+1. **Resistência à penetração.** RP = a·θ^b·Ds^c (forma de Busscher). RP sobe quando o solo seca e quando compacta. Por isso um veranico endurece o solo compactado. Num Latossolo Roxo sob plantio direto, RP = 0,0361·Ds^7,9683·θ^−2,2940, com RP em MPa, Ds em Mg/m³ e θ em m³/m³ (Equação 1, p. 577) [FONTE:RBCS-1998-TORMENA]. Num Latossolo Vermelho distrófico sob integração lavoura-pecuária, RP = e·θ^f·Ds^5,6262 com e e f iguais a 0,0123 e −1,2762 (0 a 0,10 m), 0,0049 e −1,8467 (0,10 a 0,20 m) e 0,0019 e −2,4172 (0,20 a 0,30 m) (Quadro 3) [FONTE:RBCS-2013-FIDALSKI]. O pacote guarda os coeficientes por classe de solo e camada.
+2. **IHO.** Limite superior igual ao menor entre θCC e o θ com 10% de ar. Limite inferior igual ao maior entre θPMP e o θ em que RP chega ao valor crítico. Tormena et al. usaram RP de 2,0 MPa, CC a −0,01 MPa e PMP a −1,5 MPa [FONTE:RBCS-1998-TORMENA]. Fidalski et al. usaram RP de 2,5 MPa e CC a −80 hPa [FONTE:RBCS-2013-FIDALSKI]. O padrão do pacote é 2,0 MPa, e o valor crítico é parâmetro por classe de solo.
 3. **Alongamento de raiz.** f_RP vale 1 até cerca de metade do valor crítico, cai linearmente até zero no crítico e a eficiência é f = fbio + (1 − fbio)·f_RP. Raízes da cultura seguinte passam pelos bioporos. Isso explica sem regra especial por que o plantio direto tolera RP maior.
 4. **Estresse hídrico (fase 3).** O Ks usa o IHO no lugar de (CC − PMP). O mesmo solo com o mesmo θ pode estressar a planta se estiver compactado.
 5. **Compactação por tráfego.** ΔDs = (Ds_max − Ds)·[1 − exp(−σ/σ_c(θ))]·α. A tensão σ é carga sobre área de contato. A tensão crítica σ_c cai com a umidade, então solo úmido compacta mais. É redução de baixa complexidade de Söhne e SoilFlex **proposta pelo projeto** [INFERÊNCIA].
@@ -232,8 +239,8 @@ Estados por camada. Densidade Ds, fração de bioporos contínuos fbio e rugosid
    2. Raízes formam bioporos segundo dfbio/dt = β·(incremento diário de raiz pivotante na camada)·(1 − fbio/fbio_max) − fbio/τ. O parâmetro β é da espécie e τ é a persistência do canal. A densidade do solo não muda numa estação (dDs/dt = 0). O efeito da raiz entra pela macroporosidade e pelos bioporos, que reduzem a RP e aumentam a infiltração [MODELO].
    3. Ciclos de umedecimento e secagem entram como termo pequeno proporcional à argila.
 7. **Base empírica.** Num Latossolo muito argiloso compactado sob plantio direto, o nabo forrageiro dobrou a macroporosidade média de 0 a 0,20 m, manteve a RP em até 1,6 MPa contra mais de 2,0 MPa na testemunha e aumentou a infiltração em cerca de 46%, cerca de 4 meses depois do manejo do nabo. A densidade do solo não teve diferença significativa. Cada aumento de 0,01 m³/m³ de macroporosidade correspondeu a cerca de 0,1 MPa a menos de RP (R² = 0,89) [FONTE:RBCS-2008-NICOLOSO].
-8. **Calibração.** O nabo forrageiro é a única espécie calibrada. Ele usa as três respostas acima como alvo. A crotalária teve resultado contraditório num Argissolo franco-arenoso (fila), então o efeito dela na RP fica fraco e o efeito na condutividade fica ligado. Braquiária, milheto e guandu ficam desligados até haver dado. Raízes de plantas de cobertura crescem normalmente até Ds de 1,75 Mg/m³ e sofrem deformação severa acima de 1,85 Mg/m³ (fila).
-9. **Lacuna.** A persistência do efeito depois do manejo (τ) não foi quantificada em nenhuma fonte verificada. É o maior risco de credibilidade da fase 3.
+8. **Calibração.** O nabo forrageiro é a única espécie calibrada. Ele usa as três respostas acima como alvo. Sob alta compactação, o nabo penetra mais que a colza e o centeio [FONTE:PLSOIL-2010-CHEN], e raízes da cultura seguinte usam os canais deixados por ele [FONTE:SSSAJ-2004-WILLIAMS]. Num Argissolo franco-arenoso a crotalária não melhorou densidade nem macroporosidade superficiais, mas superou a escarificação mecânica na condutividade saturada [FONTE:RBCS-2004-ABREU]. Por isso o efeito da crotalária na RP fica fraco e o efeito na condutividade fica ligado. Braquiária, milheto e guandu ficam desligados até haver dado. Raízes de plantas de cobertura crescem normalmente até Ds de 1,75 Mg/m³, têm restrição média até 1,85 Mg/m³ e deformação significativa acima disso [FONTE:RBCS-2008-REINERT].
+9. **Lacuna.** A persistência do efeito depois do manejo (τ) não foi quantificada em nenhuma fonte verificada. Uma revisão australiana lembra que a perfuração biológica só se comprova medindo tamanho, número e continuidade dos poros [FONTE:AJSR-1995-CRESSWELL]. É o maior risco de credibilidade da fase 3.
 
 Mapa entre ação e estado.
 
@@ -291,22 +298,18 @@ Qualidade das fontes baixa. Vêm de guias e fóruns de comunidade.
 
 | # | Lacuna | Situação | Próximo passo |
 |---|---|---|---|
-| 1 | Calibração brasileira do AquaCrop e Ky da alface | Só calibrações estrangeiras [PROVISÓRIO] | Derivar Ky de experimentos brasileiros de lâminas (rodada 4) |
-| 2 | Recomendação estadual de N, P e K para alface e exportação de nutrientes | Não verificada | IAC Boletim 100, CQFS RS/SC, 5ª Aproximação MG, IPA (rodada 4) |
-| 3 | Temperatura máxima, pendoamento e queima de bordas da alface tropical | Só Tu = 30 °C do AquaCrop [PROVISÓRIO] | Embrapa Hortaliças (rodada 4) |
-| 4 | Eficiência do regador e da mangueira | Sem fonte | Rodada 4; senão, uniformidade medida no jogo [INFERÊNCIA] |
-| 5 | Relação pH–V em outras mineralogias e pH em CaCl₂ | Só Raij 1979 para São Paulo | Rodada 4 |
-| 6 | Cinética do calcário por classe granulométrica | Só RE legal e Fageria | Rodada 4 |
-| 7 | DT50 de agrotóxicos medido no Brasil | Correções FOCUS confirmadas; DT50 do PPDB [PROVISÓRIO] | Rodada 4 e termos de uso do PPDB |
-| 8 | Descompactação por braquiária, milheto e guandu; persistência τ | Só nabo calibrado | Rodada 4 (Calonego e Rosolem; Silveira Junior 2012) |
-| 9 | Coeficientes de Busscher de Tormena 1998 | Citação confirmada; coeficientes não extraídos | Rodada 4 |
-| 10 | Fatores P, C e K da EUPS brasileira | Só LS confirmado | Rodada 4 |
-| 11 | Cousens I e A para alface e parâmetros das daninhas | Não encontrados | Rodada 4 (*Planta Daninha*) |
-| 12 | INMET horário, Parton e Logan, Hargreaves–Samani no Brasil | Não verificados | Rodada 4 |
-| 13 | Ano, título ou URL oficial das publicações da fila | 31 itens na fila do registro | Rodada 4 e BDPA/Infoteca-e |
-| 14 | Custo real por célula | Estimativa de ordem de grandeza | Benchmark no passo D1b |
-| 15 | Fontes sobre jogos de referência | Comunidade, qualidade baixa | Manuais oficiais (rodada 4) |
-| 16 | Modelo de temperatura do solo e dados brasileiros para validar | Não escolhido | Rodada 4 |
-| 17 | Grade climática diária para qualquer município | Não verificada | Rodada 4 |
-| 18 | Dados observados para os cenários de referência sem cultura (umidade, temperatura do solo, mineralização, pH depois da calagem) | Não levantados | Rodada 4 e documento 22 |
-| 19 | Biologia do solo calibrada no Brasil (compartimentos de matéria orgânica) | Não levantada | Rodada 4 |
+| 1 | Ky e calibração do AquaCrop da alface no Brasil | Só estudos estrangeiros [PROVISÓRIO] | Derivar Ky de experimento brasileiro de lâminas com ETa por tratamento |
+| 2 | Recomendação estadual de N, P e K para alface | Só cópia não oficial do IAC e manual RS/SC sem a tabela transcrita | Boletim 100 de 2022 (IAC), CQFS-RS/SC 2016, 5ª Aproximação MG |
+| 3 | Temperatura máxima, pendoamento e queima de bordas da alface tropical | Só Tu = 30 °C do AquaCrop [PROVISÓRIO] | Embrapa Hortaliças |
+| 4 | Eficiência do regador; aspersão e microaspersão | Regador sem fonte; Tabela 1 da Circular 98 não transcrita | Transcrever a Tabela 1; procurar dado de regador |
+| 5 | Página da equação pH–V; outras mineralogias; pH em CaCl₂ | Equação atribuída a Raij 1979 por fonte secundária | PDF de Raij 1979 e de Guarçoni 2017 |
+| 6 | Cinética do calcário por classe granulométrica | Só RE legal e Fageria 2014 | Incubações brasileiras |
+| 7 | DT50 de agrotóxicos medido no Brasil | Correções FOCUS confirmadas; DT50 do PPDB [PROVISÓRIO] | Revisões brasileiras; termos do PPDB |
+| 8 | Descompactação por braquiária, milheto e guandu; persistência τ | Só nabo calibrado | Calonego e Rosolem; Silveira Junior et al. 2012 |
+| 9 | Fatores C de hortaliças e K por classe de solo | P e LS confirmados | Teses abertas com a tabela de Bertoni e Lombardi Neto |
+| 10 | Cousens I e A para alface e parâmetros das daninhas | Não encontrados | *Planta Daninha* |
+| 11 | Dados observados para os cenários de referência (Cerrado, Sudeste, Sul, Amazônia), temperatura do solo e mineralização | Só o semiárido tem candidato | Embrapa Cerrados, IAC, ESALQ, torres LBA |
+| 12 | Classes de aceite do índice c (Camargo e Sentelhas 1997) | Fonte primária não encontrada | Revista Brasileira de Agrometeorologia |
+| 13 | Colunas do CSV do Agrofit | Base registrada; colunas não conferidas | Abrir o cabeçalho pelo navegador |
+| 14 | Itens da fila de verificação | 13 publicações sem dados mínimos | Próxima sessão de pesquisa |
+| 15 | Custo real por célula | Estimativa de ordem de grandeza | Benchmark no passo D1b |

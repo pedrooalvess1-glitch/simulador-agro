@@ -16,7 +16,7 @@
 | Teste | `test_<alvo>.gd`, numa pasta `tests/` que espelha a do alvo | `tests/model/test_water_balance.gd` |
 | Modelo 3D | `<objeto>.py`, `<objeto>.glb`, `<objeto>.png` com o mesmo nome; planta por estádio com sufixo | `art/blender/lettuce_head.py` |
 | Ferramenta | `snake_case.py` ou `.sh`, nome em português (verbo + objeto) | `tools/conferir_fontes.py` |
-| ID de fonte | `EMB-<UNIDADE>-<ANO>-<SIGLA>` para Embrapa; `<ORGAO>-<ANO>-<SIGLA>` para outros órgãos | `EMB-CNPH-2020-ALFACE` |
+| ID de fonte | `EMB-<UNIDADE>-<ANO>-<SIGLA>` para Embrapa; `<ORGAO>-<ANO>-<SIGLA>` para outros órgãos; `<PERIODICO>-<ANO>-<PRIMEIRO_AUTOR>` para artigo | `EMB-CNPH-2008-CT57`, `RBCS-2008-NICOLOSO` |
 
 Sem espaço, acento ou maiúscula em nome de arquivo de código, dado ou arte: o Godot importa caminhos sensíveis a maiúsculas na exportação, e o Windows não.
 

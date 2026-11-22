@@ -83,20 +83,20 @@ flowchart LR
 - [x] **B0.2.** 🤖 Segunda pesquisa (matriz, acoplamento, solo, planta, terreno).
 - [x] **B0.3.** 👤 Validação das decisões 26 a 34 (o usuário acatou todas as recomendações).
 - [x] **B0.4.** 🤖 Terceira pesquisa (dados da alface, descompactação, determinismo, Terrain3D) e nova análise da arquitetura.
-- [ ] **B0.5.** 🔄 🤖 `alto` Quarta pesquisa, lançada em 22/11/2026 (`docs/referencias/PEDIDO_PESQUISA_RODADA4.md`). Lacunas da `BASE_MODELOS` §10, componentes do APSIM, verificações da `ARQUITETURA_SIMULACAO` §12, fila do registro, dados para validar clima e solo sem cultura e apoio ao fluxo de ingestão. Falta incorporar o relatório.
-- [ ] **B1.** 🤖 `alto` Esvaziar a fila de verificação do registro para as publicações da fase 1, com página ou tabela de cada valor da `BASE_MODELOS` §4.
+- [x] **B0.5.** 🤖 Quarta pesquisa incorporada. Fontes conferidas na publicação original e registradas; decisões 55 a 59.
+- [ ] **B1.** 🔄 🤖 `alto` Esvaziar a fila de verificação do registro para as publicações da fase 1, com página ou tabela de cada valor da `BASE_MODELOS` §4. As fontes da alface, do calcário, da erosão e do solo físico já estão registradas. Faltam os itens da fila e as pendências da `BASE_MODELOS` §10.
 - [ ] **B2.** 🤖 `alto` Conferir licença e condição de reprodução de cada publicação (campo `licenca`).
 - [ ] **B3.** 🤖 `médio` Levantar as fontes da fase 2 (tomate cereja, compostagem, palhada, Agrofit, aspersão, APSIM SoilWater e SoilNitrogen).
 - [x] **B4.** 🤖 Núcleo C++ determinístico com testes e jobs de CI no Linux e no Windows (`engine/native/`).
-- [ ] **B5.** 🤖 `extra` Primeiros modelos no núcleo. Astronomia e ET0 de Penman–Monteith do FAO-56 em C++ com detmath, testados contra os exemplos numéricos do FAO-56. Depende de B0.5 confirmar os exemplos.
+- [ ] **B5.** 🤖 `extra` Primeiros modelos no núcleo. Astronomia e ET0 de Penman–Monteith do FAO-56 em C++ com detmath, testados contra os exemplos numéricos do FAO-56. Os exemplos 8 a 13 e 17 a 19 do FAO-56 já foram conferidos e servem de teste.
 - [ ] **B6.** 🤖 `alto` Balanço hídrico diário de uma camada com Curve Number e o compartimento "aplicada hoje" (`ARQUITETURA_SIMULACAO` §4.1), com teste de fechamento do ledger sob sequências aleatórias de ações.
 
 **Etapa V. Base de clima e solo validada sem cultura**
 
 O núcleo C++ não depende do Godot, então a base pode ser construída e validada antes da fase 1 (`CLAUDE.md` §3, regra 3).
-- [ ] **V1.** 🤖 `alto` Escolher os cinco cenários de referência (semiárido, Cerrado, Sudeste, Sul e Amazônia) com série climática real e dados observados de solo. Depende de B0.5.
+- [ ] **V1.** 🤖 `alto` Escolher os cinco cenários de referência (semiárido, Cerrado, Sudeste, Sul e Amazônia) com série climática real e dados observados de solo. A série vem da grade BR-DWGD. O semiárido já tem candidato (Pesqueira, PE); as outras regiões ainda não.
 - [ ] **V2.** 🤖 `alto` Executável de linha de comando do núcleo que roda um cenário sem cultura e grava as variáveis diárias em CSV.
-- [ ] **V3.** 🤖 `extra` Documento 22 com métricas (viés, raiz do erro quadrático médio, índice de Willmott) e limites de aceite por variável.
+- [ ] **V3.** 🤖 `extra` Documento 22 com as métricas do Documentos 381 da Embrapa Cerrados (viés médio, raiz do erro quadrático médio, eficiência, índice d de Willmott e índice c) e limites de aceite por variável.
 - [ ] **V4.** 🤖 `alto` Validar astronomia e ET0 (depois de B5).
 - [ ] **V5.** 🤖 `alto` Validar o balanço hídrico em solo nu (depois de B6).
 - [ ] **V6.** 🤖 `extra` Modelo de temperatura do solo por camada no núcleo e validação contra medidas brasileiras.
@@ -256,12 +256,12 @@ Passo a passo (Etapa J). Detalhado quando a fase 4 terminar.
 
 | # | Ponto fraco | Por que importa | Onde se resolve |
 |---|---|---|---|
-| 1 | Parâmetros da alface quase todos estrangeiros (AquaCrop, Ky, RUE, N crítico) | O ciclo brasileiro de verão e as cultivares tropicais podem ter outro comportamento | B0.5 e B1 |
-| 2 | 31 publicações na fila de verificação, entre elas as da Embrapa usadas na fase 1 | Item da fila não pode entrar no pacote | B0.5 e B1 |
-| 3 | Descompactação calibrada só para o nabo e sem persistência | Maior risco de credibilidade da fase 3 | B0.5 e H2 |
-| 4 | Eficiência do regador sem fonte | É a primeira ferramenta da fatia | B0.5 |
+| 1 | Parâmetros de dossel, Ky, RUE e N crítico da alface estrangeiros | O ciclo brasileiro de verão e as cultivares tropicais podem ter outro comportamento | B1 e G2 |
+| 2 | 13 publicações na fila de verificação e pendências da `BASE_MODELOS` §10 | Item da fila não pode entrar no pacote | B1 |
+| 3 | Descompactação calibrada só para o nabo e sem persistência | Maior risco de credibilidade da fase 3 | H2 |
+| 4 | Eficiência do regador sem fonte; aspersão ainda não transcrita | É a primeira ferramenta da fatia | B1 |
 | 5 | Regra da `main` não configurada | Hoje um *merge* sem CI verde é possível | A2 |
 | 6 | Documentos 01 a 21 ainda não escritos | O projeto Godot só começa depois da Etapa C | Etapa C |
 | 7 | Custo por célula só estimado | A escolha do tamanho da grade depende dele | D1b |
-| 8 | Base de clima e solo ainda sem validação contra dados observados | Sem ela o simulador não serve para tirar conclusões sem propriedade | Etapa V |
-| 9 | Temperatura do solo e biologia do solo ainda sem modelo escolhido | Mineralização, germinação de daninhas e degradação de defensivos dependem delas | B0.5, V6 e G3 |
+| 8 | Dados observados para os cenários de referência fora do semiárido | Sem eles o simulador não serve para tirar conclusões sem propriedade | V1 |
+| 9 | Temperatura do solo sem dado brasileiro de validação | Mineralização, germinação de daninhas e degradação de defensivos dependem dela | V6 |

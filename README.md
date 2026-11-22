@@ -10,4 +10,4 @@ Em planejamento. Estado em [`docs/STATUS.md`](docs/STATUS.md); planejamento em [
 ## Desenvolvimento
 Conduzido no Claude Code. Regras permanentes em [`CLAUDE.md`](CLAUDE.md); mapa do projeto, fases e passo a passo em [`docs/MAPA_DO_PROJETO.md`](docs/MAPA_DO_PROJETO.md). A infraestrutura (Godot 4.7.2 fixado, CI, pipeline Blender e convenções) vem do repositório [`simulador-normas`](https://github.com/pedrooalvess1-glitch/simulador-normas).
 
-Motor: Godot 4.7.2 (renderizador Compatibility), estilo low-poly com cores chapadas, alvo de GPU integrada. Código sob licença MIT.
+Motor: Godot 4.7.2 (renderizador Compatibility), estilo low-poly com cores chapadas, alvo de GPU integrada. Todo o estado do mundo calculado fica no núcleo C++ determinístico [`engine/native/`](engine/native/README.md), que dá o mesmo resultado no Linux e no Windows. Código sob licença MIT.
