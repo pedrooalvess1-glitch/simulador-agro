@@ -142,7 +142,7 @@ O passo diário segue a ordem em que um processo produz o recurso que o próximo
 | g++ 13 -O2, g++ -O0, clang++ 18 -O2 | `41cbfb563eb7b91d` |
 | g++ -O3 -march=haswell (FMA disponível) com `-ffp-contract=off` | `41cbfb563eb7b91d` |
 | g++ -O2 -march=haswell sem `-ffp-contract=off` | `1631d7df988e7a71` (diferente) |
-| MinGW-w64 no Windows (job do CI) | precisa dar `41cbfb563eb7b91d` |
+| MinGW g++ 14.2.0 no Windows Server 2022 (job do CI) | `41cbfb563eb7b91d` |
 
 A terceira linha prova o mecanismo. Basta liberar a fusão em FMA para o resultado mudar. O teste `tests/test_determinism.cpp` roda um mundo de brinquedo com agenda, ledger, árbitro, detmath e um evento sorteado. Ele confere o mesmo hash diário em 1x, 8x, 32x com um evento por quadro, quadros irregulares, dormir e save e carga no meio.
 

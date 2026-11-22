@@ -241,4 +241,3 @@ Passo a passo (Etapa J). Detalhado quando a fase 4 terminar.
 | 5 | Regra da `main` não configurada | Hoje um *merge* sem CI verde é possível | A2 |
 | 6 | Documentos 01 a 21 ainda não escritos | O projeto Godot só começa depois da Etapa C | Etapa C |
 | 7 | Custo por célula só estimado | A escolha do tamanho da grade depende dele | D1b |
-| 8 | Wine não roda na nuvem; o teste no Windows depende do job do CI | Sem ele não há prova local de determinismo no Windows | Job `Núcleo C++ (Windows, MinGW)` |
