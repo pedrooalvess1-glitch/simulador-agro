@@ -10,6 +10,7 @@
 | Documento de planejamento | `NN_NOME_EM_MAIUSCULAS.md` (número da `00_INDICE` §5) | `05_MODELO_SOLO_PLANTA_ATMOSFERA.md` |
 | Documento de apoio | `NOME_EM_MAIUSCULAS.md`; modelos com `_` no início | `CONVENCOES.md`, `_MODELO_DOCUMENTO.md` |
 | Script GDScript | `snake_case.gd`, um `class_name` em `PascalCase` por script | `water_balance.gd` → `class_name WaterBalance` |
+| Núcleo C++ | `snake_case.hpp` / `.cpp` em `engine/native/`; tudo no `namespace agro`; tipos em `PascalCase`, funções em `snake_case`, constantes `kNome` | `include/agro/ledger.hpp` → `agro::Ledger` |
 | Cena e recurso Godot | `snake_case.tscn` / `.tres` | `canteiro.tscn` |
 | Dado do pacote | `snake_case.json` | `packs/hortalicas/crops/lettuce.json` |
 | Teste | `test_<alvo>.gd`, numa pasta `tests/` que espelha a do alvo | `tests/model/test_water_balance.gd` |
@@ -30,7 +31,8 @@ Sem espaço, acento ou maiúscula em nome de arquivo de código, dado ou arte: o
 
 | Onde | Idioma | Motivo |
 |---|---|---|
-| Código do motor e do pacote (identificadores, comentários, log) | Inglês | Padrão da API do Godot; evita mistura dentro da mesma linha |
+| Código do motor e do pacote (identificadores, comentários, log), incluindo o núcleo C++ | Inglês | Padrão da API do Godot; evita mistura dentro da mesma linha |
+| Mensagens dos testes do núcleo e das ferramentas | Português | Lidas pelo usuário no CI |
 | Ferramentas de `tools/` | Português | Lidas pelo usuário; não entram no executável |
 | IDs de dado (`crop_id`, `soil_id`, verbos) | Inglês, `snake_case`, só ASCII | São chaves comparadas pelo código; o texto exibido vem de outro campo |
 | Texto ao jogador | Português do Brasil | Público e fontes em português |

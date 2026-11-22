@@ -8,6 +8,6 @@ Todo o conhecimento agronômico do simulador vem de publicações registradas e 
 Em planejamento. Estado em [`docs/STATUS.md`](docs/STATUS.md); planejamento em [`docs/00_INDICE.md`](docs/00_INDICE.md).
 
 ## Desenvolvimento
-Conduzido no Claude Code. Regras permanentes em [`CLAUDE.md`](CLAUDE.md); passos em [`docs/ROTEIRO.md`](docs/ROTEIRO.md). A infraestrutura (Godot 4.7.2 fixado, CI, pipeline Blender e convenções) vem do repositório [`simulador-normas`](https://github.com/pedrooalvess1-glitch/simulador-normas).
+Conduzido no Claude Code. Regras permanentes em [`CLAUDE.md`](CLAUDE.md); mapa do projeto, fases e passo a passo em [`docs/MAPA_DO_PROJETO.md`](docs/MAPA_DO_PROJETO.md). A infraestrutura (Godot 4.7.2 fixado, CI, pipeline Blender e convenções) vem do repositório [`simulador-normas`](https://github.com/pedrooalvess1-glitch/simulador-normas).
 
 Motor: Godot 4.7.2 (renderizador Compatibility), estilo low-poly com cores chapadas, alvo de GPU integrada. Código sob licença MIT.

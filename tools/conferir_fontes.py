@@ -6,8 +6,10 @@ Uso (na raiz do repositório):
 
 O que faz:
   1. Lê docs/referencias/fontes.json e confere cada fonte: campos obrigatórios, ID no formato
-     da CONVENCOES §1, ID único, ano inteiro, data de acesso AAAA-MM-DD e URL https num domínio
-     da lista "dominios_permitidos".
+     da CONVENCOES §1, ID único, ano inteiro, data de acesso AAAA-MM-DD, URL https num domínio
+     da lista "dominios_permitidos" e, se houver, "pendencias" como lista de textos.
+     Confere também a "fila_de_verificacao" (publicações achadas e ainda não registradas):
+     cada item tem "id_proposto", "referencia" e "falta". Item da fila não pode ser citado.
   2. Percorre os .md de docs/ e packs/ (fora de blocos de código) e confere cada citação
      [FONTE:ID]: o ID precisa existir no registro. Rótulo [FONTE] sem ID é erro.
   3. Percorre os .json de packs/ e confere cada objeto:
@@ -72,6 +74,18 @@ def conferir_registro(erros: list[str]) -> set[str]:
         return set()
 
     ids: set[str] = set()
+    fila = dados.get("fila_de_verificacao", [])
+    if not isinstance(fila, list):
+        erros.append(f"{REGISTRO}: 'fila_de_verificacao' precisa ser uma lista")
+        fila = []
+    for i, item in enumerate(fila):
+        onde = f"{REGISTRO} fila_de_verificacao[{i}]"
+        if not isinstance(item, dict):
+            erros.append(f"{onde}: cada item precisa ser um objeto")
+            continue
+        faltam = [c for c in ("id_proposto", "referencia", "falta") if item.get(c) in (None, "")]
+        if faltam:
+            erros.append(f"{onde}: campos obrigatórios ausentes: {', '.join(faltam)}")
     for i, f in enumerate(fontes):
         onde = f"{REGISTRO} fontes[{i}]"
         if not isinstance(f, dict):
@@ -98,6 +112,9 @@ def conferir_registro(erros: list[str]) -> set[str]:
                     erros.append(f"{onde}: data de acesso no futuro")
             except ValueError:
                 erros.append(f"{onde}: 'acesso' precisa estar no formato AAAA-MM-DD")
+        pend = f.get("pendencias")
+        if pend is not None and (not isinstance(pend, list) or not all(isinstance(x, str) and x.strip() for x in pend)):
+            erros.append(f"{onde}: 'pendencias' precisa ser uma lista de textos")
         url = f.get("url")
         if isinstance(url, str) and url:
             u = urlparse(url)
@@ -106,6 +123,9 @@ def conferir_registro(erros: list[str]) -> set[str]:
                 erros.append(f"{onde}: URL precisa ser https")
             elif not any(host == d or host.endswith("." + d) for d in dominios):
                 erros.append(f"{onde}: domínio '{host}' fora de 'dominios_permitidos'")
+    na_fila = {item.get("id_proposto") for item in fila if isinstance(item, dict)}
+    for fid in sorted(na_fila & ids):
+        erros.append(f"{REGISTRO}: '{fid}' está no registro e na fila ao mesmo tempo")
     return ids
 
 

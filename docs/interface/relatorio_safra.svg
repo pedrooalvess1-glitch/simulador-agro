@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="DejaVu Sans, Arial, sans-serif">
+  <title>Wireframe do relatório de safra com raio-x (1280x720)</title>
+  <rect x="0" y="0" width="1280" height="720" fill="#1f262c"/>
+  <text x="40" y="52" fill="#f2f2f2" font-size="24" font-weight="bold">Relatório de safra · Canteiro 2 · Alface crespa</text>
+  <text x="40" y="78" fill="#aab4bd" font-size="14">Transplante no dia 0 · colheita no dia 46 · estação INMET da região · semente do mundo e versões no rodapé</text>
+  <rect x="1060" y="30" width="180" height="40" rx="6" fill="#f6b26b"/><text x="1084" y="56" fill="#14181c" font-size="15" font-weight="bold">Raio-x: ligado</text>
+
+  <!-- decomposição da perda -->
+  <rect x="40" y="100" width="560" height="330" rx="8" fill="#2a333b"/>
+  <text x="60" y="130" fill="#f2f2f2" font-size="17" font-weight="bold">De onde veio a perda</text>
+  <g font-size="13" fill="#dfe6ec">
+    <rect x="60" y="150" width="500" height="26" fill="#6aa84f"/><text x="66" y="168" fill="#14181c" font-weight="bold">Potencial do clima e da cultivar · 100%</text>
+    <rect x="460" y="188" width="100" height="26" fill="#e06666"/><text x="60" y="206">Água (estresse Ks)</text><text x="232" y="206">− x%</text>
+    <rect x="400" y="226" width="60" height="26" fill="#e06666"/><text x="60" y="244">Nitrogênio</text><text x="232" y="244">− x%</text>
+    <rect x="330" y="264" width="70" height="26" fill="#e06666"/><text x="60" y="282">Daninhas</text><text x="232" y="282">− x%</text>
+    <rect x="310" y="302" width="20" height="26" fill="#e06666"/><text x="60" y="320">Temperatura</text><text x="232" y="320">− x%</text>
+    <rect x="300" y="340" width="10" height="26" fill="#e06666"/><text x="60" y="358">Acidez e alumínio</text><text x="232" y="358">− x%</text>
+    <rect x="60" y="384" width="240" height="26" fill="#3c78d8"/><text x="66" y="402" fill="#ffffff" font-weight="bold">Obtido · x% · x kg</text>
+  </g>
+
+  <!-- balanço de água -->
+  <rect x="620" y="100" width="620" height="330" rx="8" fill="#2a333b"/>
+  <text x="640" y="130" fill="#f2f2f2" font-size="17" font-weight="bold">Para onde foi a sua água</text>
+  <text x="640" y="160" fill="#aab4bd" font-size="13">Entradas</text>
+  <rect x="640" y="170" width="350" height="30" fill="#3c78d8"/><text x="648" y="190" fill="#ffffff" font-size="13">Chuva · x L</text>
+  <rect x="990" y="170" width="230" height="30" fill="#6fa8dc"/><text x="998" y="190" fill="#14181c" font-size="13">Regas · x L</text>
+  <text x="640" y="232" fill="#aab4bd" font-size="13">Destinos (fecha exato no ledger)</text>
+  <rect x="640" y="242" width="250" height="30" fill="#6aa84f"/><text x="648" y="262" fill="#14181c" font-size="13">Transpiração · x L</text>
+  <rect x="890" y="242" width="120" height="30" fill="#f6b26b"/><text x="898" y="262" fill="#14181c" font-size="13">Evaporação</text>
+  <rect x="1010" y="242" width="110" height="30" fill="#8e7cc3"/><text x="1018" y="262" fill="#ffffff" font-size="13">Drenagem</text>
+  <rect x="1120" y="242" width="50" height="30" fill="#cc4125"/><text x="1124" y="262" fill="#ffffff" font-size="11">Escoam.</text>
+  <rect x="1170" y="242" width="50" height="30" fill="#7f6000"/><text x="1174" y="262" fill="#ffffff" font-size="11">Solo</text>
+  <text x="640" y="306" fill="#dfe6ec" font-size="13">A drenagem levou x g de nitrogênio para abaixo das raízes.</text>
+  <text x="640" y="330" fill="#dfe6ec" font-size="13">Nos dias 9 a 14 a tensão passou do gatilho por 5 dias seguidos.</text>
+  <rect x="640" y="356" width="210" height="34" rx="6" fill="#3c78d8"/><text x="656" y="378" fill="#ffffff" font-size="14">Ver perfil de umidade</text>
+  <rect x="862" y="356" width="150" height="34" rx="6" fill="#44505a"/><text x="878" y="378" fill="#ffffff" font-size="14">Ver a fonte</text>
+
+  <!-- linha do tempo -->
+  <rect x="40" y="446" width="1200" height="120" rx="8" fill="#2a333b"/>
+  <text x="60" y="474" fill="#f2f2f2" font-size="17" font-weight="bold">Linha do tempo</text>
+  <line x1="80" y1="520" x2="1200" y2="520" stroke="#aab4bd" stroke-width="2"/>
+  <rect x="505" y="506" width="365" height="28" fill="#6aa84f" fill-opacity="0.35"/>
+  <text x="512" y="552" fill="#b6d7a8" font-size="12">janela de capina</text>
+  <g font-size="12" fill="#dfe6ec" text-anchor="middle">
+    <circle cx="80" cy="520" r="7" fill="#6aa84f"/><text x="80" y="500">Transplante</text>
+    <circle cx="200" cy="520" r="7" fill="#3c78d8"/><text x="200" y="500">Rega</text>
+    <circle cx="330" cy="520" r="7" fill="#f6b26b"/><text x="330" y="500">Adubação</text>
+    <circle cx="440" cy="520" r="7" fill="#e06666"/><text x="440" y="550">Estresse hídrico</text>
+    <circle cx="930" cy="520" r="7" fill="#f6b26b"/><text x="930" y="500">Capina (tarde)</text>
+    <circle cx="1200" cy="520" r="7" fill="#6aa84f"/><text x="1190" y="500">Colheita</text>
+  </g>
+
+  <!-- o que mudar -->
+  <rect x="40" y="582" width="1200" height="110" rx="8" fill="#2a333b"/>
+  <text x="60" y="610" fill="#f2f2f2" font-size="17" font-weight="bold">O que mudar na próxima safra</text>
+  <text x="60" y="638" fill="#dfe6ec" font-size="14">1. Irrigar quando o tensiômetro raso passar do gatilho, em vez de regar em dias fixos.</text>
+  <text x="60" y="662" fill="#dfe6ec" font-size="14">2. Capinar dentro da janela da cultura. Cada recomendação abre a explicação e a publicação de origem.</text>
+  <text x="1230" y="684" fill="#77838d" font-size="11" text-anchor="end">pacote vX.Y.Z · motor vX.Y.Z · semente · série climática · hash do último dia</text>
+</svg>

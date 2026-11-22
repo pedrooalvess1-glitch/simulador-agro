@@ -21,13 +21,18 @@ BOA = {
 }
 
 
-def rodar(fontes, arquivos):
+FILA = {"id_proposto": "EMB-FILA-2020-X", "referencia": "Autor. Título.", "falta": "ano"}
+
+
+def rodar(fontes, arquivos, fila=None):
     """Monta um repositório temporário e devolve a lista de erros."""
     with tempfile.TemporaryDirectory() as d:
         raiz = Path(d)
         (raiz / "docs/referencias").mkdir(parents=True)
-        (raiz / "docs/referencias/fontes.json").write_text(
-            json.dumps({"dominios_permitidos": ["embrapa.br"], "fontes": fontes}), encoding="utf-8")
+        registro = {"dominios_permitidos": ["embrapa.br"], "fontes": fontes}
+        if fila is not None:
+            registro["fila_de_verificacao"] = fila
+        (raiz / "docs/referencias/fontes.json").write_text(json.dumps(registro), encoding="utf-8")
         for nome, conteudo in arquivos.items():
             p = raiz / nome
             p.parent.mkdir(parents=True, exist_ok=True)
@@ -36,7 +41,7 @@ def rodar(fontes, arquivos):
         return cf.checar()[0]
 
 
-CASOS = [  # (nome, fontes, arquivos, trechos esperados nos erros; vazio = nenhum erro)
+CASOS = [  # (nome, fontes, arquivos, trechos esperados nos erros[, fila]; vazio = nenhum erro)
     ("registro e citações válidos", [BOA], {
         "docs/a.md": "Dado [FONTE:EMB-TESTE-2020-ALFACE]. Legenda `[FONTE]` em código.\n```\n[FONTE:X-Y]\n```\n",
         "packs/p/crops/lettuce.json": {"spacing": {"value": 25, "unit": "cm", "fonte": "EMB-TESTE-2020-ALFACE", "local": "p. 7"},
@@ -56,11 +61,18 @@ CASOS = [  # (nome, fontes, arquivos, trechos esperados nos erros; vazio = nenhu
         "packs/p/x.json": [{"value": 1, "unit": "t/ha", "fonte": "EMB-NAO-2020-EXISTE"}]}, ["não existe", "'local'"]),
     ("dado agronômico sem fonte", [BOA], {"packs/p/x.json": {"kc": {"value": 1.0, "unit": "-"}}}, ["sem 'fonte'"]),
     ("json inválido", [BOA], {"packs/p/x.json": "{nao json"}, ["JSON inválido"]),
+    ("pendências como lista de textos", [dict(BOA, pendencias=["confirmar páginas"])], {}, []),
+    ("pendências inválidas", [dict(BOA, pendencias="texto")], {}, ["'pendencias'"]),
+    ("fila válida", [BOA], {}, [], [FILA]),
+    ("item da fila incompleto", [BOA], {}, ["falta"], [{"id_proposto": "X-1", "referencia": "R"}]),
+    ("item da fila não pode ser citado", [BOA], {"docs/a.md": "[FONTE:EMB-FILA-2020-X]"}, ["EMB-FILA-2020-X"], [FILA]),
+    ("mesmo ID no registro e na fila", [BOA], {}, ["ao mesmo tempo"], [dict(FILA, id_proposto=BOA["id"])]),
 ]
 
 falhas = []
-for nome, fontes, arquivos, esperado in CASOS:
-    erros = rodar(fontes, arquivos)
+for caso in CASOS:
+    nome, fontes, arquivos, esperado = caso[:4]
+    erros = rodar(fontes, arquivos, caso[4] if len(caso) > 4 else None)
     if not esperado and erros:
         falhas.append(f"{nome}: esperava nenhum erro, veio {erros}")
     for trecho in esperado:

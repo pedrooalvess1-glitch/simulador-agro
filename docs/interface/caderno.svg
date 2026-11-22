@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="DejaVu Sans, Arial, sans-serif">
+  <title>Wireframe do caderno de campo, aba Laudos (1280x720)</title>
+  <rect x="0" y="0" width="1280" height="720" fill="#55703f"/>
+  <rect x="0" y="0" width="1280" height="720" fill="#000000" fill-opacity="0.45"/>
+  <rect x="60" y="40" width="1160" height="640" rx="10" fill="#f4efe1"/>
+  <text x="90" y="82" fill="#2b2b2b" font-size="24" font-weight="bold">Caderno de campo</text>
+  <text x="1190" y="82" fill="#6b6b6b" font-size="14" text-anchor="end">Tab fecha · Esc pausa</text>
+
+  <!-- abas -->
+  <g font-size="14">
+    <rect x="90" y="100" width="100" height="34" rx="5" fill="#e3dccb"/><text x="104" y="122" fill="#2b2b2b">Tarefas</text>
+    <rect x="196" y="100" width="108" height="34" rx="5" fill="#e3dccb"/><text x="210" y="122" fill="#2b2b2b">Canteiros</text>
+    <rect x="310" y="100" width="92" height="34" rx="5" fill="#3d6b35"/><text x="326" y="122" fill="#ffffff" font-weight="bold">Laudos</text>
+    <rect x="408" y="100" width="98" height="34" rx="5" fill="#e3dccb"/><text x="422" y="122" fill="#2b2b2b">Leituras</text>
+    <rect x="512" y="100" width="92" height="34" rx="5" fill="#e3dccb"/><text x="526" y="122" fill="#2b2b2b">Estoque</text>
+    <rect x="610" y="100" width="112" height="34" rx="5" fill="#e3dccb"/><text x="624" y="122" fill="#2b2b2b">Calendário</text>
+    <rect x="728" y="100" width="84" height="34" rx="5" fill="#e3dccb"/><text x="742" y="122" fill="#2b2b2b">Fontes</text>
+  </g>
+  <line x1="90" y1="134" x2="1190" y2="134" stroke="#3d6b35" stroke-width="2"/>
+
+  <!-- laudo -->
+  <text x="90" y="170" fill="#2b2b2b" font-size="17" font-weight="bold">Análise de solo · Canteiro 2 · camada 0–20 cm</text>
+  <text x="90" y="194" fill="#555555" font-size="13">Amostra coletada no dia 12 · laudo liberado no dia 19 · laboratório da cooperativa</text>
+  <g font-size="14">
+    <rect x="90" y="208" width="620" height="30" fill="#e3dccb"/>
+    <text x="102" y="228" fill="#2b2b2b" font-weight="bold">Atributo</text>
+    <text x="330" y="228" fill="#2b2b2b" font-weight="bold">Valor</text>
+    <text x="430" y="228" fill="#2b2b2b" font-weight="bold">Unidade</text>
+    <text x="560" y="228" fill="#2b2b2b" font-weight="bold">Classe</text>
+    <g fill="#2b2b2b">
+      <text x="102" y="262">pH em água</text><text x="330" y="262">x,x</text><text x="430" y="262">—</text><text x="560" y="262">baixo</text>
+      <text x="102" y="290">Matéria orgânica</text><text x="330" y="290">x,x</text><text x="430" y="290">dag/kg</text><text x="560" y="290">médio</text>
+      <text x="102" y="318">P (Mehlich-1)</text><text x="330" y="318">x,x</text><text x="430" y="318">mg/dm³</text><text x="560" y="318">baixo</text>
+      <text x="102" y="346">K</text><text x="330" y="346">x,x</text><text x="430" y="346">mg/dm³</text><text x="560" y="346">médio</text>
+      <text x="102" y="374">CTC a pH 7 (T)</text><text x="330" y="374">x,x</text><text x="430" y="374">cmolc/dm³</text><text x="560" y="374">médio</text>
+      <text x="102" y="402">Saturação por bases (V)</text><text x="330" y="402">x</text><text x="430" y="402">%</text><text x="560" y="402">baixo</text>
+      <text x="102" y="430">Alumínio trocável</text><text x="330" y="430">x,x</text><text x="430" y="430">cmolc/dm³</text><text x="560" y="430">médio</text>
+    </g>
+    <g stroke="#d6cfbd"><line x1="90" y1="270" x2="710" y2="270"/><line x1="90" y1="298" x2="710" y2="298"/><line x1="90" y1="326" x2="710" y2="326"/><line x1="90" y1="354" x2="710" y2="354"/><line x1="90" y1="382" x2="710" y2="382"/><line x1="90" y1="410" x2="710" y2="410"/></g>
+  </g>
+  <text x="90" y="462" fill="#7a6a4a" font-size="12">Valores de exemplo (x,x). O laudo mostra a medida, não o estado verdadeiro.</text>
+
+  <!-- recomendação -->
+  <rect x="740" y="160" width="450" height="300" rx="8" fill="#ffffff" stroke="#3d6b35" stroke-width="2"/>
+  <text x="760" y="192" fill="#3d6b35" font-size="17" font-weight="bold">Recomendação</text>
+  <text x="760" y="222" fill="#2b2b2b" font-size="14">Calagem pelo método da saturação por bases</text>
+  <text x="760" y="250" fill="#2b2b2b" font-size="14">NC = (V2 − V1) · T / PRNT  →  x,x t/ha</text>
+  <text x="760" y="276" fill="#555555" font-size="13">V2 da cultura e PRNT do calcário vêm do pacote</text>
+  <text x="760" y="312" fill="#2b2b2b" font-size="14">Reação do calcário leva meses e exige solo úmido.</text>
+  <text x="760" y="336" fill="#2b2b2b" font-size="14">Aplique antes do plantio e incorpore.</text>
+  <rect x="760" y="364" width="140" height="34" rx="6" fill="#3d6b35"/><text x="778" y="386" fill="#ffffff" font-size="14">Por quê?</text>
+  <rect x="912" y="364" width="160" height="34" rx="6" fill="#e3dccb"/><text x="930" y="386" fill="#2b2b2b" font-size="14">Ver a fonte</text>
+  <text x="760" y="430" fill="#7a6a4a" font-size="12">"Por quê?" explica a causa; "Ver a fonte" abre a publicação</text>
+
+  <!-- leituras -->
+  <text x="90" y="506" fill="#2b2b2b" font-size="17" font-weight="bold">Leituras do tensiômetro (10 cm)</text>
+  <rect x="90" y="520" width="1100" height="140" fill="#ffffff" stroke="#d6cfbd"/>
+  <line x1="90" y1="580" x2="1190" y2="580" stroke="#c2185b" stroke-dasharray="6 5"/>
+  <text x="1180" y="574" fill="#c2185b" font-size="12" text-anchor="end">gatilho de irrigação (valor do pacote)</text>
+  <polyline points="110,640 190,620 270,596 350,570 400,640 480,618 560,592 640,566 700,638 780,612 860,586 940,562 990,640 1070,616 1150,590" fill="none" stroke="#3c78d8" stroke-width="3"/>
+  <g fill="#3c78d8"><circle cx="350" cy="570" r="4"/><circle cx="640" cy="566" r="4"/><circle cx="940" cy="562" r="4"/></g>
+  <text x="110" y="656" fill="#7a6a4a" font-size="12">cada ponto é uma leitura feita pelo jogador; quedas = regas</text>
+</svg>
