@@ -101,7 +101,7 @@ flowchart LR
 | Clima | Série real de estação automática do INMET e curva diurna de temperatura | Auditável contra a fonte e sem calibração estatística | INMET; Parton e Logan |
 | ET0 | Penman–Monteith com Hargreaves–Samani de reserva | Balanço de energia mais demanda aerodinâmica | FAO-56 |
 | Temperatura do solo | Temperatura por camada a partir do ar, da chuva e da radiação, no estilo do APSIM-soiltemp | Condução de calor amortecida com a profundidade | [FONTE:AJEA-2007-CHAUHAN] |
-| Água | *Bucket* de uma camada, Kc simples, Ks e escoamento por CN | Tanque com ladrão que conserva massa a cada passo | FAO-56 cap. 8; NRCS |
+| Água | *Bucket* de uma camada, Kc simples, Ks e escoamento por CN (no núcleo, `water.hpp`) | Tanque com ladrão que conserva massa a cada passo | [FONTE:FAO-1998-FAO56] cap. 8; [FONTE:NRCS-2004-NEH630-CH10] |
 | Solo físico | Capacidade de campo, ponto de murcha e densidade por classe e textura | Tabela com fonte e curva de retenção (§4.6) | Embrapa; SiBCS |
 | Química | Laudo com V% e CTC, calagem por saturação por bases, NPK por formulação, nitrogênio mineral com lixiviação | Inventário e um compartimento dinâmico de nitrato | Embrapa Hortaliças; manuais estaduais |
 | Planta | Modelo genérico por tipo de cultura (folhosa, raiz, fruto, grão) no estilo do AquaCrop, com graus-dia, cobertura, transpiração, produtividade da água e índice de colheita | Biomassa proporcional à transpiração normalizada pela ET0; o tipo define o órgão colhido | FAO AquaCrop |
@@ -187,6 +187,8 @@ Valores das rodadas 2 e 3 de pesquisa. Os que têm `[FONTE:ID]` estão no regist
 7. Um valor de 410 °C·dia atribuído a Brunini em relatório português não foi verificado e não deve ser usado.
 
 ### 4.4 Curve Number
+O escoamento diário segue o método do NRCS. S = 25400/CN − 254 em mm, Ia = 0,2·S e Q = (P − Ia)²/(P − Ia + S) quando P passa de Ia (Eq. 10-9, 10-10 e 10-13) [FONTE:NRCS-2004-NEH630-CH10]. O núcleo aplica o CN só à chuva, porque a Eq. 85 do FAO-56 desconta o escoamento só da precipitação [FONTE:FAO-1998-FAO56]. A perda por escoamento da água aplicada vem da eficiência do método de irrigação (§4.5).
+
 Sartori, Lombardi Neto e Genovez classificam os solos brasileiros nos grupos hidrológicos A a D (Tabela 4) e aplicam o método numa microbacia com CN de 80,9 [FONTE:RBRH-2005-SARTORI1] [FONTE:RBRH-2005-SARTORI2]. Não há CN brasileiro para canteiro. Usar "culturas em linha" do TR-55 ajustado pelo grupo de Sartori, como [PROVISÓRIO].
 
 O SoilWat do APSIM parte de um CN de solo nu, reduz o CN pela cobertura e pelo preparo (cn_red) e desfaz a redução do preparo com a chuva acumulada (cn_rain) [FONTE:APSIM-2020-SOILWAT]. A mesma documentação descreve a evaporação de Ritchie em dois estágios (U e CONA; exemplo U = 6 mm e CONA = 3,5) e a drenagem em cascata SWCON·(SW − DUL), adotadas como referência da fase 2. O código do APSIM não entra no projeto. Só as equações publicadas são reimplementadas (decisão 55).

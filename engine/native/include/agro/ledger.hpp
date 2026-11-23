@@ -137,6 +137,29 @@ class Ledger {
     return problems;
   }
 
+  // Save and load. A save may happen between any two events (ARQUITETURA_SIMULACAO §10), so
+  // only the balances are stored: restore() starts a new checking period at the loaded
+  // balances, and the next close_day() checks the transfers made after loading. It refuses
+  // books of another chart of accounts, books that do not sum to zero and negative pools, so
+  // a corrupt save cannot create or destroy a conserved quantity.
+  std::vector<std::int64_t> balances() const {
+    std::vector<std::int64_t> out;
+    out.reserve(accounts_.size());
+    for (const Account& a : accounts_) out.push_back(a.balance);
+    return out;
+  }
+  void restore(const std::vector<std::int64_t>& b) {
+    if (b.size() != accounts_.size()) throw std::invalid_argument("ledger: snapshot of another chart of accounts");
+    std::int64_t total = 0;
+    for (std::size_t i = 0; i < b.size(); ++i) {
+      if (accounts_[i].kind == AccountKind::kPool && b[i] < 0) throw std::invalid_argument("ledger: negative pool in snapshot");
+      total += b[i];
+    }
+    if (total != 0) throw std::invalid_argument("ledger: snapshot does not sum to zero");
+    for (std::size_t i = 0; i < b.size(); ++i) accounts_[i].balance = accounts_[i].opening = b[i];
+    journal_.clear();
+  }
+
   void hash_into(Fnv1a64& h) const {
     h.u64(static_cast<std::uint64_t>(quantity_));
     h.u64(accounts_.size());

@@ -88,6 +88,7 @@ A física do Godot não é determinística entre taxas de quadro. Por isso ela f
 2. **Ações do jogador** entram na hora em que acontecem como transferências do ledger. A água do regador sai da fonte e entra no compartimento "aplicada hoje" da célula. Nada some e nada espera.
 3. **Estado de leitura.** Instrumentos e visual leem uma estimativa do momento, calculada como função pura do estado oficial da manhã, das transferências do dia e da fração do dia já passada [MODELO]. Ela não é gravada. Por isso não ameaça o determinismo.
 4. No passo diário, o compartimento "aplicada hoje" entra no balanço como a irrigação do dia na equação do FAO-56. O modelo validado continua exato e o tensiômetro responde na hora.
+5. O coeficiente de redução de cada demanda (Ks da transpiração, Kr da evaporação) usa a água do início do dia, como no Exemplo 37 do FAO-56 [FONTE:FAO-1998-FAO56]. Ação feita exatamente à meia-noite entra depois do passo diário e conta para o novo dia (fase da agenda).
 
 ### 4.2 Ordem causal na célula
 O passo diário segue a ordem em que um processo produz o recurso que o próximo consome. A ordem é fixa e faz parte do contrato.
@@ -171,7 +172,7 @@ A terceira linha prova o mecanismo. Basta liberar a fusão em FMA para o resulta
 
 ## 9. Núcleo C++ e a ponte com o Godot
 
-1. `engine/native/` contém o `agro_core`. Hoje ele tem agenda, relógio, ledger, alocação por maior resto, RNG de eventos, hash de estado e detmath, com testes. Os modelos já implementados são astronomia, radiação e ET0 do FAO-56 (`fao56.hpp`).
+1. `engine/native/` contém o `agro_core`. Hoje ele tem agenda, relógio, ledger, alocação por maior resto, RNG de eventos, hash de estado e detmath, com testes. Os modelos já implementados são astronomia, radiação e ET0 do FAO-56 (`fao56.hpp`) e o balanço hídrico diário de uma camada com Curve Number e o compartimento "aplicada hoje" (`water.hpp`).
 2. O estado fica em estrutura de arrays. Um vetor de `double` por variável e as contas do ledger em inteiros, com o mesmo índice de célula.
 3. Na fase 1 a GDExtension (godot-cpp) embrulha o núcleo. Ela é compilada com MinGW-w64 no CI, com as mesmas flags. O GDScript só orquestra o quadro, desenha e chama a ponte.
 4. Custo estimado de 0,3 a 3 µs por célula e dia em C++ [INFERÊNCIA]. Para 1000 células, de 0,3 a 3 ms por dia de jogo. A medida real entra no passo D1b.
@@ -192,9 +193,10 @@ A terceira linha prova o mecanismo. Basta liberar a fusão em FMA para o resulta
 | Vetores do detmath | `engine/native/tools/detmath_vectors.cpp` e `golden/` | Mesmo hash em vários compiladores, otimizações e no Windows |
 | Erro em ulp | `tools/medir_erro_detmath.py` | Precisão contra 120 bits |
 | Astronomia e ET0 | `engine/native/tests/test_fao56.cpp` | Exemplos 8 a 13 e 17 a 19 do FAO-56 na precisão impressa, soma das Ra horárias igual à diária e hash de uma grade igual em todas as plataformas |
+| Balanço hídrico | `engine/native/tests/test_water.cpp` | Exemplos 10-1 e 10-2 do NEH-630 e Exemplo 37 do FAO-56; 300 ações aleatórias em 40 dias fecham o ledger todo dia; mesmo hash em 1x, 8x, quadros irregulares, dormir, pular até o evento e save/load no meio do dia |
 | CI | `.github/workflows/ci.yml` | Jobs Linux e Windows a cada PR |
 
-Próximos testes. Cenários de referência da base de clima e solo contra dados observados (Etapa V). Fechamento do ledger com sequências aleatórias de ações em cada módulo. Reprodução da hipérbole de Cousens e da faixa de Ky da alface como testes de validação.
+Próximos testes. Cenários de referência da base de clima e solo contra dados observados (Etapa V). Fechamento do ledger com sequências aleatórias de ações em cada módulo novo. Reprodução da hipérbole de Cousens e da faixa de Ky da alface como testes de validação.
 
 ## 12. Pontos a verificar na fonte primária
 Artigo do ECP 157 (Linköping) sobre mestres de passo fixo e sinais descontínuos. Afirmação do arXiv 1705.09704 sobre funções transcendentais. O mesmo `math_funcs.h` no ramo 4.7 do Godot. Benchmark de GDScript contra C++ (passo D1b).

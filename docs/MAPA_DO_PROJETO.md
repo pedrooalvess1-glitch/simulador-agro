@@ -89,7 +89,7 @@ flowchart LR
 - [ ] **B3.** 🤖 `médio` Levantar as fontes da fase 2 (tomate cereja, compostagem, palhada, Agrofit, aspersão, APSIM SoilWater e SoilNitrogen).
 - [x] **B4.** 🤖 Núcleo C++ determinístico com testes e jobs de CI no Linux e no Windows (`engine/native/`).
 - [x] **B5.** 🤖 `extra` Astronomia, radiação e ET0 de Penman–Monteith do FAO-56 (diária e horária) no núcleo, com detmath (`engine/native/include/agro/fao56.hpp`). Os exemplos 8 a 13 e 17 a 19 do FAO-56 batem na precisão impressa e o hash de uma grade de entradas é o mesmo em todas as configurações do CI.
-- [ ] **B6.** 🤖 `alto` Balanço hídrico diário de uma camada com Curve Number e o compartimento "aplicada hoje" (`ARQUITETURA_SIMULACAO` §4.1), com teste de fechamento do ledger sob sequências aleatórias de ações.
+- [x] **B6.** 🤖 `alto` Balanço hídrico diário de uma camada com Curve Number e o compartimento "aplicada hoje" (`engine/native/include/agro/water.hpp`). Reproduz os Exemplos 10-1 e 10-2 do NEH-630 e o Exemplo 37 do FAO-56; 300 ações aleatórias em 40 dias fecham o ledger todo dia e dão o mesmo hash em qualquer velocidade e depois de save/load.
 
 **Etapa V. Base de clima e solo validada sem cultura**
 
