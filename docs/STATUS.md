@@ -4,9 +4,9 @@
 
 ## 1. Fase atual
 
-**Fase 0, Etapas B, V e C.** Quatro rodadas de pesquisa estão no `BASE_MODELOS`, com os valores da fase 1 conferidos na publicação original. A arquitetura de simulação está no `ARQUITETURA_SIMULACAO` e já tem núcleo C++ testado em `engine/native/`. Clima e solo passaram a ser a base do simulador, validada sem cultura na Etapa V. O fluxo de ingestão de cultura (documento 19) e a interface (documento 13) estão em rascunho. O registro de fontes tem 59 publicações registradas e 13 na fila de verificação. Nada é produzido no Godot nesta fase.
+**Fase 0, Etapas B, V e C.** Quatro rodadas de pesquisa estão no `BASE_MODELOS`, com os valores da fase 1 conferidos na publicação original. A arquitetura de simulação está no `ARQUITETURA_SIMULACAO` e já tem núcleo C++ testado em `engine/native/`, com astronomia e ET0 do FAO-56 conferidas contra os exemplos do manual. Clima e solo passaram a ser a base do simulador, validada sem cultura na Etapa V. O fluxo de ingestão de cultura (documento 19) e a interface (documento 13) estão em rascunho. O registro de fontes tem 59 publicações registradas e 13 na fila de verificação. Nada é produzido no Godot nesta fase.
 
-**Próximo passo.** B5 e V4 (astronomia e ET0 no núcleo, testadas contra os exemplos do FAO-56, esforço `extra`). Em paralelo, B1 (fila do registro e pendências da `BASE_MODELOS` §10, esforço `alto`) e V1 a V3 (cenários de referência e documento 22).
+**Próximo passo.** B6 (balanço hídrico de uma camada com Curve Number) e B1 a B3 (registro de fontes). Depois V1 a V4 (cenários de referência, documento 22 e validação da ET0).
 
 ## 2. O que existe
 
@@ -14,7 +14,7 @@
 |---|---|
 | Repositório `pedrooalvess1-glitch/simulador-agro` | Público, MIT. Todo trabalho entra por *branch* + PR. |
 | CI (`.github/workflows/ci.yml`) | Links internos; registro de fontes e citações; núcleo C++ no Linux (g++ -O0/-O2, clang++, g++ -march=haswell, erro em ulp) e no Windows (MinGW-w64); Godot fixado. |
-| Núcleo C++ (`engine/native/`) | detmath, agenda de eventos, relógio, ledger, alocação por maior resto, RNG de eventos e hash de estado. 15 testes, incluindo 1x = 8x = dormir = pular até o evento = save/load. Hash dos vetores do detmath `41cbfb563eb7b91d` igual em todas as configurações Linux e no Windows (MinGW g++ 14.2.0, job do CI). |
+| Núcleo C++ (`engine/native/`) | detmath, agenda de eventos, relógio, ledger, alocação por maior resto, RNG de eventos, hash de estado, astronomia e ET0 do FAO-56 (diária e horária). 25 testes, incluindo 1x = 8x = dormir = pular até o evento = save/load e os exemplos 8 a 13 e 17 a 19 do FAO-56. Hash dos vetores do detmath `41cbfb563eb7b91d` igual em todas as configurações Linux e no Windows (MinGW g++ 14.2.0, job do CI). |
 | Documentos | `00_INDICE`, `MAPA_DO_PROJETO`, `ARQUITETURA_SIMULACAO`, `BASE_MODELOS`, `DECISOES`, `CONVENCOES`, `GLOSSARIO_DO_PROJETO`, `_MODELO_DOCUMENTO`, `13_INTERFACE` (rascunho, com wireframes em `docs/interface/`), `19_INGESTAO_DE_CULTURA` (rascunho), este arquivo. Os demais documentos 01 a 21 ainda não existem. |
 | Registro de fontes | 59 fontes registradas e 13 publicações na fila de verificação (`docs/referencias/fontes.json`). |
 | Projeto Godot | Ainda não existe. `packs/` e `art/` só têm a estrutura de pastas. |

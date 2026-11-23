@@ -171,7 +171,7 @@ A terceira linha prova o mecanismo. Basta liberar a fusão em FMA para o resulta
 
 ## 9. Núcleo C++ e a ponte com o Godot
 
-1. `engine/native/` contém o `agro_core`. Hoje ele tem agenda, relógio, ledger, alocação por maior resto, RNG de eventos, hash de estado e detmath, com testes. Os modelos entram nele a partir do passo B5 do `MAPA_DO_PROJETO`.
+1. `engine/native/` contém o `agro_core`. Hoje ele tem agenda, relógio, ledger, alocação por maior resto, RNG de eventos, hash de estado e detmath, com testes. Os modelos já implementados são astronomia, radiação e ET0 do FAO-56 (`fao56.hpp`).
 2. O estado fica em estrutura de arrays. Um vetor de `double` por variável e as contas do ledger em inteiros, com o mesmo índice de célula.
 3. Na fase 1 a GDExtension (godot-cpp) embrulha o núcleo. Ela é compilada com MinGW-w64 no CI, com as mesmas flags. O GDScript só orquestra o quadro, desenha e chama a ponte.
 4. Custo estimado de 0,3 a 3 µs por célula e dia em C++ [INFERÊNCIA]. Para 1000 células, de 0,3 a 3 ms por dia de jogo. A medida real entra no passo D1b.
@@ -191,9 +191,10 @@ A terceira linha prova o mecanismo. Basta liberar a fusão em FMA para o resulta
 | Determinismo do tempo | `engine/native/tests/test_determinism.cpp` | 1x = 8x = quadros irregulares = dormir = pular até o evento = save e carga |
 | Vetores do detmath | `engine/native/tools/detmath_vectors.cpp` e `golden/` | Mesmo hash em vários compiladores, otimizações e no Windows |
 | Erro em ulp | `tools/medir_erro_detmath.py` | Precisão contra 120 bits |
+| Astronomia e ET0 | `engine/native/tests/test_fao56.cpp` | Exemplos 8 a 13 e 17 a 19 do FAO-56 na precisão impressa, soma das Ra horárias igual à diária e hash de uma grade igual em todas as plataformas |
 | CI | `.github/workflows/ci.yml` | Jobs Linux e Windows a cada PR |
 
-Próximos testes. Exemplos numéricos do FAO-56 para astronomia e ET0 (passo B5). Cenários de referência da base de clima e solo contra dados observados (Etapa V). Fechamento do ledger com sequências aleatórias de ações em cada módulo. Reprodução da hipérbole de Cousens e da faixa de Ky da alface como testes de validação.
+Próximos testes. Cenários de referência da base de clima e solo contra dados observados (Etapa V). Fechamento do ledger com sequências aleatórias de ações em cada módulo. Reprodução da hipérbole de Cousens e da faixa de Ky da alface como testes de validação.
 
 ## 12. Pontos a verificar na fonte primária
 Artigo do ECP 157 (Linköping) sobre mestres de passo fixo e sinais descontínuos. Afirmação do arXiv 1705.09704 sobre funções transcendentais. O mesmo `math_funcs.h` no ramo 4.7 do Godot. Benchmark de GDScript contra C++ (passo D1b).

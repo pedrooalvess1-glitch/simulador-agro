@@ -43,7 +43,7 @@
 docs/             00_INDICE (entrada), MAPA_DO_PROJETO, STATUS, ARQUITETURA_SIMULACAO, BASE_MODELOS, DECISOES, CONVENCOES, GLOSSARIO_DO_PROJETO, _MODELO_DOCUMENTO, NN_*.md (planejamento), interface/ (wireframes)
 docs/referencias/ fontes.json (registro de fontes) · FONTES.md (como registrar) · pdf/ (local, ignorada)
 art/              blender/ (scripts .py) · glb/ · previews/ · fotos/ (local, ignorada)
-engine/           motor genérico (não conhece nenhuma cultura) · native/ núcleo C++ agro_core (detmath, agenda, relógio, ledger, alocação, RNG de eventos, testes, golden/)
+engine/           motor genérico (não conhece nenhuma cultura) · native/ núcleo C++ agro_core (detmath, agenda, relógio, ledger, alocação, RNG de eventos, astronomia e ET0 do FAO-56, testes, golden/)
 packs/            pacotes de conteúdo agronômico (culturas, solos, clima, pragas, insumos)
 tools/            conferir_fontes.py (+ teste) · checar_links.py (+ teste) · testar_nucleo.sh · medir_erro_detmath.py · ambiente/ (versões fixadas, instaladores, cena de fumaça)
 .github/          CI · modelos de issue (bug, conteudo-tecnico, desempenho) e de PR
