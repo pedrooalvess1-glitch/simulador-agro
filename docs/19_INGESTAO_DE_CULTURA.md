@@ -91,7 +91,7 @@ flowchart TD
 | Simulação de referência compara ciclo e produtividade com as próprias publicações | Pega erro de unidade e de leitura que o esquema não pega | Só validação de esquema | agente [INFERÊNCIA] |
 
 ## 7. Exemplos
-Piloto planejado com a beterraba no passo G9 do `MAPA_DO_PROJETO`, depois do tomate cereja.
+Piloto planejado com a beterraba no passo G9 do `MAPA_DO_PROJETO`, depois do tomate cereja. A primeira fonte do piloto já está registrada [FONTE:IAC-2011-TIVELLI].
 
 ## 8. Casos de teste
 1. Ficha com um valor sem fonte → o validador recusa.

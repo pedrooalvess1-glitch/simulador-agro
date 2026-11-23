@@ -303,6 +303,38 @@
       "notas": "P. 63: reação quase completa depois de 6 meses. P. 64: mais de 60% do calcário mais fino reage em 3 meses; o sucesso da calagem depende da água do solo. P. 65: PRNT mínimo de 80%."
     },
     {
+      "id": "EMB-CNPAT-2023-CT51",
+      "titulo": "Cultivo protegido de tomate cereja, em substrato, na região da Ibiapaba, Ceará",
+      "autoria": "Miranda, F. R.; Mesquita, A. L. M.; Maia, C. W. C. P.; Soares, J. V. S.; Silva, J. G. Embrapa Agroindústria Tropical, Fortaleza. Circular Técnica 51, ISSN 1679-2254",
+      "tipo": "Circular Técnica",
+      "ano": 2023,
+      "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/1154534/1/Ci-51-1.pdf",
+      "acesso": "2026-11-23",
+      "licenca": "Embrapa, acesso aberto; sem licença livre: direitos reservados pela Lei 9.610/1998",
+      "notas": "Tomate cereja em cultivo protegido, em sacos de substrato com gotejamento (Serra da Ibiapaba, CE). Serve ao tomate cereja da fase 2 como referência de manejo; o canteiro do jogo é em solo.",
+      "culturas": [
+        "cherry_tomato"
+      ],
+      "regiao": "Ceará (Ibiapaba), cultivo protegido",
+      "pendencias": [
+        "transcrever espaçamento, início e duração da colheita, produtividade e lâmina com página (passo G7)"
+      ]
+    },
+    {
+      "id": "EMB-CNPF-2021-COT473",
+      "titulo": "Composto orgânico produzido com resíduos da agroindústria do palmito pupunha",
+      "autoria": "Magalhães, W. L. E.; Sá, F. P.; Belniaki, A. C.; Lima, E. A. Embrapa Florestas, Colombo. Comunicado Técnico 473, ISSN 1980-3982",
+      "tipo": "Comunicado Técnico",
+      "ano": 2021,
+      "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/1135971/1/EmbrapaFlorestas-2021-ComunicadoTecnico473.pdf",
+      "acesso": "2026-11-23",
+      "licenca": "Embrapa, acesso aberto; sem licença livre: direitos reservados pela Lei 9.610/1998",
+      "notas": "Relação C/N ideal entre 25/1 e 35/1 para a decomposição eficiente, corrigida com ureia; composto pronto 45 dias após o início, pela estabilidade da temperatura e pela redução do volume das pilhas.",
+      "pendencias": [
+        "páginas dos valores (lidos no resumo da busca, p. 2 a 4)"
+      ]
+    },
+    {
       "id": "EMB-CNPH-2007-CT51",
       "titulo": "Irrigação da pimenteira",
       "autoria": "Marouelli, W. A.; Silva, H. R. Embrapa Hortaliças, Brasília. Circular Técnica 51, ISSN 1415-3033",
@@ -570,6 +602,24 @@
       "notas": "PAI 1, 3 e 3 dias, PTPI 37, 37 e 35 dias e PCPI 2-37, 3-37 e 3-35 dias após o transplante para Elisa, Lucy Brown e Solaris, com 5% de perda tolerada; perdas de 48, 40 e 33% na convivência total.",
       "culturas": [
         "lettuce"
+      ]
+    },
+    {
+      "id": "IAC-2011-TIVELLI",
+      "titulo": "Beterraba: do plantio à comercialização",
+      "autoria": "Tivelli, S. W.; Factor, T. L.; Teramoto, J. R. S.; Fabri, E. G.; Moraes, A. R. A.; Trani, P. E.; May, A. Instituto Agronômico, Campinas. Série Tecnologia APTA, Boletim Técnico IAC 210, 45 p., ISSN 1809-7936",
+      "tipo": "Boletim técnico",
+      "ano": 2011,
+      "url": "https://ainfo.cnptia.embrapa.br/digital/bitstream/item/48016/1/Andre-May-Boletim-Tec-IAC.pdf",
+      "acesso": "2026-11-23",
+      "licenca": "cópia aberta no repositório da Embrapa; licença não localizada; uso só por citação",
+      "notas": "Fonte do piloto de ingestão da beterraba (G9). Sumário com coeficientes técnicos e custo de produção (cap. 11, p. 39).",
+      "culturas": [
+        "beet"
+      ],
+      "regiao": "São Paulo",
+      "pendencias": [
+        "transcrever espaçamento, ciclo, temperatura, adubação e coeficientes técnicos com página (passo G9)"
       ]
     },
     {
@@ -985,15 +1035,8 @@
       "id_proposto": "EMB-CNPTIA-AGROAPI",
       "referencia": "Embrapa Agricultura Digital. API AGROFIT v1 (AgroAPI).",
       "url": "https://www.agroapi.cnptia.embrapa.br/store/apis/info?name=AGROFIT&version=v1&provider=agroapi",
-      "falta": "ano, termos de uso e campos",
-      "etapa": "B3"
-    },
-    {
-      "id_proposto": "IAC-2011-TIVELLI",
-      "referencia": "Tivelli, S. W. et al. Beterraba: do plantio à comercialização. IAC, Boletim Técnico 210.",
-      "url": "https://ainfo.cnptia.embrapa.br/digital/bitstream/item/48016/1/Andre-May-Boletim-Tec-IAC.pdf",
-      "falta": "leitura do texto (piloto da beterraba)",
-      "etapa": "B3"
+      "falta": "ano, termos de uso e campos; usar junto com as colunas do CSV do Agrofit (pendência de MAPA-2026-AGROFIT)",
+      "etapa": "G6"
     },
     {
       "id_proposto": "RBAGRO-1997-CAMARGO",
@@ -1007,6 +1050,34 @@
       "url": "https://doi.org/10.1016/0002-1571(81)90105-9",
       "falta": "leitura das equações; acesso fechado e sem resumo publicado; procurar descrição aberta da equação antes do passo D8",
       "etapa": "D8"
+    },
+    {
+      "id_proposto": "EMB-CNPS-CT48-COMPOSTAGEM",
+      "referencia": "Inácio, C. T. Compostagem: curso prático e teórico. Embrapa Solos, Rio de Janeiro. Circular Técnica 48 (processo aeróbio com fase termofílica; função de cada resíduo na leira).",
+      "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/1027799/1/Circulartecnica48.pdf",
+      "falta": "ano, autoria completa e leitura das fases, temperaturas, C/N, umidade e revolvimento com página",
+      "etapa": "G6"
+    },
+    {
+      "id_proposto": "EMB-CNPH-2019-CT168",
+      "referencia": "Madeira, N. R.; Lima, C. E. P.; Melo, R. A. C.; Fontenelle, M. R.; Silva, J.; Michereff Filho, M.; Guedes, Í. M. R. Sistema de Plantio Direto em Hortaliças (SPDH) no cultivo do tomateiro. Embrapa Hortaliças, Brasília. Circular Técnica 168, 30 p. (palhada e tomate).",
+      "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/1111562/1/CT168220820191.pdf",
+      "falta": "título exato e leitura dos valores de palhada (massa, cobertura, decomposição) com página",
+      "etapa": "G6"
+    },
+    {
+      "id_proposto": "AGSY-2024-APSIMSOILN",
+      "referencia": "Revisão do modelo de N do solo do APSIM por 24 usuários e desenvolvedores. Agricultural Systems, doi 10.1016/j.agsy.2024.104213 (bom desempenho sazonal; dificuldade na dinâmica diária e possível subestimativa da mineralização em pousio).",
+      "url": "https://doi.org/10.1016/j.agsy.2024.104213",
+      "falta": "título exato, autoria e leitura do texto",
+      "etapa": "G3"
+    },
+    {
+      "id_proposto": "SBB-2005-PROBERT",
+      "referencia": "Probert, M. E.; Delve, R. J.; Kimani, S. K.; Dimes, J. P. Modelling nitrogen mineralization from manures: representing quality aspects by varying C:N ratio of sub-pools. Soil Biology & Biochemistry 37:279-287 (três compartimentos de matéria orgânica fresca com C:N próprios; BIOM e HUM com C:N fixos).",
+      "url": "https://core.ac.uk/download/211014436.pdf",
+      "falta": "DOI oficial e leitura das equações (o domínio core.ac.uk não está na lista)",
+      "etapa": "G3"
     }
   ]
 }

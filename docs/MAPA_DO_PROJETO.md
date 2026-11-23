@@ -47,7 +47,7 @@ flowchart LR
 
 | Fase | Objetivo | Entregável que fecha a fase | Critério de saída | Estado |
 |---|---|---|---|---|
-| 0 | Escolher modelos, provar a arquitetura e registrar as fontes antes de qualquer cena | Documentos 01 a 21, registro de fontes da fase 1, núcleo C++ determinístico com testes | Revisão cruzada sem contradição. Todo parâmetro da fase 1 com fonte registrada ou rótulo [PROVISÓRIO]. CI verde em Linux e Windows | 🔄 Etapas B e C |
+| 0 | Escolher modelos, provar a arquitetura e registrar as fontes antes de qualquer cena | Documentos 01 a 21, registro de fontes da fase 1, núcleo C++ determinístico com testes | Revisão cruzada sem contradição. Todo parâmetro da fase 1 com fonte registrada ou rótulo [PROVISÓRIO]. CI verde em Linux e Windows | 🔄 Etapas V e C |
 | V | Provar que clima e solo reproduzem a realidade sem nenhuma cultura | Cenários de referência sem cultura rodando no núcleo, com métricas contra dados observados | Astronomia e ET0 batem com os exemplos do FAO-56. Água e temperatura do solo dentro dos limites de aceite do documento 22 nas cinco regiões | ⬜ |
 | 1 | Atravessar todas as camadas com o menor conteúdo possível | `.exe` com um canteiro plano de alface, ciclo completo e relatório de safra | Balanço de água e N fecha exato. 1x, 8x, dormir, pular até o evento e save/load dão o mesmo hash. Mesmo hash no Linux e no Windows. ≥ 30 FPS no notebook | ⬜ |
 | 2 | Horta completa com campanha que ensina o básico em área plana | Várias culturas, água em camadas, biologia do solo, calagem com tempo de reação, defensivos, compostagem, microtrator, primeira cultura pelo fluxo de ingestão (beterraba) | Campanha plana jogável do início ao fim. Base revalidada com os processos novos. Testes de validação contra as fontes passam | ⬜ |
@@ -66,7 +66,7 @@ flowchart LR
 | E0.1 | Escolha de modelos por fase e dados levantados | `BASE_MODELOS.md` | Matriz C1 a C7, modelos por fase, lacunas com próximo passo | ✅ três rodadas; ⚠️ lacunas da §10 |
 | E0.2 | Arquitetura de simulação | `ARQUITETURA_SIMULACAO.md` | Agenda, ordem causal, árbitros, ledger, determinismo, save e testes descritos | ✅ |
 | E0.3 | Núcleo C++ determinístico | `engine/native/` | Agenda, relógio, ledger, alocação, RNG de eventos, detmath. Mesmo hash em gcc, clang, MinGW. Teste 1x = 8x = dormir = save/load | ✅ (Windows confirmado pelo CI); astronomia e ET0 do FAO-56 já no núcleo |
-| E0.4 | Registro de fontes da fase 1 | `docs/referencias/fontes.json` | Toda publicação usada pela fase 1 registrada com URL, local e licença. Fila vazia para os itens da fase 1 | 🔄 74 registradas, todas com licença; um item da fase 1 na fila (D8) |
+| E0.4 | Registro de fontes da fase 1 | `docs/referencias/fontes.json` | Toda publicação usada pela fase 1 registrada com URL, local e licença. Fila vazia para os itens da fase 1 | 🔄 77 registradas, todas com licença; um item da fase 1 na fila (D8) |
 | E0.5 | Documentos de planejamento 01 a 21 | `docs/NN_*.md` | Formato do `_MODELO_DOCUMENTO`, verificadores sem erro | 🔄 13 Interface em rascunho |
 | E0.6 | Revisão cruzada | todos os `docs/` | Sem contradição; `BASE_MODELOS` e `ARQUITETURA_SIMULACAO` absorvidos e retirados | ⬜ |
 | E0.7 | Fluxo de ingestão de cultura | `19_INGESTAO_DE_CULTURA.md` | Fluxo, ficha da cultura, regras de conflito e validação definidos | 🔄 rascunho |
@@ -86,7 +86,7 @@ flowchart LR
 - [x] **B0.5.** 🤖 Quarta pesquisa incorporada. Fontes conferidas na publicação original e registradas; decisões 55 a 59.
 - [x] **B1.** 🤖 `alto` Fila de verificação da fase 1 resolvida, com página ou tabela de cada valor da `BASE_MODELOS` §4. Ficou um item da fase 1 bloqueado por acesso fechado (Parton e Logan, passo D8); os outros itens da fila têm a etapa que os usa (`etapa`). As lacunas que continuam abertas estão na `BASE_MODELOS` §10.
 - [x] **B2.** 🤖 `alto` Licença e condição de uso de cada publicação no campo `licenca`, com a regra de uso por citação (`referencias/FONTES.md` §4, Lei 9.610/1998). O verificador barra "a conferir".
-- [ ] **B3.** 🤖 `médio` Levantar as fontes da fase 2 (tomate cereja, compostagem, palhada, Agrofit, aspersão, APSIM SoilWater e SoilNitrogen).
+- [x] **B3.** 🤖 `médio` Fontes da fase 2 levantadas (`BASE_MODELOS` §3.2). Registradas as do tomate cereja, da beterraba, da compostagem, da aspersão e do protocolo de solo do APSIM; a leitura com página dos valores fica nos passos G3, G6, G7 e G9, e quatro publicações esperam na fila com a etapa.
 - [x] **B4.** 🤖 Núcleo C++ determinístico com testes e jobs de CI no Linux e no Windows (`engine/native/`).
 - [x] **B5.** 🤖 `extra` Astronomia, radiação e ET0 de Penman–Monteith do FAO-56 (diária e horária) no núcleo, com detmath (`engine/native/include/agro/fao56.hpp`). Os exemplos 8 a 13 e 17 a 19 do FAO-56 batem na precisão impressa e o hash de uma grade de entradas é o mesmo em todas as configurações do CI.
 - [x] **B6.** 🤖 `alto` Balanço hídrico diário de uma camada com Curve Number e o compartimento "aplicada hoje" (`engine/native/include/agro/water.hpp`). Reproduz os Exemplos 10-1 e 10-2 do NEH-630 e o Exemplo 37 do FAO-56; 300 ações aleatórias em 40 dias fecham o ledger todo dia e dão o mesmo hash em qualquer velocidade e depois de save/load.
