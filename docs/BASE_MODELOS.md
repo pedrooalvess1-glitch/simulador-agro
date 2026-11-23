@@ -113,15 +113,15 @@ flowchart LR
 A interface de planta já nasce preparada para o árbitro de luz da fase 2. A alface é a cultura da fatia porque o índice de colheita da alface é alto e quase constante. Isso dispensa florescimento e partição para frutos. O modelo de planta é um só para todas as culturas. Uma cultura nova entra só com parâmetros, preenchidos pelo fluxo de ingestão do documento 19, e os estádios seguem uma escala fenológica comum (BBCH [VERIFICAR]).
 
 ### 3.2 Fase 2 (horta completa e campanha em área plana)
-1. Água em várias camadas por cascata.
+1. Água em várias camadas por cascata [FONTE:APSIM-2020-SOILWAT], com a descrição do solo por camada do protocolo do APSIM [FONTE:MEX-2021-CICHOTA].
 2. Planta híbrida com biomassa igual ao mínimo entre a limitada por luz e a limitada por água (§7), com árbitro de luz.
 3. Daninhas com o mesmo código da planta e parâmetros próprios.
 4. Calcário com cinética por classe granulométrica, relação pH–V e NPK por formulação (§4.1 e §6).
-5. Biologia do solo com matéria orgânica em compartimentos (resíduo fresco, biomassa microbiana e húmus), mineralização e imobilização de N dependentes da temperatura e da umidade do solo. A referência é o SoilN do APSIM, reimplementado a partir dos artigos [FONTE:AGSY-1998-PROBERT], sem copiar código (decisão 55).
+5. Biologia do solo com matéria orgânica em compartimentos (resíduo fresco, biomassa microbiana e húmus), mineralização e imobilização de N dependentes da temperatura e da umidade do solo. A referência é o SoilN do APSIM, reimplementado a partir dos artigos [FONTE:AGSY-1998-PROBERT], sem copiar código (decisão 55). A revisão do modelo de 2024 e os compartimentos de matéria orgânica fresca com C:N próprios (Probert et al. 2005) estão na fila de verificação (passo G3).
 6. Séries do INMET de vários anos e de estações de todas as regiões. A campanha não usa gerador climático, porque a aleatoriedade fica só nos eventos do modo semiaberto (decisão 40).
 7. Densidade do solo simples por preparo e tráfego, malha de canteiro de 5 cm, deformação do terreno e Terrain3D 1.1.x na propriedade (§8).
-8. Defensivos com dose e carência do Agrofit e meia-vida provisória com correção de temperatura e umidade (§4.2).
-9. Compostagem, palhada com Kc dual, aspersão com molhamento foliar (passo horário), microtrator e tomate cereja.
+8. Defensivos com dose e carência do Agrofit [FONTE:MAPA-2026-AGROFIT] e meia-vida provisória com correção de temperatura e umidade (§4.2). A API do Agrofit da Embrapa está na fila (passo G6).
+9. Compostagem, com relação C/N inicial de 25/1 a 35/1 e composto pronto em cerca de 45 dias [FONTE:EMB-CNPF-2021-COT473]. Palhada com Kc dual e cobertura do solo no fator de evaporação (FAO-56 cap. 10, Tabela 25, para cobertura plástica [FONTE:FAO-1998-FAO56]). Aspersão com eficiência da Tabela 1 da CT51 [FONTE:EMB-CNPH-2007-CT51] e molhamento foliar no passo horário. Microtrator. Tomate cereja [FONTE:EMB-CNPAT-2023-CT51] e beterraba do piloto de ingestão [FONTE:IAC-2011-TIVELLI]. A circular de compostagem da Embrapa Solos e o plantio direto do tomateiro com palhada (CT 168) estão na fila (passo G6).
 
 ### 3.3 Fase 3 (encosta, solo vivo e modo semiaberto)
 1. Roteamento D8 em cascata, MUSLE e práticas conservacionistas (§8).

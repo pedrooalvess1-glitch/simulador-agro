@@ -9,7 +9,7 @@
 | `id` | texto | Identificador fixo (`CONVENCOES` §1), ex.: `EMB-CNPH-2020-ALFACE`, `RBCS-2008-NICOLOSO` |
 | `titulo` | texto | Título completo da publicação |
 | `autoria` | texto | Autores, unidade ou órgão e, para artigo, periódico, volume e páginas |
-| `tipo` | texto | Circular Técnica, Comunicado Técnico, Documentos, Sistema de Produção, Boletim de Pesquisa, Cartilha, Livro, Capítulo, Artigo, Revisão, Manual técnico, Guia regulatório, Base de dados, Artigo e base de dados, Licença de software, Documentação de software, Página de software, Código-fonte, Artigo técnico (blog), Artigo (revista técnica), Guia de projeto, Wiki de comunidade |
+| `tipo` | texto | Circular Técnica, Comunicado Técnico, Documentos, Sistema de Produção, Boletim de Pesquisa, Boletim técnico, Lei, Cartilha, Livro, Capítulo, Artigo, Revisão, Manual técnico, Guia regulatório, Base de dados, Artigo e base de dados, Licença de software, Documentação de software, Página de software, Código-fonte, Artigo técnico (blog), Artigo (revista técnica), Guia de projeto, Wiki de comunidade |
 | `ano` | inteiro | Ano de publicação |
 | `url` | texto | Endereço https da publicação, num domínio de `dominios_permitidos` |
 | `acesso` | data | Data em que o conteúdo foi conferido (AAAA-MM-DD) |
