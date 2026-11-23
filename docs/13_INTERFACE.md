@@ -26,9 +26,10 @@ Fora.
 | ID da fonte | O que fornece aqui | Rótulo |
 |---|---|---|
 | WIKIGG-2024-FS25MANUAL | Elementos de HUD e escala de tempo do Farming Simulator 25, como referência de convenção de jogo | [FONTE:WIKIGG-2024-FS25MANUAL] |
+| GAG-2012-FULLLIST | Diretrizes de acessibilidade e seus níveis (§5.9) | [FONTE:GAG-2012-FULLLIST] |
 | Nenhuma outra | Números agronômicos mostrados na interface vêm do pacote (documento 14) | [INFERÊNCIA] |
 
-As Game Accessibility Guidelines (fila de verificação, falta o ano da versão) orientam a §5.9. Manuais oficiais dos jogos de referência ainda não foram lidos [VERIFICAR].
+Manuais oficiais dos jogos de referência ainda não foram lidos [VERIFICAR].
 
 ## 4. Dependências
 Precisa de 01 (pedagogia), 02 (contratos `read()` e `act()`), 08 (verbos) e 18 (câmera). Alimenta 11 (campanha), 12 (avaliação) e 16 (testes de interface).
@@ -139,12 +140,12 @@ flowchart TD
 Todas as teclas são remapeáveis. Controle de *gamepad* fica para depois da fase 1.
 
 ### 5.9 Acessibilidade
-Itens das Game Accessibility Guidelines adotados (lista completa na fila de verificação do registro).
+Itens das Game Accessibility Guidelines adotados [FONTE:GAG-2012-FULLLIST].
 1. Fonte padrão fácil de ler e contraste alto entre texto e fundo (nível básico).
 2. Nenhuma informação essencial só pela cor (nível básico). Estados críticos sempre com ícone e texto.
 3. Remapeamento completo dos controles (nível básico).
-4. Legendas para avisos sonoros, apresentadas de forma clara (nível básico).
-5. Opção de ajustar a velocidade do jogo (nível básico). O relógio de 1x a 8x e a pausa cumprem esse item.
+4. Legendas apresentadas de forma clara (nível básico) e sinal visual para sons de fundo importantes, como os avisos (nível intermediário).
+5. Opção de ajustar a velocidade do jogo (nível intermediário). O relógio de 1x a 8x e a pausa cumprem esse item.
 6. Interface redimensionável (nível intermediário) e tamanho de fonte ajustável (nível avançado). Escala de texto e de interface separadas.
 
 ### 5.10 Contrato de dados
@@ -185,5 +186,5 @@ Nenhuma que bloqueie. Resolução real da tela do notebook e o gosto por barra d
 - [ ] Todas as seções preenchidas; nenhuma instrução do modelo restante.
 - [ ] §3 completa; `tools/conferir_fontes.py` sem erro.
 - [ ] Toda simplificação rotulada [MODELO] e toda decisão [INFERÊNCIA].
-- [ ] Diretrizes de acessibilidade confirmadas em fonte primária.
+- [x] Diretrizes de acessibilidade confirmadas em fonte primária.
 - [ ] Links internos válidos (CI).

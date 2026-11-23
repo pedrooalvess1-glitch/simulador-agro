@@ -66,7 +66,7 @@ flowchart LR
 | E0.1 | Escolha de modelos por fase e dados levantados | `BASE_MODELOS.md` | Matriz C1 a C7, modelos por fase, lacunas com próximo passo | ✅ três rodadas; ⚠️ lacunas da §10 |
 | E0.2 | Arquitetura de simulação | `ARQUITETURA_SIMULACAO.md` | Agenda, ordem causal, árbitros, ledger, determinismo, save e testes descritos | ✅ |
 | E0.3 | Núcleo C++ determinístico | `engine/native/` | Agenda, relógio, ledger, alocação, RNG de eventos, detmath. Mesmo hash em gcc, clang, MinGW. Teste 1x = 8x = dormir = save/load | ✅ (Windows confirmado pelo CI); astronomia e ET0 do FAO-56 já no núcleo |
-| E0.4 | Registro de fontes da fase 1 | `docs/referencias/fontes.json` | Toda publicação usada pela fase 1 registrada com URL, local e licença. Fila vazia para os itens da fase 1 | 🔄 16 registradas, 31 na fila |
+| E0.4 | Registro de fontes da fase 1 | `docs/referencias/fontes.json` | Toda publicação usada pela fase 1 registrada com URL, local e licença. Fila vazia para os itens da fase 1 | 🔄 73 registradas; um item da fase 1 na fila (D8); licenças no B2 |
 | E0.5 | Documentos de planejamento 01 a 21 | `docs/NN_*.md` | Formato do `_MODELO_DOCUMENTO`, verificadores sem erro | 🔄 13 Interface em rascunho |
 | E0.6 | Revisão cruzada | todos os `docs/` | Sem contradição; `BASE_MODELOS` e `ARQUITETURA_SIMULACAO` absorvidos e retirados | ⬜ |
 | E0.7 | Fluxo de ingestão de cultura | `19_INGESTAO_DE_CULTURA.md` | Fluxo, ficha da cultura, regras de conflito e validação definidos | 🔄 rascunho |
@@ -84,7 +84,7 @@ flowchart LR
 - [x] **B0.3.** 👤 Validação das decisões 26 a 34 (o usuário acatou todas as recomendações).
 - [x] **B0.4.** 🤖 Terceira pesquisa (dados da alface, descompactação, determinismo, Terrain3D) e nova análise da arquitetura.
 - [x] **B0.5.** 🤖 Quarta pesquisa incorporada. Fontes conferidas na publicação original e registradas; decisões 55 a 59.
-- [ ] **B1.** 🔄 🤖 `alto` Esvaziar a fila de verificação do registro para as publicações da fase 1, com página ou tabela de cada valor da `BASE_MODELOS` §4. As fontes da alface, do calcário, da erosão e do solo físico já estão registradas. Faltam os itens da fila e as pendências da `BASE_MODELOS` §10.
+- [x] **B1.** 🤖 `alto` Fila de verificação da fase 1 resolvida, com página ou tabela de cada valor da `BASE_MODELOS` §4. Ficou um item da fase 1 bloqueado por acesso fechado (Parton e Logan, passo D8); os outros itens da fila têm a etapa que os usa (`etapa`). As lacunas que continuam abertas estão na `BASE_MODELOS` §10.
 - [ ] **B2.** 🤖 `alto` Conferir licença e condição de reprodução de cada publicação (campo `licenca`).
 - [ ] **B3.** 🤖 `médio` Levantar as fontes da fase 2 (tomate cereja, compostagem, palhada, Agrofit, aspersão, APSIM SoilWater e SoilNitrogen).
 - [x] **B4.** 🤖 Núcleo C++ determinístico com testes e jobs de CI no Linux e no Windows (`engine/native/`).
@@ -256,10 +256,10 @@ Passo a passo (Etapa J). Detalhado quando a fase 4 terminar.
 
 | # | Ponto fraco | Por que importa | Onde se resolve |
 |---|---|---|---|
-| 1 | Parâmetros de dossel, Ky, RUE e N crítico da alface estrangeiros | O ciclo brasileiro de verão e as cultivares tropicais podem ter outro comportamento | B1 e G2 |
-| 2 | 13 publicações na fila de verificação e pendências da `BASE_MODELOS` §10 | Item da fila não pode entrar no pacote | B1 |
+| 1 | Parâmetros de dossel, Ky, RUE e N crítico da alface estrangeiros | O ciclo brasileiro de verão e as cultivares tropicais podem ter outro comportamento | G2 e D5 |
+| 2 | Parton e Logan com acesso fechado; regador, microaspersão e i e a de Cousens da alface sem fonte | Item da fila e valor sem fonte não entram no pacote | D8 e `BASE_MODELOS` §10 |
 | 3 | Descompactação calibrada só para o nabo e sem persistência | Maior risco de credibilidade da fase 3 | H2 |
-| 4 | Eficiência do regador sem fonte; aspersão ainda não transcrita | É a primeira ferramenta da fatia | B1 |
+| 4 | Eficiência do regador sem fonte | É a primeira ferramenta da fatia | `BASE_MODELOS` §10 |
 | 5 | Documentos 01 a 21 ainda não escritos | O projeto Godot só começa depois da Etapa C | Etapa C |
 | 6 | Custo por célula só estimado | A escolha do tamanho da grade depende dele | D1b |
 | 7 | Dados observados para os cenários de referência fora do semiárido | Sem eles o simulador não serve para tirar conclusões sem propriedade | V1 |

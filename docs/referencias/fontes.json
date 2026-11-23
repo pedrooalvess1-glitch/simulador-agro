@@ -12,8 +12,10 @@
     "es.gov.br",
     "europa.eu",
     "fao.org",
+    "gameaccessibilityguidelines.com",
     "github.com",
     "godotengine.org",
+    "govinfo.gov",
     "harvard.edu",
     "inria.fr",
     "nih.gov",
@@ -23,6 +25,7 @@
     "semanticscholar.org",
     "sgb.gov.br",
     "tokisan.com",
+    "upit.ro",
     "usda.gov",
     "wiki.gg"
   ],
@@ -62,6 +65,17 @@
       "acesso": "2026-11-22",
       "licenca": "acesso aberto; licença a conferir",
       "notas": "Umidade diária por TDR a 20 cm em solo nu e caatinga, Argissolo Amarelo, Pesqueira-PE, 2012-2013. Dados só em figuras. Candidato ao cenário de referência do semiárido."
+    },
+    {
+      "id": "AGRMET-2024-KIMBALL",
+      "titulo": "Simulation of soil temperature under maize: An inter-comparison among 33 maize models",
+      "autoria": "Kimball, B. A.; Thorp, K. R.; Boote, K. J. et al. Agricultural and Forest Meteorology 351:110003",
+      "tipo": "Artigo",
+      "ano": 2024,
+      "url": "https://doi.org/10.1016/j.agrformet.2024.110003",
+      "acesso": "2026-11-23",
+      "licenca": "acesso conforme o editor; pós-print aberto no repositório ORBi da Universidade de Liège",
+      "notas": "Resumo: 33 modelos de milho contra temperatura do solo medida em Mead (Nebraska) e Bushland (Texas); RMSE médio por família de 1,5 a 5,1 °C; os melhores usam balanço de energia numérico por camada (variação de calor armazenado igual ao fluxo que entra menos o que sai)."
     },
     {
       "id": "AGSY-1998-PROBERT",
@@ -227,6 +241,24 @@
       ]
     },
     {
+      "id": "CTNS-2016-KIRNAK",
+      "titulo": "Effects of different irrigation levels on yield of lettuce grown in an unheated greenhouse",
+      "autoria": "Kirnak, H.; Taş, I.; Gökalp, Z.; Karaman, S. Current Trends in Natural Sciences 5(9) (Universidade de Pitești)",
+      "tipo": "Artigo",
+      "ano": 2016,
+      "url": "https://www.natsci.upit.ro/issues/2016/volume-5-issue-9/effects-of-different-irrigation-levels-on-yield-of-lettuce-grown-in-an-unheated-greenhouse/",
+      "acesso": "2026-11-23",
+      "licenca": "acesso aberto; licença a conferir",
+      "notas": "Resumo: Ky = 0,88; cv. Hazar, dezembro a fevereiro, Şanlıurfa; gotejamento com Kp de 1,0 a 0,25 do tanque Classe A; ET do tratamento pleno 125 mm.",
+      "culturas": [
+        "lettuce"
+      ],
+      "regiao": "Turquia (Şanlıurfa), estufa",
+      "pendencias": [
+        "páginas do artigo"
+      ]
+    },
+    {
       "id": "EFSA-2017-PECSOIL",
       "titulo": "EFSA Guidance Document for predicting environmental concentrations of active substances of plant protection products and transformation products of these active substances in soil",
       "autoria": "European Food Safety Authority (EFSA). EFSA Journal",
@@ -257,6 +289,20 @@
       "acesso": "2026-11-22",
       "licenca": "Embrapa, acesso aberto",
       "notas": "P. 63: reação quase completa depois de 6 meses. P. 64: mais de 60% do calcário mais fino reage em 3 meses; o sucesso da calagem depende da água do solo. P. 65: PRNT mínimo de 80%."
+    },
+    {
+      "id": "EMB-CNPH-2007-CT51",
+      "titulo": "Irrigação da pimenteira",
+      "autoria": "Marouelli, W. A.; Silva, H. R. Embrapa Hortaliças, Brasília. Circular Técnica 51, ISSN 1415-3033",
+      "tipo": "Circular Técnica",
+      "ano": 2007,
+      "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/780473/1/ct51.pdf",
+      "acesso": "2026-11-23",
+      "licenca": "Embrapa, acesso aberto",
+      "notas": "Tabela 1, p. 3, adaptada de Marouelli e Silva (1998): eficiência de irrigação de sulco 40-70%, aspersão convencional portátil 60-75%, semiportátil 60-75%, fixa 70-85%, autopropelido 60-70%, pivô central 75-90% e gotejamento 75-95%; a eficiência cai muito em sistema mal dimensionado ou mal mantido.",
+      "pendencias": [
+        "número de páginas"
+      ]
     },
     {
       "id": "EMB-CNPH-2008-CT57",
@@ -314,7 +360,21 @@
       "licenca": "Embrapa, acesso aberto",
       "notas": "P. 7: eficiência do gotejamento de 80 a 95% e dos sistemas por superfície entre 40 e 70%. Tabela 1, p. 8, traz as demais eficiências.",
       "pendencias": [
-        "transcrever a Tabela 1 (aspersão e microaspersão)"
+        "a Tabela 1 (p. 8) não sai na extração de texto do PDF; ler pela imagem da página (aspersão já coberta pela EMB-CNPH-2007-CT51)"
+      ]
+    },
+    {
+      "id": "EMB-CNPH-2013-COT89",
+      "titulo": "Métodos de avaliação do florescimento precoce e identificação de fontes de tolerância ao calor em cultivares de alface do grupo varietal 'crespa'",
+      "autoria": "Suinaga, F. A.; Boiteux, L. S.; Cabral, C. S.; Rodrigues, C. S. Embrapa Hortaliças, Brasília. Comunicado Técnico 89, ISSN 1414-9850, 4 p.",
+      "tipo": "Comunicado Técnico",
+      "ano": 2013,
+      "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/956376/1/cot89.pdf",
+      "acesso": "2026-11-23",
+      "licenca": "Embrapa, acesso aberto",
+      "notas": "P. 1: temperaturas ideais para produção de folhas de 12 a 22 °C; acima disso o florescimento precoce é favorecido (citando Silva et al. 1999). P. 2: a alface crespa em campo chega à colheita cerca de 60 dias após o plantio; avaliação do pendoamento pelo comprimento do pendão aos 40 dias.",
+      "culturas": [
+        "lettuce"
       ]
     },
     {
@@ -343,6 +403,52 @@
       ]
     },
     {
+      "id": "EMB-CPATSA-2015-RESENDE",
+      "titulo": "Desenvolvimento de genótipos de alface crespa sob temperaturas amenas (inverno)",
+      "autoria": "Resende, G. M.; Yuri, J. E.; Costa, N. D.; Gomes, A. S. (Embrapa Semiárido). Cultivar HF, fevereiro/março de 2015",
+      "tipo": "Artigo (revista técnica)",
+      "ano": 2015,
+      "url": "https://www.alice.cnptia.embrapa.br/alice/bitstream/doc/1013085/1/Milanez.pdf",
+      "acesso": "2026-11-23",
+      "licenca": "acesso aberto (Alice/Embrapa); licença a conferir",
+      "notas": "P. 9: faixa ideal de 15,5 a 18,3 °C; tolera 26,6 a 29,4 °C por alguns dias com noites mais frias; 21,1 a 26,6 °C por longos períodos promovem o pendoamento; máxima tolerável de cerca de 30 °C para a maioria das cultivares. Métodos: plantas a 0,25 × 0,25 m; mudas com 28 dias; colheita 39 dias após o transplante no inverno e 33 no verão.",
+      "culturas": [
+        "lettuce"
+      ],
+      "pendencias": [
+        "páginas inferidas do cabeçalho do PDF (cerca de p. 9 a 13)"
+      ]
+    },
+    {
+      "id": "EMB-CPATU-2020-FOLHOSAS",
+      "titulo": "Alface e outras folhosas (jambu, coentro, salsa, cebolinha, couve, rúcula, chicorinha)",
+      "autoria": "Botelho, S. M.; Gusmão, S. A. L.; Viégas, I. J. M.; Cheng, S. S. In: Brasil, E. C.; Cravo, M. S.; Viégas, I. J. M. (Ed.). Recomendações de calagem e adubação para o estado do Pará. 2. ed. Embrapa, Brasília. Pt. 4, cap. 1, p. 297-301",
+      "tipo": "Capítulo",
+      "ano": 2020,
+      "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/1127293/1/LV-RecomendacaoSolo-2020-299-301.pdf",
+      "acesso": "2026-11-23",
+      "licenca": "Embrapa, acesso aberto",
+      "notas": "P. 297: espaçamento de 0,20 a 0,30 m entre plantas e entre linhas; transplante 20 dias após a germinação. P. 298: calcário 20 dias antes, V2 = 70%, NC = CTC·(V2 − V1)/PRNT, dolomítico se Mg < 0,5 cmolc/dm³; 15-20 t/ha de esterco bovino ou composto ou 7-10 t/ha de esterco de aves; 1,0 kg/ha de B. Tabela 1, p. 299 (Mehlich-1): N 90 kg/ha em cobertura (7 e 14 dias após o transplante); P2O5 300/200/100 kg/ha para P de 0-10/11-20/>20 mg/dm³; K2O 120/90/60 kg/ha para K de 0-40/41-90/>90 mg/dm³.",
+      "culturas": [
+        "lettuce"
+      ],
+      "regiao": "Pará",
+      "pendencias": [
+        "a p. 297 não tem número impresso no PDF"
+      ]
+    },
+    {
+      "id": "EMB-CPPSE-2004-DOC37",
+      "titulo": "Características de corretivos agrícolas",
+      "autoria": "Primavesi, A. C.; Primavesi, O. Embrapa Pecuária Sudeste, São Carlos. Documentos 37",
+      "tipo": "Documentos",
+      "ano": 2004,
+      "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/42323/1/Doc37ACP2004.pdf",
+      "acesso": "2026-11-23",
+      "licenca": "Embrapa, acesso aberto",
+      "notas": "P. 19: reatividade (RE) é o percentual do corretivo que reage em três meses; Tabela 2 com as taxas por fração. P. 20: RE = 0,2·F(10-20) + 0,6·F(20-50) + 1,0·F(<50), fração retida na peneira ABNT 10 com peso zero, taxas adotadas pela legislação (sem número da norma). P. 22: PRNT = PN·RE/100 e classes A (45-60%), B (60,1-75%), C (75,1-90%) e D (>90,1%). P. 15: PN mínimo de 67% para calcários."
+    },
+    {
       "id": "FAO-1998-FAO56",
       "titulo": "Crop evapotranspiration: guidelines for computing crop water requirements (FAO Irrigation and Drainage Paper 56)",
       "autoria": "Allen, R. G.; Pereira, L. S.; Raes, D.; Smith, M. (FAO)",
@@ -366,6 +472,43 @@
       "pendencias": [
         "página da tabela de Ky do repolho"
       ]
+    },
+    {
+      "id": "FAO-2026-AQUACROP73",
+      "titulo": "AquaCrop Version 7.3 Reference manual, Annexes",
+      "autoria": "Raes, D.; Steduto, P.; Hsiao, T. C.; Fereres, E. (FAO), com a rede AquaCrop",
+      "tipo": "Manual técnico",
+      "ano": 2026,
+      "url": "https://www.fao.org/docs/devbuildingforwardbetterlibraries/default-document-library/annexesaquacropv73.pdf",
+      "acesso": "2026-11-23",
+      "licenca": "© FAO 2026; uso e reprodução para estudo, pesquisa, ensino e produtos não comerciais com citação; uso comercial por pedido de licença",
+      "notas": "Anexo I (p. 1): parâmetros de 17 culturas, entre elas beterraba açucareira (p. 28) e tomate para indústria (p. 36); alface e outras folhosas não constam. Anexo II (p. 66): durações indicativas dos estádios. Anexo III (p. 72): tolerância à salinidade. Anexo IV (p. 76): ETo."
+    },
+    {
+      "id": "GAG-2012-FULLLIST",
+      "titulo": "Game Accessibility Guidelines: full list",
+      "autoria": "Game Accessibility Guidelines (colaboração de estúdios e especialistas)",
+      "tipo": "Guia de projeto",
+      "ano": 2012,
+      "url": "https://gameaccessibilityguidelines.com/?p=21",
+      "acesso": "2026-11-23",
+      "licenca": "a conferir",
+      "notas": "Página viva, sem versão nem ano; o sítio existe desde 2012. Nível básico: fonte padrão legível, alto contraste entre texto e fundo, nenhuma informação essencial só pela cor, controles remapeáveis, legendas claras para falas. Intermediário: legendas ou sinais visuais para sons de fundo importantes, opção de ajustar a velocidade do jogo, interface redimensionável. Avançado: tamanho de fonte ajustável."
+    },
+    {
+      "id": "GESPFL-2023-CEREZ",
+      "titulo": "Effects of Irrigation Water Levels on Lettuce Yield and Water Use Efficiencies under Unheated Greenhouse Conditions",
+      "autoria": "Çerez, N. E.; Şahin, M. Gesunde Pflanzen 75(4):1315-1324",
+      "tipo": "Artigo",
+      "ano": 2023,
+      "url": "https://doi.org/10.1007/s10343-022-00744-w",
+      "acesso": "2026-11-23",
+      "licenca": "acesso conforme o editor; só valores do resumo",
+      "notas": "Resumo: Ky = 2,26 no outono de 2019 e 0,69 na primavera de 2020, estufa não aquecida em Konya, gotejamento por níveis do tanque Classe A (60 a 120%). Publicado on-line em 2022.",
+      "culturas": [
+        "lettuce"
+      ],
+      "regiao": "Turquia (Konya), estufa"
     },
     {
       "id": "GH-2026-TERRAIN3D110",
@@ -565,6 +708,31 @@
       "regiao": "China"
     },
     {
+      "id": "MEX-2021-CICHOTA",
+      "titulo": "A protocol to build soil descriptions for APSIM simulations",
+      "autoria": "Cichota, R.; Vogeler, I.; Sharp, J.; Verburg, K.; Huth, N.; Holzworth, D.; Dalgliesh, N.; Snow, V. MethodsX 8:101566",
+      "tipo": "Artigo",
+      "ano": 2021,
+      "url": "https://doi.org/10.1016/j.mex.2021.101566",
+      "acesso": "2026-11-23",
+      "licenca": "CC BY 4.0 (acesso aberto)",
+      "notas": "Resume os modelos de solo do APSIM e define os parâmetros de uma descrição de solo (camadas, água disponível, matéria orgânica). Referência para o pacote de solo da fase 2, sem copiar código (decisão 55)."
+    },
+    {
+      "id": "NRCS-1986-TR55",
+      "titulo": "Urban Hydrology for Small Watersheds (Technical Release 55), 2nd edition",
+      "autoria": "USDA Soil Conservation Service, Engineering Division (210-VI-TR-55)",
+      "tipo": "Manual técnico",
+      "ano": 1986,
+      "url": "https://www.govinfo.gov/content/pkg/CZIC-gb980-u73-1986/html/CZIC-gb980-u73-1986.htm",
+      "acesso": "2026-11-23",
+      "licenca": "obra do governo dos EUA, domínio público",
+      "notas": "Tabela 2-2b, p. 2-6 (condição média de escoamento, Ia = 0,2·S), grupos A/B/C/D: pousio em solo nu 77/86/91/94; culturas em linha retas em condição pobre 72/81/88/91 e boa 67/78/85/89; em contorno pobre 70/79/84/88 e boa 65/75/82/86.",
+      "pendencias": [
+        "o texto do govinfo é OCR; os valores batem com uma segunda cópia do capítulo 2"
+      ]
+    },
+    {
       "id": "NRCS-2004-NEH630-CH10",
       "titulo": "National Engineering Handbook, Part 630 Hydrology, Chapter 10: Estimation of Direct Runoff from Storm Rainfall",
       "autoria": "USDA Natural Resources Conservation Service (210-VI-NEH)",
@@ -577,6 +745,17 @@
       "pendencias": [
         "a forma métrica da Eq. 10-13 saiu ilegível na extração do texto; conferida pela Eq. 10-12 multiplicada por 25,4 e pelos Exemplos 10-1 e 10-2"
       ]
+    },
+    {
+      "id": "PD-2020-FRANDOLOSO",
+      "titulo": "Interference and level of economic damage of alexandergrass on corn",
+      "autoria": "Frandoloso, F. S.; Galon, L.; Concenço, G.; Rossetto, E. R. O.; Bianchessi, F.; Santin, C. O.; Forte, C. T. Planta Daninha 38:e020219966",
+      "tipo": "Artigo",
+      "ano": 2020,
+      "url": "https://doi.org/10.1590/S0100-83582020380100045",
+      "acesso": "2026-11-23",
+      "licenca": "CC BY",
+      "notas": "Eq. 2, p. 3: hipérbole retangular de Cousens (1985), Pp = i·X/[1 + (i/a)·X], com Pp a perda de produtividade (%), X a densidade (ou massa, cobertura ou área foliar) da daninha, i a perda por unidade quando X tende a zero e a a perda máxima. Fonte original citada: Cousens (1985), J. Agric. Sci. 105:513-521 (acesso fechado, não lida)."
     },
     {
       "id": "PLSOIL-2010-CHEN",
@@ -784,78 +963,38 @@
   ],
   "fila_de_verificacao": [
     {
-      "id_proposto": "RBCS-2015-PRNT",
-      "referencia": "Revista Brasileira de Ciência do Solo 39:1723-1736 (tabelas de RE e PRNT de corretivos).",
-      "falta": "título, autoria e URL"
-    },
-    {
-      "id_proposto": "GESPFL-2023-CEREZ",
-      "referencia": "Effects of Irrigation Water Levels on Lettuce Yield and Water Use Efficiencies under Unheated Greenhouse Conditions. Gesunde Pflanzen 75:1315-1324 (Ky 2,26 em 2019 e 0,69 em 2020, Konya).",
-      "url": "https://link.springer.com/article/10.1007/s10343-022-00744-w",
-      "falta": "autoria completa"
-    },
-    {
-      "id_proposto": "UPIT-KY-ALFACE",
-      "referencia": "Effects of different irrigation levels on yield of lettuce (estufa, gotejamento). Universidade de Pitești, Scientific Papers.",
-      "url": "https://www.natsci.upit.ro/media/1567/paper-22.pdf",
-      "falta": "ano, autoria e título exato"
-    },
-    {
-      "id_proposto": "MEX-2021-CICHOTA",
-      "referencia": "Cichota et al. Protocolo de parametrização de solos para o APSIM. MethodsX 8:101566.",
-      "url": "https://doi.org/10.1016/j.mex.2021.101566",
-      "falta": "título exato: há conflito entre 'A protocol to build soil descriptions for APSIM simulations' e um artigo sobre parâmetros do S-map para o APSIM"
-    },
-    {
-      "id_proposto": "JFAE-2008-YAZGAN",
-      "referencia": "Yazgan, S. et al. Deficit irrigation effects on lettuce (Lactuca sativa var. Olenka) yield in unheated greenhouse condition. Journal of Food, Agriculture & Environment 6:357-361 (Ky 1,096).",
-      "falta": "URL e leitura da fonte primária (referência vista só em citação)"
-    },
-    {
       "id_proposto": "ZENODO-2024-BRDWGDMUN",
       "referencia": "Estatísticas zonais do BR-DWGD por município (v3.2.3, Parquet).",
       "url": "https://zenodo.org/records/13906834",
-      "falta": "autoria, licença e versão para a v3.2.4"
+      "falta": "autoria, licença e versão para a v3.2.4; o artigo de método dos mesmos autores (Environmental Data Science 3:e2, 2024) trata do ERA5-Land, e a série BR-DWGD por município vai de 1961 a março de 2024",
+      "etapa": "V1"
     },
     {
       "id_proposto": "EMB-CNPTIA-AGROAPI",
       "referencia": "Embrapa Agricultura Digital. API AGROFIT v1 (AgroAPI).",
       "url": "https://www.agroapi.cnptia.embrapa.br/store/apis/info?name=AGROFIT&version=v1&provider=agroapi",
-      "falta": "ano, termos de uso e campos"
-    },
-    {
-      "id_proposto": "IAC-2014-TRANI",
-      "referencia": "Trani, P. E. et al. Calagem e adubação da alface, almeirão, agrião d'água, chicória, coentro, espinafre e rúcula. IAC, 2014 (cópia não oficial).",
-      "falta": "versão oficial; trocar pelo Boletim 100 de 2022 (IAC)"
+      "falta": "ano, termos de uso e campos",
+      "etapa": "B3"
     },
     {
       "id_proposto": "IAC-2011-TIVELLI",
       "referencia": "Tivelli, S. W. et al. Beterraba: do plantio à comercialização. IAC, Boletim Técnico 210.",
       "url": "https://ainfo.cnptia.embrapa.br/digital/bitstream/item/48016/1/Andre-May-Boletim-Tec-IAC.pdf",
-      "falta": "leitura do texto (piloto da beterraba)"
-    },
-    {
-      "id_proposto": "GAG-SD-FULLLIST",
-      "referencia": "Game Accessibility Guidelines, lista completa (tamanho de texto, cor, remapeamento, legendas, contraste, velocidade do jogo).",
-      "url": "https://gameaccessibilityguidelines.com/full-list/",
-      "falta": "ano ou versão da página"
-    },
-    {
-      "id_proposto": "AGRMET-2024-KIMBALL",
-      "referencia": "Kimball, B. A. et al. Intercomparação de modelos de temperatura do solo em modelos de cultura. Agricultural and Forest Meteorology 110003.",
-      "url": "https://doi.org/10.1016/j.agrformet.2024.110003",
-      "falta": "título exato e leitura"
-    },
-    {
-      "id_proposto": "FAO-2026-AQUACROP73",
-      "referencia": "Raes, D.; Steduto, P.; Hsiao, T. C.; Fereres, E. AquaCrop versão 7.3, manual de referência e anexos com parâmetros de culturas (julho de 2026).",
-      "url": "https://www.fao.org/docs/devbuildingforwardbetterlibraries/default-document-library/annexesaquacropv73.pdf",
-      "falta": "leitura dos anexos de parâmetros por tipo de cultura"
+      "falta": "leitura do texto (piloto da beterraba)",
+      "etapa": "B3"
     },
     {
       "id_proposto": "RBAGRO-1997-CAMARGO",
       "referencia": "Camargo, A. P.; Sentelhas, P. C. Avaliação do desempenho de diferentes métodos de estimativa da evapotranspiração potencial no Estado de São Paulo. Revista Brasileira de Agrometeorologia 5(1):89-97 (classes do índice c).",
-      "falta": "URL e tabela de classes do índice c"
+      "falta": "URL e tabela de classes do índice c; a fonte primária não foi achada em acesso aberto",
+      "etapa": "V3"
+    },
+    {
+      "id_proposto": "AGMET-1981-PARTON",
+      "referencia": "Parton, W. J.; Logan, J. A. A model for diurnal variation in soil and air temperature. Agricultural Meteorology 23:205-216 (curva diurna de temperatura).",
+      "url": "https://doi.org/10.1016/0002-1571(81)90105-9",
+      "falta": "leitura das equações; acesso fechado e sem resumo publicado; procurar descrição aberta da equação antes do passo D8",
+      "etapa": "D8"
     }
   ]
 }

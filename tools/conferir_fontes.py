@@ -9,7 +9,8 @@ O que faz:
      da CONVENCOES §1, ID único, ano inteiro, data de acesso AAAA-MM-DD, URL https num domínio
      da lista "dominios_permitidos" e, se houver, "pendencias" como lista de textos.
      Confere também a "fila_de_verificacao" (publicações achadas e ainda não registradas):
-     cada item tem "id_proposto", "referencia" e "falta". Item da fila não pode ser citado.
+     cada item tem "id_proposto", "referencia" e "falta" e, se tiver, "etapa" não vazia.
+     Item da fila não pode ser citado.
   2. Percorre os .md de docs/ e packs/ (fora de blocos de código) e confere cada citação
      [FONTE:ID]: o ID precisa existir no registro. Rótulo [FONTE] sem ID é erro.
   3. Percorre os .json de packs/ e confere cada objeto:
@@ -86,6 +87,8 @@ def conferir_registro(erros: list[str]) -> set[str]:
         faltam = [c for c in ("id_proposto", "referencia", "falta") if item.get(c) in (None, "")]
         if faltam:
             erros.append(f"{onde}: campos obrigatórios ausentes: {', '.join(faltam)}")
+        if "etapa" in item and (not isinstance(item["etapa"], str) or not item["etapa"].strip()):
+            erros.append(f"{onde}: 'etapa' precisa ser o passo do MAPA_DO_PROJETO que usa a publicação")
     for i, f in enumerate(fontes):
         onde = f"{REGISTRO} fontes[{i}]"
         if not isinstance(f, dict):
