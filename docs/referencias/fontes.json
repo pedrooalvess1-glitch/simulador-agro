@@ -19,6 +19,7 @@
     "harvard.edu",
     "inria.fr",
     "nih.gov",
+    "planalto.gov.br",
     "redalyc.org",
     "sbcs-nrs.org.br",
     "scielo.br",
@@ -63,7 +64,7 @@
       "ano": 2015,
       "url": "https://doi.org/10.5039/agraria.v10i2a4219",
       "acesso": "2026-11-22",
-      "licenca": "acesso aberto; licença a conferir",
+      "licenca": "acesso aberto; licença do artigo não localizada; uso só por citação",
       "notas": "Umidade diária por TDR a 20 cm em solo nu e caatinga, Argissolo Amarelo, Pesqueira-PE, 2012-2013. Dados só em figuras. Candidato ao cenário de referência do semiárido."
     },
     {
@@ -140,7 +141,7 @@
       "ano": 2020,
       "url": "https://www.apsim.info/documentation/model-documentation/soil-modules-documentation/soilwat/",
       "acesso": "2026-11-22",
-      "licenca": "documentação pública",
+      "licenca": "documentação pública da APSIM Initiative; licença do texto não localizada; uso só das equações por citação (decisão 55)",
       "notas": "CN2 de solo nu com redução por cobertura; cn_red e cn_rain para o preparo; evaporação de Ritchie em dois estágios com U e CONA (exemplo U = 6 mm, CONA = 3,5); drenagem SWCON·(SW − DUL).",
       "pendencias": [
         "página sem data; conteúdo equivalente no relatório do ApsimX 2020.09.09"
@@ -165,7 +166,18 @@
       "ano": 2024,
       "url": "https://box2d.org/posts/2024/08/determinism/",
       "acesso": "2026-11-22",
-      "licenca": "a conferir"
+      "licenca": "licença não localizada na página; uso só por citação"
+    },
+    {
+      "id": "BR-1998-LEI9610",
+      "titulo": "Lei nº 9.610, de 19 de fevereiro de 1998 (Lei de Direitos Autorais)",
+      "autoria": "Presidência da República, Casa Civil",
+      "tipo": "Lei",
+      "ano": 1998,
+      "url": "https://planalto.gov.br/ccivil_03/leis/l9610.htm",
+      "acesso": "2026-11-23",
+      "licenca": "texto legal oficial (Planalto)",
+      "notas": "Art. 7º, § 3º: nas ciências a proteção recai sobre a forma literária ou artística e não abrange o conteúdo científico ou técnico. Art. 8º, I: ideias, procedimentos normativos, sistemas, métodos e conceitos matemáticos não são protegidos. Art. 46, III: a citação de passagens de qualquer obra, com autor e origem, não ofende os direitos autorais."
     },
     {
       "id": "BRAGANTIA-1976-BRUNINI",
@@ -175,7 +187,7 @@
       "ano": 1976,
       "url": "https://doi.org/10.1590/S0006-87051976000100019",
       "acesso": "2026-11-22",
-      "licenca": "SciELO, acesso aberto",
+      "licenca": "acesso aberto (SciELO); licença do artigo não localizada; uso só por citação",
       "notas": "Resumo: temperatura-base de 6 °C da germinação ao transplante e de 10 °C do transplante à colheita; desenvolvimento máximo perto de 22 °C e decrescente acima.",
       "culturas": [
         "lettuce"
@@ -189,7 +201,7 @@
       "ano": 1979,
       "url": "https://doi.org/10.1590/S0006-87051979000100007",
       "acesso": "2026-11-22",
-      "licenca": "SciELO, acesso aberto",
+      "licenca": "acesso aberto (SciELO); licença do artigo não localizada; uso só por citação",
       "notas": "O resumo compara critérios de calagem e diz que o critério pH–saturação por bases dá necessidades muito baixas.",
       "pendencias": [
         "localizar no PDF a equação pH = 4,50 + 0,025·V atribuída a esta obra"
@@ -223,7 +235,7 @@
       "ano": 2015,
       "url": "https://ainfo.cnptia.embrapa.br/digital/bitstream/item/138887/1/Rotacao-e-sucessao-de-culturas.pdf",
       "acesso": "2026-11-22",
-      "licenca": "Embrapa, acesso aberto",
+      "licenca": "Embrapa, acesso aberto; sem licença livre: direitos reservados pela Lei 9.610/1998",
       "notas": "Equação 5, p. 157: LS = 0,00984·L^0,63·S^1,18 (Bertoni e Lombardi Neto 1999; L em m, S em %). Tabela 2, p. 160: P de plantio em contorno 0,50/0,50/0,60/0,70 e com cordão vegetado 0,35/0,35/0,45/0,55 para 2/5/10/15% de declive. P. 158: P = 1 sem prática; C vai de 0 a 1 (solo exposto)."
     },
     {
@@ -234,7 +246,7 @@
       "ano": 2017,
       "url": "https://biblioteca.incaper.es.gov.br/digital/bitstream/item/2746/1/BRT-saturacaoporbaseparaocafeeiro-guarconi.pdf",
       "acesso": "2026-11-22",
-      "licenca": "acesso aberto",
+      "licenca": "acesso aberto (biblioteca do Incaper); licença não localizada; uso só por citação",
       "notas": "Atribui a Raij et al. (1979) a relação pH = 4,50 + 0,025·V e a chama de modelo teórico.",
       "pendencias": [
         "página da equação (PDF indisponível em 22/11/2026)"
@@ -248,7 +260,7 @@
       "ano": 2016,
       "url": "https://www.natsci.upit.ro/issues/2016/volume-5-issue-9/effects-of-different-irrigation-levels-on-yield-of-lettuce-grown-in-an-unheated-greenhouse/",
       "acesso": "2026-11-23",
-      "licenca": "acesso aberto; licença a conferir",
+      "licenca": "acesso aberto; licença do artigo não localizada; uso só por citação",
       "notas": "Resumo: Ky = 0,88; cv. Hazar, dezembro a fevereiro, Şanlıurfa; gotejamento com Kp de 1,0 a 0,25 do tanque Classe A; ET do tratamento pleno 125 mm.",
       "culturas": [
         "lettuce"
@@ -266,7 +278,7 @@
       "ano": 2017,
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7010114/",
       "acesso": "2026-11-22",
-      "licenca": "a conferir"
+      "licenca": "EFSA Journal (Wiley), cópia aberta no PMC; licença não localizada na leitura; uso só por citação"
     },
     {
       "id": "EJA-2003-KEATING",
@@ -287,7 +299,7 @@
       "ano": 2014,
       "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/1015113/1/p59.pdf",
       "acesso": "2026-11-22",
-      "licenca": "Embrapa, acesso aberto",
+      "licenca": "Embrapa, acesso aberto; sem licença livre: direitos reservados pela Lei 9.610/1998",
       "notas": "P. 63: reação quase completa depois de 6 meses. P. 64: mais de 60% do calcário mais fino reage em 3 meses; o sucesso da calagem depende da água do solo. P. 65: PRNT mínimo de 80%."
     },
     {
@@ -298,7 +310,7 @@
       "ano": 2007,
       "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/780473/1/ct51.pdf",
       "acesso": "2026-11-23",
-      "licenca": "Embrapa, acesso aberto",
+      "licenca": "Embrapa, acesso aberto; sem licença livre: direitos reservados pela Lei 9.610/1998",
       "notas": "Tabela 1, p. 3, adaptada de Marouelli e Silva (1998): eficiência de irrigação de sulco 40-70%, aspersão convencional portátil 60-75%, semiportátil 60-75%, fixa 70-85%, autopropelido 60-70%, pivô central 75-90% e gotejamento 75-95%; a eficiência cai muito em sistema mal dimensionado ou mal mantido.",
       "pendencias": [
         "número de páginas"
@@ -312,7 +324,7 @@
       "ano": 2008,
       "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/780870/4/ct57.pdf",
       "acesso": "2026-11-22",
-      "licenca": "Embrapa, acesso aberto",
+      "licenca": "Embrapa, acesso aberto; sem licença livre: direitos reservados pela Lei 9.610/1998",
       "notas": "Tabela 1, p. 5: alface 10-20 kPa em aspersão e gotejo, 20-40 kPa em sulco. P. 12: exemplo irriga a alface quando tensiômetros rasos a 10 cm chegam a 15 kPa (raiz efetiva 25 cm). P. 4: leitura até cerca de 80 kPa.",
       "culturas": [
         "lettuce"
@@ -329,7 +341,7 @@
       "ano": 2009,
       "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/782937/4/ct69.pdf",
       "acesso": "2026-11-22",
-      "licenca": "Embrapa, acesso aberto",
+      "licenca": "Embrapa, acesso aberto; sem licença livre: direitos reservados pela Lei 9.610/1998",
       "notas": "P. 4: sensores de 15, 25 e 40 kPa. Tabela 1, p. 7: alface com 15 kPa em aspersão e gotejo e 25 kPa em sulco.",
       "culturas": [
         "lettuce"
@@ -343,7 +355,7 @@
       "ano": 2011,
       "url": "https://www.alice.cnptia.embrapa.br/alice/bitstream/doc/915574/1/IRRIGACAOeFERTIRRIGACAOcap5.pdf",
       "acesso": "2026-11-22",
-      "licenca": "Embrapa, acesso aberto",
+      "licenca": "Embrapa, acesso aberto; sem licença livre: direitos reservados pela Lei 9.610/1998",
       "notas": "Tabela 9, p. 194: Kc da alface 0,70, 1,05 e 0,95. P. 183: fAm 0,95 para hortaliças de menor espaçamento. Tabelas 4 e 5, p. 174-175: tensões-limite (alface 20-50 kPa em aspersão segundo Sammis 1980; 10-20 kPa em gotejo; 20-40 kPa em sulco).",
       "culturas": [
         "lettuce"
@@ -357,7 +369,7 @@
       "ano": 2011,
       "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/916702/4/ct98.pdf",
       "acesso": "2026-11-22",
-      "licenca": "Embrapa, acesso aberto",
+      "licenca": "Embrapa, acesso aberto; sem licença livre: direitos reservados pela Lei 9.610/1998",
       "notas": "P. 7: eficiência do gotejamento de 80 a 95% e dos sistemas por superfície entre 40 e 70%. Tabela 1, p. 8, traz as demais eficiências.",
       "pendencias": [
         "a Tabela 1 (p. 8) não sai na extração de texto do PDF; ler pela imagem da página (aspersão já coberta pela EMB-CNPH-2007-CT51)"
@@ -371,7 +383,7 @@
       "ano": 2013,
       "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/956376/1/cot89.pdf",
       "acesso": "2026-11-23",
-      "licenca": "Embrapa, acesso aberto",
+      "licenca": "Embrapa, acesso aberto; sem licença livre: direitos reservados pela Lei 9.610/1998",
       "notas": "P. 1: temperaturas ideais para produção de folhas de 12 a 22 °C; acima disso o florescimento precoce é favorecido (citando Silva et al. 1999). P. 2: a alface crespa em campo chega à colheita cerca de 60 dias após o plantio; avaliação do pendoamento pelo comprimento do pendão aos 40 dias.",
       "culturas": [
         "lettuce"
@@ -385,7 +397,7 @@
       "ano": 2021,
       "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/1139955/1/Doc-381-final.pdf",
       "acesso": "2026-11-22",
-      "licenca": "Embrapa, acesso aberto",
+      "licenca": "Embrapa, acesso aberto; sem licença livre: direitos reservados pela Lei 9.610/1998",
       "notas": "P. 18-19: índice d de Willmott, RQME, EPE, erro médio, eficiência, viés médio, desvio percentual e índice c = r·d. Sem tabela de classes do índice c."
     },
     {
@@ -396,7 +408,7 @@
       "ano": 2011,
       "url": "https://www.infoteca.cnptia.embrapa.br/bitstream/doc/939283/1/5ControledaIrrigacaodeHortalicas.pdf",
       "acesso": "2026-11-22",
-      "licenca": "Embrapa, acesso aberto",
+      "licenca": "Embrapa, acesso aberto; sem licença livre: direitos reservados pela Lei 9.610/1998",
       "notas": "P. 36: irrigar a alface quando a média passar de 20 kPa. P. 43: aplicar até o tensiômetro de 10 cm marcar 5-10 kPa e o de 30 cm 10-15 kPa. P. 34: leitura diária às 7 h.",
       "culturas": [
         "lettuce"
@@ -410,7 +422,7 @@
       "ano": 2015,
       "url": "https://www.alice.cnptia.embrapa.br/alice/bitstream/doc/1013085/1/Milanez.pdf",
       "acesso": "2026-11-23",
-      "licenca": "acesso aberto (Alice/Embrapa); licença a conferir",
+      "licenca": "cópia aberta no Alice (Embrapa) de artigo da revista Cultivar HF; licença não localizada; uso só por citação",
       "notas": "P. 9: faixa ideal de 15,5 a 18,3 °C; tolera 26,6 a 29,4 °C por alguns dias com noites mais frias; 21,1 a 26,6 °C por longos períodos promovem o pendoamento; máxima tolerável de cerca de 30 °C para a maioria das cultivares. Métodos: plantas a 0,25 × 0,25 m; mudas com 28 dias; colheita 39 dias após o transplante no inverno e 33 no verão.",
       "culturas": [
         "lettuce"
@@ -427,7 +439,7 @@
       "ano": 2020,
       "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/1127293/1/LV-RecomendacaoSolo-2020-299-301.pdf",
       "acesso": "2026-11-23",
-      "licenca": "Embrapa, acesso aberto",
+      "licenca": "Embrapa, acesso aberto; sem licença livre: direitos reservados pela Lei 9.610/1998",
       "notas": "P. 297: espaçamento de 0,20 a 0,30 m entre plantas e entre linhas; transplante 20 dias após a germinação. P. 298: calcário 20 dias antes, V2 = 70%, NC = CTC·(V2 − V1)/PRNT, dolomítico se Mg < 0,5 cmolc/dm³; 15-20 t/ha de esterco bovino ou composto ou 7-10 t/ha de esterco de aves; 1,0 kg/ha de B. Tabela 1, p. 299 (Mehlich-1): N 90 kg/ha em cobertura (7 e 14 dias após o transplante); P2O5 300/200/100 kg/ha para P de 0-10/11-20/>20 mg/dm³; K2O 120/90/60 kg/ha para K de 0-40/41-90/>90 mg/dm³.",
       "culturas": [
         "lettuce"
@@ -445,7 +457,7 @@
       "ano": 2004,
       "url": "https://www.infoteca.cnptia.embrapa.br/infoteca/bitstream/doc/42323/1/Doc37ACP2004.pdf",
       "acesso": "2026-11-23",
-      "licenca": "Embrapa, acesso aberto",
+      "licenca": "Embrapa, acesso aberto; sem licença livre: direitos reservados pela Lei 9.610/1998",
       "notas": "P. 19: reatividade (RE) é o percentual do corretivo que reage em três meses; Tabela 2 com as taxas por fração. P. 20: RE = 0,2·F(10-20) + 0,6·F(20-50) + 1,0·F(<50), fração retida na peneira ABNT 10 com peso zero, taxas adotadas pela legislação (sem número da norma). P. 22: PRNT = PN·RE/100 e classes A (45-60%), B (60,1-75%), C (75,1-90%) e D (>90,1%). P. 15: PN mínimo de 67% para calcários."
     },
     {
@@ -456,7 +468,7 @@
       "ano": 1998,
       "url": "https://www.fao.org/4/x0490e/x0490e00.htm",
       "acesso": "2026-11-22",
-      "licenca": "a conferir",
+      "licenca": "© FAO 1998, todos os direitos reservados (página de rosto da edição web); uso só por citação",
       "notas": "Equações de astronomia, ET0 de Penman-Monteith, Kc e balanço hídrico; tabelas 11, 12, 17 e 22 usadas para alface."
     },
     {
@@ -492,7 +504,7 @@
       "ano": 2012,
       "url": "https://gameaccessibilityguidelines.com/?p=21",
       "acesso": "2026-11-23",
-      "licenca": "a conferir",
+      "licenca": "licença não localizada na página; uso só por citação",
       "notas": "Página viva, sem versão nem ano; o sítio existe desde 2012. Nível básico: fonte padrão legível, alto contraste entre texto e fundo, nenhuma informação essencial só pela cor, controles remapeáveis, legendas claras para falas. Intermediário: legendas ou sinais visuais para sons de fundo importantes, opção de ajustar a velocidade do jogo, interface redimensionável. Avançado: tamanho de fonte ajustável."
     },
     {
@@ -554,7 +566,7 @@
       "ano": 2023,
       "url": "https://doi.org/10.1590/s0102-0536-2023-e2566",
       "acesso": "2026-11-22",
-      "licenca": "acesso aberto (SciELO); licença a conferir",
+      "licenca": "acesso aberto (selo da SciELO); licença do artigo não localizada; uso só por citação",
       "notas": "PAI 1, 3 e 3 dias, PTPI 37, 37 e 35 dias e PCPI 2-37, 3-37 e 3-35 dias após o transplante para Elisa, Lucy Brown e Solaris, com 5% de perda tolerada; perdas de 48, 40 e 33% na convivência total.",
       "culturas": [
         "lettuce"
@@ -593,7 +605,7 @@
       "ano": 2020,
       "url": "https://doi.org/10.5772/intechopen.93741",
       "acesso": "2026-11-22",
-      "licenca": "acesso aberto (IntechOpen); licença a conferir",
+      "licenca": "acesso aberto (IntechOpen); licença do capítulo não localizada na leitura; uso só por citação",
       "notas": "Tabela 1: Tb 7 °C, Tu 30 °C, p_exp 0,25-0,55, p_sto 0,50, formas 3, WP* 19 g/m², HIo 95%, Kc com dossel completo 0,85, 15 plantas/m², CC0 2,25%, CCx 81%, CGC 14,30%/dia, CDC 8,0%/dia.",
       "culturas": [
         "lettuce"
@@ -647,7 +659,7 @@
       "ano": 2021,
       "url": "https://esdac.jrc.ec.europa.eu/public_path/projects_data/focus/gw/docs/Generic_guidance_FOCUS_GW_V2-3final.pdf",
       "acesso": "2026-11-22",
-      "licenca": "a conferir",
+      "licenca": "documento da Comissão Europeia no ESDAC; licença não localizada no PDF lido; uso só por citação",
       "notas": "Correção de temperatura (Q10 = 2,58; Ea = 65,4 kJ/mol) e de umidade (Walker, B = 0,7) da degradação de agrotóxicos."
     },
     {
@@ -658,7 +670,7 @@
       "ano": 1984,
       "url": "https://repository.arizona.edu/handle/10150/645693",
       "acesso": "2026-11-22",
-      "licenca": "acesso aberto",
+      "licenca": "acesso aberto (repositório da Universidade do Arizona); licença não localizada; uso só por citação",
       "notas": "MUSLE de Williams (1975): Y = 11,8·(Q·qp)^0,56·K·C·P·LS com Y em t, Q em m³ e qp em m³/s."
     },
     {
@@ -683,7 +695,7 @@
       "ano": 2018,
       "url": "https://doi.org/10.3390/w10050666",
       "acesso": "2026-11-22",
-      "licenca": "CC BY (versão a conferir)",
+      "licenca": "acesso aberto (MDPI Water); licença do artigo não conferida na página; uso só por citação",
       "regiao": "Camboja (monção)",
       "culturas": [
         "lettuce"
@@ -726,7 +738,7 @@
       "ano": 1986,
       "url": "https://www.govinfo.gov/content/pkg/CZIC-gb980-u73-1986/html/CZIC-gb980-u73-1986.htm",
       "acesso": "2026-11-23",
-      "licenca": "obra do governo dos EUA, domínio público",
+      "licenca": "obra do governo federal dos EUA, sem direito autoral nos EUA",
       "notas": "Tabela 2-2b, p. 2-6 (condição média de escoamento, Ia = 0,2·S), grupos A/B/C/D: pousio em solo nu 77/86/91/94; culturas em linha retas em condição pobre 72/81/88/91 e boa 67/78/85/89; em contorno pobre 70/79/84/88 e boa 65/75/82/86.",
       "pendencias": [
         "o texto do govinfo é OCR; os valores batem com uma segunda cópia do capítulo 2"
@@ -740,7 +752,7 @@
       "ano": 2004,
       "url": "https://directives.nrcs.usda.gov//sites/default/files2/1712930634/Part%20630%20-%20Hydrology.pdf",
       "acesso": "2026-11-23",
-      "licenca": "obra do governo dos EUA, domínio público",
+      "licenca": "obra do governo federal dos EUA, sem direito autoral nos EUA",
       "notas": "A URL é o índice oficial da Parte 630, que leva ao capítulo 10 (edição de julho de 2004). Eq. 10-9, p. 10-3: Q = (P − Ia)²/(P − Ia + S). Eq. 10-1, p. 10-2: Q = 0 se P ≤ Ia. Eq. 10-10, p. 10-3: Ia = 0,2·S. Eq. 10-12 e 10-13, p. 10-4: CN = 1000/(10 + S), com S em polegadas, e forma métrica S = 25400/CN − 254 (mm). Exemplos 10-1 e 10-2, p. 10-9 e 10-10: P = 4,3 pol, CN 55/74/88 dão Q = 0,65/1,82/3,01 pol.",
       "pendencias": [
         "a forma métrica da Eq. 10-13 saiu ilegível na extração do texto; conferida pela Eq. 10-12 multiplicada por 25,4 e pelos Exemplos 10-1 e 10-2"
@@ -776,7 +788,7 @@
       "ano": 1998,
       "url": "https://doi.org/10.1590/S0100-06831998000400002",
       "acesso": "2026-11-22",
-      "licenca": "a conferir",
+      "licenca": "acesso aberto (SciELO); licença do artigo não localizada; uso só por citação",
       "notas": "Equação 1, p. 577: RP = 0,0361·Ds^7,9683·θ^-2,2940 (RP em MPa, Ds em Mg/m³, θ em m³/m³; 86% da variação explicada). Limites do IHO, p. 576-577: RP 2,0 MPa, CC -0,01 MPa, PMP -1,5 MPa, porosidade de aeração 0,10 m³/m³."
     },
     {
@@ -787,7 +799,7 @@
       "ano": 2004,
       "url": "https://www.redalyc.org/pdf/1802/180214032013.pdf",
       "acesso": "2026-11-22",
-      "licenca": "acesso aberto; licença a conferir",
+      "licenca": "acesso aberto (Redalyc); licença do artigo não localizada; uso só por citação",
       "notas": "Crotalária sem vantagem em densidade e macroporosidade na camada superficial; escarificação biológica superou a mecânica na condutividade saturada."
     },
     {
@@ -798,7 +810,7 @@
       "ano": 2008,
       "url": "https://doi.org/10.1590/S0100-06832008000400037",
       "acesso": "2026-11-22",
-      "licenca": "acesso aberto (SciELO); licença a conferir",
+      "licenca": "acesso aberto (RBCS, indexada no DOAJ); licença do artigo não localizada; uso só por citação",
       "regiao": "Santa Rosa, RS; Latossolo Vermelho distroférrico"
     },
     {
@@ -856,7 +868,7 @@
       "ano": 2005,
       "url": "https://doi.org/10.21168/rbrh.v10n4.p5-18",
       "acesso": "2026-11-22",
-      "licenca": "ABRHidro, acesso aberto",
+      "licenca": "ABRHidro, acesso aberto; licença não localizada; uso só por citação",
       "notas": "Tabela 4: grupos hidrológicos A a D para condições brasileiras. Tabela 5: perfis de São Paulo."
     },
     {
@@ -867,7 +879,7 @@
       "ano": 2005,
       "url": "https://doi.org/10.21168/rbrh.v10n4.p19-29",
       "acesso": "2026-11-22",
-      "licenca": "ABRHidro, acesso aberto",
+      "licenca": "ABRHidro, acesso aberto; licença não localizada; uso só por citação",
       "notas": "CN de 80,9 na microbacia de aplicação.",
       "pendencias": [
         "a tabela de CN adaptados está em outra obra dos mesmos autores"
@@ -881,7 +893,7 @@
       "ano": 2004,
       "url": "https://www.sbcs-nrs.org.br/docs/manual_de_adubacao_2004_versao_internet.pdf",
       "acesso": "2026-11-22",
-      "licenca": "SBCS-NRS, acesso aberto",
+      "licenca": "SBCS-NRS, acesso aberto; licença não localizada; uso só por citação",
       "notas": "Seção 12.3 traz a recomendação para alface.",
       "pendencias": [
         "transcrever a tabela da alface; existe edição de 2016"
@@ -895,7 +907,7 @@
       "ano": 2010,
       "url": "https://doi.org/10.5433/1679-0359.2010v31n4Sup1p1299",
       "acesso": "2026-11-22",
-      "licenca": "acesso aberto; licença a conferir",
+      "licenca": "acesso aberto; licença do artigo não localizada; uso só por citação",
       "notas": "Resumo: PTPI de 21 dias após o transplante com 5% de perda tolerada; convivência no ciclo todo reduziu a produtividade em 25%.",
       "culturas": [
         "lettuce"
@@ -935,7 +947,7 @@
       "ano": 2025,
       "url": "https://tokisan.com/terrain3d-gpu-driven-workflow/",
       "acesso": "2026-11-22",
-      "licenca": "a conferir",
+      "licenca": "licença não localizada na página; uso só por citação",
       "notas": "Série 1.x edita na CPU e suporta Compatibility; série 2.x não suportará Compatibility."
     },
     {
@@ -946,7 +958,7 @@
       "ano": 2018,
       "url": "https://rigeo.sgb.gov.br/bitstream/doc/20525/1/hydrophysical_database.pdf",
       "acesso": "2026-11-22",
-      "licenca": "acesso aberto (RIGEO/SGB); licença a conferir",
+      "licenca": "acesso aberto (Vadose Zone Journal, indexada no DOAJ); cópia do RIGEO com direitos reservados salvo indicação; uso só por citação",
       "regiao": "Brasil (445 perfis, 1075 amostras)"
     },
     {

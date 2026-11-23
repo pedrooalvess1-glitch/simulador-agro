@@ -45,7 +45,7 @@ O usuário é o primeiro público. Ele é engenheiro, tem horta própria e quer 
 4. Todo parâmetro do pacote cita o ID do registro `docs/referencias/fontes.json` e o local (página, tabela, seção). O `tools/conferir_fontes.py` barra no CI citação a ID inexistente e dado sem fonte.
 5. Quando duas publicações divergirem, o pacote guarda as duas com região e ano. O motor usa a da região do cenário [INFERÊNCIA].
 6. PDFs de terceiros ficam fora do Git (`docs/referencias/pdf/`). O registro guarda a referência, a URL e a data de acesso.
-7. A busca na Embrapa começa pelo BDPA e pela Infoteca-e (`docs/referencias/FONTES.md` §4).
+7. A busca na Embrapa começa pelo BDPA e pela Infoteca-e (`docs/referencias/FONTES.md` §5).
 8. Modelo de software com licença restritiva, como o APSIM, serve só como referência de equações publicadas. O código dele não entra no repositório (decisão 55).
 9. Quando uma citação secundária diverge da publicação original, vale a original (decisão 58).
 

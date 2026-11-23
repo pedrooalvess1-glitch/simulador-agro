@@ -50,7 +50,7 @@ flowchart TD
   H --> I["9. U4 valida o conteúdo técnico<br/>U1 manda fotos por estádio"]
 ```
 
-1. **Coleta.** O usuário manda os PDFs ou pede a busca. O agente busca primeiro na Embrapa (`docs/referencias/FONTES.md` §4) e depois nas fontes complementares (`00_INDICE` §1.4). Os PDFs ficam em `docs/referencias/pdf/`, fora do Git.
+1. **Coleta.** O usuário manda os PDFs ou pede a busca. O agente busca primeiro na Embrapa (`docs/referencias/FONTES.md` §5) e depois nas fontes complementares (`00_INDICE` §1.4). Os PDFs ficam em `docs/referencias/pdf/`, fora do Git.
 2. **Registro.** Cada publicação lida entra no registro com URL, ano e licença. Publicação incompleta vai para a fila de verificação e não pode ser citada.
 3. **Leitura e extração.** O agente preenche a ficha da cultura (§5.2). Cada valor leva unidade, ID da fonte, página ou tabela e rótulo. Texto didático (descrição de sintoma, recomendação) leva a mesma citação.
 4. **Conflitos.** Quando fontes divergem, a ficha guarda todas as leituras com a região de cada uma. O pacote escolhe pela ordem Embrapa, depois outra fonte brasileira da mesma região, depois a mais recente, depois a estrangeira [INFERÊNCIA].

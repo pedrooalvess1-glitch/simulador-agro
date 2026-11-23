@@ -7,7 +7,8 @@ Uso (na raiz do repositório):
 O que faz:
   1. Lê docs/referencias/fontes.json e confere cada fonte: campos obrigatórios, ID no formato
      da CONVENCOES §1, ID único, ano inteiro, data de acesso AAAA-MM-DD, URL https num domínio
-     da lista "dominios_permitidos" e, se houver, "pendencias" como lista de textos.
+     da lista "dominios_permitidos", "licenca" sem "a conferir" e, se houver, "pendencias"
+     como lista de textos.
      Confere também a "fila_de_verificacao" (publicações achadas e ainda não registradas):
      cada item tem "id_proposto", "referencia" e "falta" e, se tiver, "etapa" não vazia.
      Item da fila não pode ser citado.
@@ -115,6 +116,9 @@ def conferir_registro(erros: list[str]) -> set[str]:
                     erros.append(f"{onde}: data de acesso no futuro")
             except ValueError:
                 erros.append(f"{onde}: 'acesso' precisa estar no formato AAAA-MM-DD")
+        lic = f.get("licenca")
+        if isinstance(lic, str) and "a conferir" in lic.lower():
+            erros.append(f"{onde}: 'licenca' ainda 'a conferir' (FONTES.md §4)")
         pend = f.get("pendencias")
         if pend is not None and (not isinstance(pend, list) or not all(isinstance(x, str) and x.strip() for x in pend)):
             erros.append(f"{onde}: 'pendencias' precisa ser uma lista de textos")
