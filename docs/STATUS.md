@@ -18,7 +18,7 @@
 | Documentos | `00_INDICE`, `MAPA_DO_PROJETO`, `ARQUITETURA_SIMULACAO`, `BASE_MODELOS`, `DECISOES`, `CONVENCOES`, `GLOSSARIO_DO_PROJETO`, `_MODELO_DOCUMENTO`, `13_INTERFACE` (rascunho, com wireframes em `docs/interface/`), `19_INGESTAO_DE_CULTURA` (rascunho), este arquivo. Os demais documentos 01 a 21 ainda não existem. |
 | Registro de fontes | 59 fontes registradas e 13 publicações na fila de verificação (`docs/referencias/fontes.json`). |
 | Projeto Godot | Ainda não existe. `packs/` e `art/` só têm a estrutura de pastas. |
-| Regra da `main` | Ainda não configurada (passo A2). |
+| Regra da `main` | *Ruleset* "Proteção da main" ativo. PR, os cinco jobs do CI, histórico linear e só *squash*; sem *push* forçado nem exclusão. *Branch* apagada no *merge*. |
 
 ## 3. Ambiente
 Mesmo ambiente do `simulador-normas`. O notebook Windows 10 com Radeon R5 integrada e 7,5 GB de RAM é o alvo de desempenho. As ferramentas são instaladas na nuvem a cada sessão por `tools/ambiente/`, com versão e soma conferidas. O núcleo C++ compila com g++, clang++ e MinGW-w64 na nuvem. O Wine não roda na sessão da nuvem, então o teste no Windows é o job do CI. A pasta de testes no notebook será `C:\projetos\simulador-agro-testes`, criada com o primeiro `.exe`.
