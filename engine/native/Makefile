@@ -16,8 +16,8 @@ LDFLAGS  ?=
 EXE      ?=
 BUILD    := build/$(CFG)
 
-SRC   := src/detmath.cpp
-TESTS := tests/run_tests.cpp tests/test_core.cpp tests/test_determinism.cpp
+SRC   := $(sort $(wildcard src/*.cpp))
+TESTS := $(sort $(wildcard tests/*.cpp))
 
 .PHONY: test vectors windows clean
 
@@ -25,9 +25,9 @@ $(BUILD)/run_tests$(EXE): $(SRC) $(TESTS) $(wildcard include/agro/*.hpp tests/*.
 	@mkdir -p $(BUILD)
 	$(CXX) $(CXXFLAGS) $(SRC) $(TESTS) -o $@ $(LDFLAGS)
 
-$(BUILD)/detmath_vectors$(EXE): $(SRC) tools/detmath_vectors.cpp $(wildcard include/agro/*.hpp)
+$(BUILD)/detmath_vectors$(EXE): src/detmath.cpp tools/detmath_vectors.cpp include/agro/detmath.hpp
 	@mkdir -p $(BUILD)
-	$(CXX) $(CXXFLAGS) $(SRC) tools/detmath_vectors.cpp -o $@ $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) src/detmath.cpp tools/detmath_vectors.cpp -o $@ $(LDFLAGS)
 
 test: $(BUILD)/run_tests$(EXE)
 	./$(BUILD)/run_tests$(EXE)

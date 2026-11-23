@@ -70,7 +70,7 @@ jobs:
           GXX=/c/mingw64/bin/g++.exe; [ -x "$GXX" ] || GXX=g++
           "$GXX" --version | head -1
           FLAGS="-std=c++17 -O2 -ffp-contract=off -fno-fast-math -Wall -Wextra -Iinclude"
-          "$GXX" $FLAGS src/detmath.cpp tests/run_tests.cpp tests/test_core.cpp tests/test_determinism.cpp -o run_tests.exe -static
+          "$GXX" $FLAGS src/*.cpp tests/*.cpp -o run_tests.exe -static
           "$GXX" $FLAGS src/detmath.cpp tools/detmath_vectors.cpp -o detmath_vectors.exe -static
           ./run_tests.exe
           obtido="$(./detmath_vectors.exe | tail -1 | tr -d '\r' | awk '{print $2}')"
