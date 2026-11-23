@@ -23,6 +23,7 @@
     "semanticscholar.org",
     "sgb.gov.br",
     "tokisan.com",
+    "usda.gov",
     "wiki.gg"
   ],
   "fontes": [
@@ -562,6 +563,20 @@
         "lettuce"
       ],
       "regiao": "China"
+    },
+    {
+      "id": "NRCS-2004-NEH630-CH10",
+      "titulo": "National Engineering Handbook, Part 630 Hydrology, Chapter 10: Estimation of Direct Runoff from Storm Rainfall",
+      "autoria": "USDA Natural Resources Conservation Service (210-VI-NEH)",
+      "tipo": "Manual técnico",
+      "ano": 2004,
+      "url": "https://directives.nrcs.usda.gov//sites/default/files2/1712930634/Part%20630%20-%20Hydrology.pdf",
+      "acesso": "2026-11-23",
+      "licenca": "obra do governo dos EUA, domínio público",
+      "notas": "A URL é o índice oficial da Parte 630, que leva ao capítulo 10 (edição de julho de 2004). Eq. 10-9, p. 10-3: Q = (P − Ia)²/(P − Ia + S). Eq. 10-1, p. 10-2: Q = 0 se P ≤ Ia. Eq. 10-10, p. 10-3: Ia = 0,2·S. Eq. 10-12 e 10-13, p. 10-4: CN = 1000/(10 + S), com S em polegadas, e forma métrica S = 25400/CN − 254 (mm). Exemplos 10-1 e 10-2, p. 10-9 e 10-10: P = 4,3 pol, CN 55/74/88 dão Q = 0,65/1,82/3,01 pol.",
+      "pendencias": [
+        "a forma métrica da Eq. 10-13 saiu ilegível na extração do texto; conferida pela Eq. 10-12 multiplicada por 25,4 e pelos Exemplos 10-1 e 10-2"
+      ]
     },
     {
       "id": "PLSOIL-2010-CHEN",
