@@ -9,7 +9,7 @@
 | `id` | texto | Identificador fixo (`CONVENCOES` §1), ex.: `EMB-CNPH-2020-ALFACE`, `RBCS-2008-NICOLOSO` |
 | `titulo` | texto | Título completo da publicação |
 | `autoria` | texto | Autores, unidade ou órgão e, para artigo, periódico, volume e páginas |
-| `tipo` | texto | Circular Técnica, Comunicado Técnico, Documentos, Sistema de Produção, Boletim de Pesquisa, Cartilha, Livro, Capítulo, Artigo, Revisão, Manual técnico, Guia regulatório, Base de dados, Artigo e base de dados, Licença de software, Documentação de software, Página de software, Código-fonte, Artigo técnico (blog), Wiki de comunidade |
+| `tipo` | texto | Circular Técnica, Comunicado Técnico, Documentos, Sistema de Produção, Boletim de Pesquisa, Cartilha, Livro, Capítulo, Artigo, Revisão, Manual técnico, Guia regulatório, Base de dados, Artigo e base de dados, Licença de software, Documentação de software, Página de software, Código-fonte, Artigo técnico (blog), Artigo (revista técnica), Guia de projeto, Wiki de comunidade |
 | `ano` | inteiro | Ano de publicação |
 | `url` | texto | Endereço https da publicação, num domínio de `dominios_permitidos` |
 | `acesso` | data | Data em que o conteúdo foi conferido (AAAA-MM-DD) |
@@ -18,7 +18,7 @@
 Campos opcionais são `regiao` (onde o dado vale), `culturas` (lista de IDs), `notas` e `pendencias` (lista do que falta conferir, como página de tabela ou título completo).
 
 ## 2. Fila de verificação
-Publicação achada por pesquisa e ainda sem os dados mínimos (ano, título exato, URL oficial) entra em `fila_de_verificacao`, com `id_proposto`, `referencia`, `url` quando houver e `falta`. Item da fila não pode ser citado em `[FONTE:ID]` nem no pacote. Quando os dados chegam, o item sai da fila e entra em `fontes`. O ID proposto é corrigido nessa hora se a publicação original mostrar outro ano ou outro autor.
+Publicação achada por pesquisa e ainda sem os dados mínimos (ano, título exato, URL oficial) entra em `fila_de_verificacao`, com `id_proposto`, `referencia`, `url` quando houver, `falta` e `etapa` (passo do `MAPA_DO_PROJETO` que precisa dela). Item da fila não pode ser citado em `[FONTE:ID]` nem no pacote. Quando os dados chegam, o item sai da fila e entra em `fontes`. O ID proposto é corrigido nessa hora se a publicação original mostrar outro ano ou outro autor.
 
 ## 3. Regras
 1. Só entra no registro publicação aberta e lida pelo agente ou por uma rodada de pesquisa do projeto. Nada de referência de memória.

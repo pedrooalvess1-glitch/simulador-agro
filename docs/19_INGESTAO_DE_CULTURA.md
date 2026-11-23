@@ -28,7 +28,7 @@ Fora.
 | MAPA-2026-AGROFIT | Produtos registrados por cultura, em dados abertos CC BY atualizados todo dia | [FONTE:MAPA-2026-AGROFIT] |
 | Publicações da cultura | Todo valor da ficha | registradas no passo 2 do fluxo |
 
-Os parâmetros padrão por tipo de cultura do manual do AquaCrop 7.3 estão na fila de verificação [VERIFICAR].
+O Anexo I do manual do AquaCrop 7.3 traz parâmetros de 17 culturas, entre elas beterraba açucareira (p. 28) e tomate para indústria (p. 36), e não traz alface nem outras folhosas. O Anexo II dá durações indicativas dos estádios (p. 66) [FONTE:FAO-2026-AQUACROP73].
 
 ## 4. Dependências
 Precisa de 04 (formato do pacote), 05 (parâmetros do modelo genérico), 10 (fitossanidade), 17 (arte por estádio) e 22 (cenários de referência da base de clima e solo). Alimenta 14 (pacote inicial) e todas as culturas novas.

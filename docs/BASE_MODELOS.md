@@ -98,14 +98,14 @@ flowchart LR
 | Módulo | Modelo | Mecanismo | Referência a registrar |
 |---|---|---|---|
 | Astronomia | Declinação, fotoperíodo e radiação extraterrestre do FAO-56 | Expressões fechadas para qualquer latitude do Brasil | FAO-56 cap. 3 |
-| Clima | Série real de estação automática do INMET e curva diurna de temperatura | Auditável contra a fonte e sem calibração estatística | INMET; Parton e Logan |
+| Clima | Série real de estação automática do INMET e curva diurna de temperatura | Auditável contra a fonte e sem calibração estatística | INMET; Parton e Logan (fila de verificação, passo D8) |
 | ET0 | Penman–Monteith com Hargreaves–Samani de reserva | Balanço de energia mais demanda aerodinâmica | FAO-56 |
 | Temperatura do solo | Temperatura por camada a partir do ar, da chuva e da radiação, no estilo do APSIM-soiltemp | Condução de calor amortecida com a profundidade | [FONTE:AJEA-2007-CHAUHAN] |
 | Água | *Bucket* de uma camada, Kc simples, Ks e escoamento por CN (no núcleo, `water.hpp`) | Tanque com ladrão que conserva massa a cada passo | [FONTE:FAO-1998-FAO56] cap. 8; [FONTE:NRCS-2004-NEH630-CH10] |
 | Solo físico | Capacidade de campo, ponto de murcha e densidade por classe e textura | Tabela com fonte e curva de retenção (§4.6) | Embrapa; SiBCS |
 | Química | Laudo com V% e CTC, calagem por saturação por bases, NPK por formulação, nitrogênio mineral com lixiviação | Inventário e um compartimento dinâmico de nitrato | Embrapa Hortaliças; manuais estaduais |
 | Planta | Modelo genérico por tipo de cultura (folhosa, raiz, fruto, grão) no estilo do AquaCrop, com graus-dia, cobertura, transpiração, produtividade da água e índice de colheita | Biomassa proporcional à transpiração normalizada pela ET0; o tipo define o órgão colhido | FAO AquaCrop |
-| Daninhas | Coorte com cobertura logística e perda de Cousens, janela de capina pelo período crítico (§4.8) | Competição com dano marginal decrescente | Cousens 1985; [FONTE:SEMINA-2010-GIANCOTTI] |
+| Daninhas | Coorte com cobertura logística e perda de Cousens, janela de capina pelo período crítico (§4.8) | Competição com dano marginal decrescente | Forma de Cousens (1985) [FONTE:PD-2020-FRANDOLOSO] eq. 2; [FONTE:SEMINA-2010-GIANCOTTI] |
 | Irrigação | Regador, gotejo com eficiência e fração de área molhada, tensiômetro virtual (gatilho de 15 kPa a 10 cm, §4.3) | Lâmina pela ETc e manejo pela tensão da água | Embrapa Hortaliças |
 | Arquitetura | Agenda única, ledger inteiro, árbitros, núcleo C++ com detmath | `ARQUITETURA_SIMULACAO` | APSIM; [FONTE:BOX2D-2024-DETERMINISM] |
 | Relatório | Atribuição da perda aos fatores Ks, nitrogênio, daninha e V% | Cada fator multiplicativo é registrado por dia | [INFERÊNCIA] |
@@ -139,7 +139,7 @@ Fase 4 reúne economia, combustível, NPCs, cidades, gases e deriva, micronutrie
 Valores das rodadas 2 e 3 de pesquisa. Os que têm `[FONTE:ID]` estão no registro. Os demais vêm de publicações da fila de verificação e entram no pacote só depois de registrados.
 
 ### 4.1 Calcário
-1. **Reatividade legal (MAPA).** RE é o percentual que reage em 3 meses. RE = 0,2·F(10–20) + 0,6·F(20–50) + 1,0·F(<50), com partículas retidas na peneira 10 valendo zero. PRNT = PN·RE/100 (Boletim Técnico 6; RBCS 39, 2015).
+1. **Reatividade da legislação.** RE é o percentual que reage em 3 meses (p. 19). RE = 0,2·F(10–20) + 0,6·F(20–50) + 1,0·F(<50), com partículas retidas na peneira 10 valendo zero (p. 20). PRNT = PN·RE/100, com classes A a D (p. 22) [FONTE:EMB-CPPSE-2004-DOC37].
 2. **Cinética observada (Embrapa).** Depois de 6 meses de contato a reação é quase completa (p. 63) e depois de 3 meses mais de 60% do calcário mais fino já reagiu (p. 64). Sem água no solo a incorporação tem pouco efeito (p. 64). O PRNT mínimo recomendado é 80% (p. 65) [FONTE:EMB-CNPAF-2014-CALAGEM].
 3. **Formulação adotada.** Cada classe granulométrica j segue dM_j/dt = −k_j·f(θ)·M_j. A dissolução do CaCO₃ exige H⁺ em solução. Por isso f(θ) vale zero abaixo do ponto de murcha e cresce linearmente até 1 na capacidade de campo. Para a classe fina, 1 − e^(−90k) ≈ 0,62 dá k ≈ 0,0107 por dia e 87% em 180 dias. Essa calibração é provisória.
 4. **pH e V%.** pH em água = 4,50 + 0,025·V, relação atribuída a Raij, Cantarella e Zullo (1979) e chamada de modelo teórico por Guarçoni [FONTE:COFFEESCI-2017-GUARCONI]. O resumo do artigo de 1979 diz que o critério pH–saturação por bases dá necessidades de calagem muito baixas [FONTE:BRAGANTIA-1979-RAIJ]. A página da equação ainda não foi conferida no PDF. Vale para solos de São Paulo. O pacote guarda o par (a, b) por classe de solo.
@@ -159,14 +159,16 @@ Valores das rodadas 2 e 3 de pesquisa. Os que têm `[FONTE:ID]` estão no regist
 | Kc inicial, médio, final | 0,70, 1,05 e 0,95 | [FONTE:EMB-CNPH-2011-CAP5] Tabela 9, p. 194 |
 | Fração de área molhada | 0,95 para hortaliças de menor espaçamento | [FONTE:EMB-CNPH-2011-CAP5] p. 183 |
 | Fração de depleção p | 0,30, ajustada pela ETc | [FONTE:FAO-1998-FAO56] tabela 22 |
-| Profundidade de raiz | 0,25 m em canteiro | apostila UFAC e Embrapa; [INFERÊNCIA] |
+| Profundidade de raiz | 0,25 m em canteiro | raiz efetiva de 25 cm no exemplo da alface [FONTE:EMB-CNPH-2008-CT57] p. 12 |
 | Gatilho de irrigação | Faixa de 10 a 20 kPa em aspersão e gotejo; 15 kPa no tensiômetro raso a 10 cm; 25 kPa em sulco | [FONTE:EMB-CNPH-2008-CT57] Tabela 1 e p. 12; [FONTE:EMB-CNPH-2009-CT69] Tabela 1, p. 7 |
 | Temperatura-base | 6 °C da germinação ao transplante e 10 °C do transplante à colheita | [FONTE:BRAGANTIA-1976-BRUNINI] resumo |
-| Temperatura superior | 30 °C | [FONTE:INTECH-2020-AMIROUCHE] Tabela 1; [PROVISÓRIO] |
+| Temperatura superior | 30 °C | [FONTE:INTECH-2020-AMIROUCHE] Tabela 1; [PROVISÓRIO]. Coincide com a máxima tolerável de cerca de 30 °C para a maioria das cultivares [FONTE:EMB-CPATSA-2015-RESENDE] p. 9 [INFERÊNCIA] |
+| Faixa térmica e pendoamento | ideal de 12 a 22 °C para folhas, com florescimento precoce acima disso; 21,1 a 26,6 °C por longos períodos promovem o pendoamento | [FONTE:EMB-CNPH-2013-COT89] p. 1; [FONTE:EMB-CPATSA-2015-RESENDE] p. 9 |
 | Soma térmica | 898 °C·dia em 45 dias (Simpson, Grand Rapids) e 1050 °C·dia em 52 dias (Bruna, Palmas), Bom Jesus, PI | [FONTE:RBMET-2019-FERNANDES] Tabela 2 |
 | Resposta à temperatura | desenvolvimento máximo perto de 22 °C e menor acima | [FONTE:BRAGANTIA-1976-BRUNINI] resumo. Exige função com teto |
-| Espaçamento | 0,25 × 0,25 m | Embrapa Hortaliças, livro de cultivares (a registrar) |
-| Ciclo | 35 dias no calor e 45 dias nos demais (BRS Mediterrânea) | Embrapa Hortaliças, livro de cultivares (a registrar) |
+| Espaçamento | 0,25 × 0,25 m, dentro da faixa de 0,20 a 0,30 m entre plantas e entre linhas | [FONTE:EMB-CPATU-2020-FOLHOSAS] p. 297; ensaio a 0,25 × 0,25 m em [FONTE:EMB-CPATSA-2015-RESENDE] |
+| Ciclo | Emerge da soma térmica. Referências de 33 dias após o transplante no verão e 39 no inverno, e cerca de 60 dias do plantio à colheita da crespa em campo | [FONTE:EMB-CPATSA-2015-RESENDE]; [FONTE:EMB-CNPH-2013-COT89] p. 2 |
+| Calagem e adubação (Pará) | V2 = 70%; N 90 kg/ha em cobertura aos 7 e 14 dias após o transplante; P2O5 300, 200 ou 100 kg/ha e K2O 120, 90 ou 60 kg/ha pelas classes de Mehlich-1; 15 a 20 t/ha de esterco bovino ou composto; 1 kg/ha de B | [FONTE:EMB-CPATU-2020-FOLHOSAS] p. 298 e Tabela 1, p. 299 |
 | Produtividade da água WP* | 15 g/m² (19 g/m² como limite superior) | [FONTE:MDPI-2018-KET]; [FONTE:MDPI-2026-ZHAI]; [FONTE:INTECH-2020-AMIROUCHE]; [PROVISÓRIO] |
 | Cobertura máxima CCx | 81% | [FONTE:INTECH-2020-AMIROUCHE] Tabela 1; [PROVISÓRIO] |
 | Cobertura inicial CC0 | densidade de plantas vezes área da muda | regra do AquaCrop [MODELO] |
@@ -176,7 +178,7 @@ Valores das rodadas 2 e 3 de pesquisa. Os que têm `[FONTE:ID]` estão no regist
 | Curva crítica de N | %Nc = 4,56·DW^−0,357 (DW em t/ha de massa seca; válida de 0,9 a 3,4 t/ha). Alternativa espanhola %Nc = 3,39·DMP^−0,22 | [FONTE:ISHS-2003-TEI]; [FONTE:AAB-2025-SUAREZREY]; [PROVISÓRIO] |
 | Eficiência de uso da radiação RUE | 1,44 g/MJ de radiação total interceptada, até 40 dias após a emergência | [FONTE:ANNBOT-1996-TEI]; [PROVISÓRIO] |
 | Coeficiente de extinção k | 0,60 | [FONTE:ANNBOT-1996-TEI] com pendência (0,60 ou 0,655); [PROVISÓRIO] |
-| Ky | não é parâmetro. Teste de validação com valor central 1,17 (lisímetro) e faixa de 0,9 a 1,4; valores publicados de 0,69 a 2,26 | [FONTE:ISHS-2022-ROUPHAEL]; [FONTE:SJAR-2008-KUSLU]; nenhum estudo brasileiro |
+| Ky | não é parâmetro. Teste de validação com valor central 1,17 (lisímetro) e faixa de 0,9 a 1,4; valores publicados de 0,69 a 2,26 | [FONTE:ISHS-2022-ROUPHAEL]; [FONTE:SJAR-2008-KUSLU]; 0,69 e 2,26 em [FONTE:GESPFL-2023-CEREZ]; 0,88 em [FONTE:CTNS-2016-KIRNAK]; nenhum estudo brasileiro |
 
 1. Não há calibração brasileira do AquaCrop para alface. A alface não consta do catálogo do AquaCrop [FONTE:MDPI-2018-KET].
 2. O KcTr,x de 0,85 do capítulo IntechOpen é menor que o Kc médio de 1,05 de Marouelli. O pacote deriva o KcTr,x do Kcb do FAO-56 e guarda 0,85 só como teste [INFERÊNCIA].
@@ -189,7 +191,7 @@ Valores das rodadas 2 e 3 de pesquisa. Os que têm `[FONTE:ID]` estão no regist
 ### 4.4 Curve Number
 O escoamento diário segue o método do NRCS. S = 25400/CN − 254 em mm, Ia = 0,2·S e Q = (P − Ia)²/(P − Ia + S) quando P passa de Ia (Eq. 10-9, 10-10 e 10-13) [FONTE:NRCS-2004-NEH630-CH10]. O núcleo aplica o CN só à chuva, porque a Eq. 85 do FAO-56 desconta o escoamento só da precipitação [FONTE:FAO-1998-FAO56]. A perda por escoamento da água aplicada vem da eficiência do método de irrigação (§4.5).
 
-Sartori, Lombardi Neto e Genovez classificam os solos brasileiros nos grupos hidrológicos A a D (Tabela 4) e aplicam o método numa microbacia com CN de 80,9 [FONTE:RBRH-2005-SARTORI1] [FONTE:RBRH-2005-SARTORI2]. Não há CN brasileiro para canteiro. Usar "culturas em linha" do TR-55 ajustado pelo grupo de Sartori, como [PROVISÓRIO].
+Sartori, Lombardi Neto e Genovez classificam os solos brasileiros nos grupos hidrológicos A a D (Tabela 4) e aplicam o método numa microbacia com CN de 80,9 [FONTE:RBRH-2005-SARTORI1] [FONTE:RBRH-2005-SARTORI2]. Não há CN brasileiro para canteiro. O pacote usa culturas em linha retas em boa condição (CN 67, 78, 85 e 89 nos grupos A a D) e pousio em solo nu (77, 86, 91 e 94) [FONTE:NRCS-1986-TR55] Tabela 2-2b, p. 2-6, com o grupo de Sartori, como [PROVISÓRIO].
 
 O SoilWat do APSIM parte de um CN de solo nu, reduz o CN pela cobertura e pelo preparo (cn_red) e desfaz a redução do preparo com a chuva acumulada (cn_rain) [FONTE:APSIM-2020-SOILWAT]. A mesma documentação descreve a evaporação de Ritchie em dois estágios (U e CONA; exemplo U = 6 mm e CONA = 3,5) e a drenagem em cascata SWCON·(SW − DUL), adotadas como referência da fase 2. O código do APSIM não entra no projeto. Só as equações publicadas são reimplementadas (decisão 55).
 
@@ -197,9 +199,10 @@ O SoilWat do APSIM parte de um CN de solo nu, reduz o CN pela cobertura e pelo p
 
 | Método | Faixa publicada | Fonte | Padrão do pacote |
 |---|---|---|---|
-| Gotejamento | 80 a 95% | [FONTE:EMB-CNPH-2011-CT98] p. 7 | 0,90 |
+| Gotejamento | 80 a 95% (75 a 95% na Tabela 1 da CT51) | [FONTE:EMB-CNPH-2011-CT98] p. 7; [FONTE:EMB-CNPH-2007-CT51] p. 3 | 0,90 |
 | Superfície (sulco) | 40 a 70% | [FONTE:EMB-CNPH-2011-CT98] p. 7 | 0,60 |
-| Aspersão e microaspersão | Tabela 1 da Circular 98, ainda não transcrita | [FONTE:EMB-CNPH-2011-CT98] p. 8 | pendente |
+| Aspersão convencional | 60 a 75% portátil e semiportátil; 70 a 85% fixa | [FONTE:EMB-CNPH-2007-CT51] Tabela 1, p. 3 | 0,70 (portátil, a do canteiro) [INFERÊNCIA] |
+| Microaspersão | não consta da Tabela 1 da CT51; a Tabela 1 da CT98 não sai na extração do texto | [FONTE:EMB-CNPH-2011-CT98] p. 8 | pendente |
 | Regador | sem fonte | nenhuma | 0,85 [INFERÊNCIA] |
 
 A perda (1 menos a eficiência) é particionada em deriva e evaporação, percolação e escoamento. Assim ela fecha o ledger e alimenta a drenagem e a lixiviação de nitrogênio.
@@ -219,7 +222,7 @@ A base HYBRAS reúne 445 perfis e 1075 amostras de solos brasileiros com parâme
 2. Espécies dominantes no mesmo trabalho. *Bidens pilosa*, *Amaranthus hybridus*, *Oxalis corniculata*, *Euphorbia heterophylla*, *Commelina benghalensis* e *Lepidium virginicum* [FONTE:SEMINA-2010-GIANCOTTI].
 3. Em três cultivares, o período anterior à interferência foi de 1 a 3 dias, o período total de prevenção de 35 a 37 dias e o período crítico de 2 a 37 dias (Elisa), 3 a 37 dias (Lucy Brown) e 3 a 35 dias (Solaris) após o transplante. A convivência total reduziu a produtividade em 48, 40 e 33% [FONTE:HB-2023-DARIVA].
 4. A janela de controle do jogo começa logo depois do transplante e vai até 35 a 37 dias, conforme a cultivar. O relatório de safra explica a perda quando o controle cai fora dela [INFERÊNCIA].
-5. Os parâmetros I e A de Cousens para alface e os parâmetros de crescimento das daninhas não foram encontrados.
+5. A hipérbole é Pp = i·X/[1 + (i/a)·X], com i a perda por planta quando a densidade tende a zero e a a perda máxima [FONTE:PD-2020-FRANDOLOSO] eq. 2, p. 3. Os valores de i e a para alface e os parâmetros de crescimento das daninhas não foram encontrados.
 
 ### 4.9 Erosão
 1. **Fator topográfico.** LS = 0,00984·L^0,63·S^1,18, com L em metros e S em porcentagem, de Bertoni e Lombardi Neto (1999), para relevo suave ondulado a ondulado (Equação 5, p. 157) [FONTE:CCT-2015-NAKAO].
@@ -301,17 +304,17 @@ Qualidade das fontes baixa. Vêm de guias e fóruns de comunidade.
 | # | Lacuna | Situação | Próximo passo |
 |---|---|---|---|
 | 1 | Ky e calibração do AquaCrop da alface no Brasil | Só estudos estrangeiros [PROVISÓRIO] | Derivar Ky de experimento brasileiro de lâminas com ETa por tratamento |
-| 2 | Recomendação estadual de N, P e K para alface | Só cópia não oficial do IAC e manual RS/SC sem a tabela transcrita | Boletim 100 de 2022 (IAC), CQFS-RS/SC 2016, 5ª Aproximação MG |
-| 3 | Temperatura máxima, pendoamento e queima de bordas da alface tropical | Só Tu = 30 °C do AquaCrop [PROVISÓRIO] | Embrapa Hortaliças |
-| 4 | Eficiência do regador; aspersão e microaspersão | Regador sem fonte; Tabela 1 da Circular 98 não transcrita | Transcrever a Tabela 1; procurar dado de regador |
+| 2 | Recomendação estadual de N, P e K para alface | Pará registrado [FONTE:EMB-CPATU-2020-FOLHOSAS]; o Boletim 100 de 2022 do IAC é vendido e fica fora do registro; manual RS/SC sem a tabela transcrita | Tabela da alface do CQFS-RS/SC 2016 e da 5ª Aproximação MG |
+| 3 | Temperatura máxima, pendoamento e queima de bordas da alface tropical | Faixa térmica e máxima tolerável com fonte da Embrapa (§4.3); queima de bordas sem dado | Embrapa Hortaliças (queima de bordas) |
+| 4 | Eficiência do regador e da microaspersão | Aspersão com fonte (§4.5); regador e microaspersão sem fonte | Ler a Tabela 1 da CT98 pela imagem da página; procurar dado de regador |
 | 5 | Página da equação pH–V; outras mineralogias; pH em CaCl₂ | Equação atribuída a Raij 1979 por fonte secundária | PDF de Raij 1979 e de Guarçoni 2017 |
 | 6 | Cinética do calcário por classe granulométrica | Só RE legal e Fageria 2014 | Incubações brasileiras |
 | 7 | DT50 de agrotóxicos medido no Brasil | Correções FOCUS confirmadas; DT50 do PPDB [PROVISÓRIO] | Revisões brasileiras; termos do PPDB |
 | 8 | Descompactação por braquiária, milheto e guandu; persistência τ | Só nabo calibrado | Calonego e Rosolem; Silveira Junior et al. 2012 |
 | 9 | Fatores C de hortaliças e K por classe de solo | P e LS confirmados | Teses abertas com a tabela de Bertoni e Lombardi Neto |
-| 10 | Cousens I e A para alface e parâmetros das daninhas | Não encontrados | *Planta Daninha* |
+| 10 | Cousens i e a para alface e parâmetros das daninhas | Forma da equação com fonte; valores da alface não encontrados | *Planta Daninha*, *Horticultura Brasileira* |
 | 11 | Dados observados para os cenários de referência (Cerrado, Sudeste, Sul, Amazônia), temperatura do solo e mineralização | Só o semiárido tem candidato | Embrapa Cerrados, IAC, ESALQ, torres LBA |
-| 12 | Classes de aceite do índice c (Camargo e Sentelhas 1997) | Fonte primária não encontrada | Revista Brasileira de Agrometeorologia |
+| 12 | Classes de aceite do índice c (Camargo e Sentelhas 1997) | Fonte primária não encontrada; item da fila para o passo V3 | Revista Brasileira de Agrometeorologia |
 | 13 | Colunas do CSV do Agrofit | Base registrada; colunas não conferidas | Abrir o cabeçalho pelo navegador |
-| 14 | Itens da fila de verificação | 13 publicações sem dados mínimos | Próxima sessão de pesquisa |
+| 14 | Itens da fila de verificação | Cinco itens, cada um com a etapa que o usa; o único da fase 1 é Parton e Logan (acesso fechado, passo D8) | Ver campo `etapa` da fila |
 | 15 | Custo real por célula | Estimativa de ordem de grandeza | Benchmark no passo D1b |

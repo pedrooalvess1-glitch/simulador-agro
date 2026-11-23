@@ -67,6 +67,8 @@ CASOS = [  # (nome, fontes, arquivos, trechos esperados nos erros[, fila]; vazio
     ("item da fila incompleto", [BOA], {}, ["falta"], [{"id_proposto": "X-1", "referencia": "R"}]),
     ("item da fila não pode ser citado", [BOA], {"docs/a.md": "[FONTE:EMB-FILA-2020-X]"}, ["EMB-FILA-2020-X"], [FILA]),
     ("mesmo ID no registro e na fila", [BOA], {}, ["ao mesmo tempo"], [dict(FILA, id_proposto=BOA["id"])]),
+    ("etapa da fila vazia", [BOA], {}, ["etapa"], [dict(FILA, etapa=" ")]),
+    ("etapa da fila preenchida", [BOA], {}, [], [dict(FILA, etapa="V1")]),
 ]
 
 falhas = []
